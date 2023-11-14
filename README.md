@@ -188,4 +188,4 @@ Add cave generation [using a cellular automaton](#generation-using-a-cellular-au
 - The size of cells in pixels is calculated so that the cave occupies the entire field allotted to it
 - Prepare full coverage of the cave generation module with unit-tests
 
-💡 [Tap here](https://forms.yandex.ru/cloud/64181d8ff47e7326ab0fc364/) **to leave your feedback on the project**. Pedago Team really tries to make your educational experience better.
+💡 [Tap here](https://forms.yandex.ru/cloud/64181d8ff47e7326ab0fc364/) **to leave your feedback on the project**. Product Team really tries to make your educational experience better.
