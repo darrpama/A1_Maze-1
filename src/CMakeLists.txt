@@ -15,9 +15,17 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets OpenGL Core Gui OpenGLWidgets)
 
 set(PROJECT_SOURCES
     main.cc
+    views/canvas.h
+    views/canvas.cc
     views/mainwindow.h
     views/mainwindow.cc
     views/mainwindow.ui
+    controllers/controller.cc
+    controllers/controller.h
+    models/model.cc
+    models/model.h
+    models/renderer.cc
+    models/renderer.h
 )
 
 
