@@ -30,10 +30,13 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions {
   void resizeGL(int, int) override;
  
  private:
+  std::vector<int> maze_;
   int cols_;
   int rows_;
+  int cell_width_ = 0;
+  int cell_height_ = 0;
 
-  void DrawCell();
+  void DrawCell(Qt::GlobalColor, QPainter *, size_t, size_t);
 };
 
 #endif // GRAPHWIDGET_H
