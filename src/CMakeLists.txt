@@ -15,6 +15,10 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets OpenGL Core Gui OpenGLWidgets)
 
 set(PROJECT_SOURCES
     main.cc
+    maze_parser/maze_parser.cc
+    maze_parser/maze_parser.h
+    maze_parser/maze.cc
+    maze_parser/maze.h
     views/mainwindow.h
     views/mainwindow.cc
     views/mainwindow.ui

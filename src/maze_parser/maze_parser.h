@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
+#include <fstream>
+#include <sstream>
 
 #include "maze.h"
 
@@ -16,6 +19,7 @@ class MazeParser {
   
   private:
     Maze *maze_;
+    std::string filepath_;
 
     void ParseSize(std::string &);
     void ParseMatrixRight(std::string &);

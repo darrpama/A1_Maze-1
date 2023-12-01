@@ -6,8 +6,8 @@ std::vector<MazeStatement> Maze::GetMazeStatement() {
 
 }
 
-void Maze::SetMazeStatement(std::vector<MazeStatement> &data) {
-
+void Maze::SetMazeStatement(std::vector<MazeStatement> &maze_statement) {
+  *maze_statement_ = maze_statement;
 }
 
 int Maze::GetRows() {
@@ -19,11 +19,11 @@ int Maze::GetCols() {
 }
 
 void Maze::SetRows(int rows) {
-
+  rows_ = rows;
 }
 
 void Maze::SetCols(int cols) {
-
+  cols_ = cols;
 }
 
 void Maze::Clear() {
