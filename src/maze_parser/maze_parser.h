@@ -10,11 +10,13 @@ namespace s21 {
 
 class MazeParser {
   public:
+    explicit MazeParser(Maze *maze) : maze_(maze) {};
     void Parse();
     void SetFilePath(const std::string &);
   
   private:
     Maze *maze_;
+
     void ParseSize(std::string &);
     void ParseMatrixRight(std::string &);
     void ParseMatrixBottom(std::string &);
