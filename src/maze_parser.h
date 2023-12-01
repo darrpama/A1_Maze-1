@@ -4,21 +4,9 @@
 #include <iostream>
 #include <vector>
 
+#include "maze.h"
+
 namespace s21 {
-
-enum MazeStatement {
-  NO_BORDER = 0,
-  RIGHT_BORDER,
-  BOTTOM_BORDER,
-  BOTH_BORDER,
-};
-
-struct Maze {
-  Maze(int rows, int cols) : rows(rows), cols(cols) {}
-  int rows;
-  int cols;
-  std::vector<MazeStatement> data;
-};
 
 class MazeParser {
   public:
