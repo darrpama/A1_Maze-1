@@ -2,7 +2,7 @@
 #define MAZE_GEN_H
 
 #include <vector>
-#include "maze.h"
+#include "../Maze/maze.h"
 
 namespace s21 {
     class MazeGenerator {
