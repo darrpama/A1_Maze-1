@@ -3,10 +3,8 @@
 Canvas::Canvas(QWidget* parent) : QOpenGLWidget(parent) {
   cols_ = 4;
   rows_ = 3;
-  
   cell_width_ = std::round(498.0f / cols_ - 2.0f);
   cell_height_ = std::round(498.0f / rows_ - 2.0f);
-
   maze_ = {
     0, 2, 3, 1,
     0, 1, 0, 1,
@@ -38,31 +36,23 @@ void Canvas::paintGL() {
   p.fillRect(0, 0, 2, 500, Qt::black);
 }
 
-// 0 - нет границ 
-// 1 - граница справа
-// 2 - граница снизу
-// 3 - границы и снизу и справа
 void Canvas::DrawCell(QPainter *p, size_t i, size_t j, int wall) {
   if (wall == 0) {  // 0 - нет границ 
     DrawCellBody(p, i, j);
   }
-
   if (wall == 1) {  // 1 - граница справа
     DrawCellBody(p, i, j);
     DrawRightWall(p, i, j);
   }
-
   if (wall == 2) {  // 2 - граница снизу
     DrawCellBody(p, i, j);
     DrawBottomWall(p, i, j);
   }
-
   if (wall == 3) {  // 3 - границы и снизу и справа
     DrawCellBody(p, i, j);
     DrawRightWall(p, i, j);
     DrawBottomWall(p, i, j);
   }
-
 }
 
 void Canvas::DrawCellBody(QPainter *p, size_t i, size_t j) {
