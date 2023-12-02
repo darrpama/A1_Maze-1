@@ -24,10 +24,12 @@ class MazeParser {
     std::vector<Border> bottom_matrix_;
     int current_line_ = 0;
 
+    void CheckAndFixEndLine();
     void ParseSize(std::string &);
     void ParseMatrixRight(std::string &);
     void ParseMatrixBottom(std::string &);
     void MergeMatricies();
+    void Reset();
 };
 
 }

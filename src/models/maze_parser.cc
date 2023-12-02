@@ -2,6 +2,21 @@
 
 namespace s21 {
 
+void MazeParser::CheckAndFixEndLine() {
+  const char *filepath = filepath_.c_str();
+  FILE *fp = fopen(filepath, "r+");
+  if (fp == NULL) {
+    std::cerr << "Failed to open file: " << filepath_ << std::endl;
+    return;
+  }
+  fseek(fp, -1, SEEK_END);
+  char c = fgetc(fp);
+  if (c != '\n') {
+    fseek(fp, -1, SEEK_END);
+    fputc('\n', fp);
+  }
+  fclose(fp);
+}
 
 void MazeParser::Parse() {
   std::ifstream file(filepath_);
@@ -9,6 +24,9 @@ void MazeParser::Parse() {
     std::cerr << "Failed to open file: " << filepath_ << std::endl;
     return;
   }
+
+  CheckAndFixEndLine();
+
   std::stringstream buffer;
   buffer << file.rdbuf();
   std::string file_content = buffer.str();
@@ -19,10 +37,9 @@ void MazeParser::Parse() {
     size_t line_end = file_content.find('\n', pos);
     std::string line = file_content.substr(pos, line_end - pos);
     try {
-      // std::cout << "current_line = " << current_line_ << std::endl;
       if (current_line_== 0) {
         ParseSize(line);
-      } else if (current_line_ > 0 && current_line_ <= maze_->GetRows()) {
+      } else if (current_line_ <= maze_->GetRows()) {
         ParseMatrixRight(line);
       } else if (current_line_ >= maze_->GetRows() + 2)  {
         ParseMatrixBottom(line);
@@ -34,14 +51,13 @@ void MazeParser::Parse() {
     {
       std::cerr << e.what() << '\n';
     }
-     
   }
-
   MergeMatricies();
   file.close();
 }
 
 void MazeParser::SetFilePath(const std::string &filepath) {
+  Reset();
   filepath_ = filepath;
 }
 
@@ -52,13 +68,12 @@ void MazeParser::ParseSize(std::string &line) {
     maze_->SetRows(rows);
     maze_->SetCols(cols);
   } else {
-    std::cerr << "Failed to parse size of matrix: " << filepath_ << std::endl;
+    throw std::invalid_argument("Failed to parse size of matrix: " + filepath_);
     return;
   }
 }
 
 void MazeParser::ParseMatrixRight(std::string &line) {
-  // std::cout << "right: " << line << std::endl;
   for (int i = 0; i < line.size(); i++) {
     Border border;
     switch (line[i]) {
@@ -77,7 +92,6 @@ void MazeParser::ParseMatrixRight(std::string &line) {
 }
 
 void MazeParser::ParseMatrixBottom(std::string &line) {
-  // std::cout << "bottom: " <<line << std::endl;
   for (int i = 0; i < line.size(); i++) {
     Border border;
     switch (line[i]) {
@@ -96,7 +110,6 @@ void MazeParser::ParseMatrixBottom(std::string &line) {
 }
 
 void MazeParser::MergeMatricies() {
-  std::cout << "matrix_size before merge: " << right_matrix_.size() << std::endl;
   for (int i = 0; i < right_matrix_.size(); i++) {
     switch (right_matrix_[i])
     {
@@ -119,6 +132,13 @@ void MazeParser::MergeMatricies() {
       break;
     }
   }
+}
+
+void MazeParser::Reset() {
+    filepath_.clear();
+    right_matrix_.clear();
+    bottom_matrix_.clear();
+    current_line_ = 0;
 }
 
 }  // namespace s21
