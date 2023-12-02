@@ -36,7 +36,10 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions {
   int cell_width_ = 0;
   int cell_height_ = 0;
 
-  void DrawCell(Qt::GlobalColor, QPainter *, size_t, size_t);
+  void DrawCell(QPainter *, size_t, size_t, int);
+  void DrawCellBody(QPainter *p, size_t i, size_t j);
+  void DrawRightWall(QPainter *, size_t, size_t);
+  void DrawBottomWall(QPainter *, size_t, size_t);
 };
 
-#endif // GRAPHWIDGET_H
+#endif  // GRAPHWIDGET_H
