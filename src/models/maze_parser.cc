@@ -16,14 +16,21 @@ void MazeParser::Parse() {
   size_t file_content_size = file_content.size();
 
   while (pos < file_content_size) {
+    int line_num = 0;
     size_t line_end = file_content.find('\n', pos);
     std::string line = file_content.substr(pos, line_end - pos);
+    
+    if (line_num == 0) {
+      ParseSize(line);
+    } else if (line_num > 0 && line_num < maze_->GetRows()) {
+      ParseMatrixRight(line);
+    } else {
+      ParseMatrixBottom(line);
+    }
+    line_num++;
+    pos = line_end + 1;
   }
 
-  std::getline(file, line);
-  ParseSize(line);
-  ParseMatrixRight(line);
-  ParseMatrixBottom(line);
   file.close();
 }
 
@@ -41,24 +48,36 @@ void MazeParser::ParseSize(std::string &line) {
 
 void MazeParser::ParseMatrixRight(std::string &line) {
   std::vector<MazeStatement> matrix_right;
-  for (int i = 0; i < maze_->GetRows(); i++) {
+  for (int i = 0; i < line.size(); i++) {
+    int state = 0;
     MazeStatement statement;
     std::stringstream ss(line);
-    ss >> statement;
+    ss >> state;
+    switch (state) {
+    case 0:
+      statement = NO_BORDER;
+      break;
+    case 1:
+      statement = RIGHT_BORDER;
+      break;
+
+    default:
+      break;
+    }
+
     matrix_right.push_back(statement);
   }
-  maze_->SetMazeStatement(matrix_right);
+  maze_state_.(matrix_right);
 }
 
-void MazeParser::ParseMatrixBottom(std::string &) {
+void MazeParser::ParseMatrixBottom(std::string &line) {
   std::vector<MazeStatement> matrix_bottom;
-  for (int i = 0; i < maze_->GetCols(); i++) {
+  for (int i = 0; i < maze_->GetRows(); i++) {
     MazeStatement statement;
     std::stringstream ss(line);
     ss >> statement;
     matrix_bottom.push_back(statement);
   }
-  maze_->SetMazeStatement(matrix_bottom);
 }
 
 

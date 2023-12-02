@@ -3,7 +3,7 @@
 namespace s21 {
 
 std::vector<MazeStatement> Maze::GetMazeStatement() {
-
+  return *maze_statement_;
 }
 
 void Maze::SetMazeStatement(std::vector<MazeStatement> &maze_statement) {

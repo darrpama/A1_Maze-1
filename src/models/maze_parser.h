@@ -20,6 +20,7 @@ class MazeParser {
   private:
     Maze *maze_;
     std::string filepath_;
+    std::vector<MazeStatement> maze_state_;
 
     void ParseSize(std::string &);
     void ParseMatrixRight(std::string &);
