@@ -16,21 +16,28 @@ void MazeParser::Parse() {
   size_t file_content_size = file_content.size();
 
   while (pos < file_content_size) {
-    int line_num = 0;
     size_t line_end = file_content.find('\n', pos);
     std::string line = file_content.substr(pos, line_end - pos);
-    
-    if (line_num == 0) {
-      ParseSize(line);
-    } else if (line_num > 0 && line_num < maze_->GetRows()) {
-      ParseMatrixRight(line);
-    } else {
-      ParseMatrixBottom(line);
+    try {
+      // std::cout << "current_line = " << current_line_ << std::endl;
+      if (current_line_== 0) {
+        ParseSize(line);
+      } else if (current_line_ > 0 && current_line_ <= maze_->GetRows()) {
+        ParseMatrixRight(line);
+      } else if (current_line_ >= maze_->GetRows() + 2)  {
+        ParseMatrixBottom(line);
+      }
+      current_line_++;
+      pos = line_end + 1;
     }
-    line_num++;
-    pos = line_end + 1;
+    catch(const std::exception& e)
+    {
+      std::cerr << e.what() << '\n';
+    }
+     
   }
 
+  MergeMatricies();
   file.close();
 }
 
@@ -41,44 +48,77 @@ void MazeParser::SetFilePath(const std::string &filepath) {
 void MazeParser::ParseSize(std::string &line) {
   std::stringstream ss(line);
   int rows, cols;
-  ss >> rows >> cols;
-  maze_->SetRows(rows);
-  maze_->SetCols(cols);
+  if (ss >> rows >> cols) {
+    maze_->SetRows(rows);
+    maze_->SetCols(cols);
+  } else {
+    std::cerr << "Failed to parse size of matrix: " << filepath_ << std::endl;
+    return;
+  }
 }
 
 void MazeParser::ParseMatrixRight(std::string &line) {
-  std::vector<MazeStatement> matrix_right;
+  // std::cout << "right: " << line << std::endl;
   for (int i = 0; i < line.size(); i++) {
-    int state = 0;
-    MazeStatement statement;
-    std::stringstream ss(line);
-    ss >> state;
-    switch (state) {
-    case 0:
-      statement = NO_BORDER;
+    Border border;
+    switch (line[i]) {
+    case '0':
+      border = NO_BORDER;
+      right_matrix_.push_back(border);
       break;
-    case 1:
-      statement = RIGHT_BORDER;
+    case '1':
+      border = RIGHT_BORDER;
+      right_matrix_.push_back(border);
+      break;
+    default:
+      break;
+    }
+  }
+}
+
+void MazeParser::ParseMatrixBottom(std::string &line) {
+  // std::cout << "bottom: " <<line << std::endl;
+  for (int i = 0; i < line.size(); i++) {
+    Border border;
+    switch (line[i]) {
+    case '0':
+      border = NO_BORDER;
+      bottom_matrix_.push_back(border);
+      break;
+    case '1':
+      border = BOTTOM_BORDER;
+      bottom_matrix_.push_back(border);
+      break;
+    default:
+      break;
+    }
+  }
+}
+
+void MazeParser::MergeMatricies() {
+  std::cout << "matrix_size before merge: " << right_matrix_.size() << std::endl;
+  for (int i = 0; i < right_matrix_.size(); i++) {
+    switch (right_matrix_[i])
+    {
+    case NO_BORDER:
+      if (bottom_matrix_[i] == NO_BORDER) {
+        maze_->Push(NO_BORDER);
+      } else if (bottom_matrix_[i] == BOTTOM_BORDER) {
+        maze_->Push(BOTTOM_BORDER);
+      }
+      break;
+    case RIGHT_BORDER:
+      if (bottom_matrix_[i] == NO_BORDER) {
+        maze_->Push(RIGHT_BORDER);
+      } else if (bottom_matrix_[i] == BOTTOM_BORDER) {
+        maze_->Push(BOTH_BORDER);
+      }
       break;
 
     default:
       break;
     }
-
-    matrix_right.push_back(statement);
-  }
-  maze_state_.(matrix_right);
-}
-
-void MazeParser::ParseMatrixBottom(std::string &line) {
-  std::vector<MazeStatement> matrix_bottom;
-  for (int i = 0; i < maze_->GetRows(); i++) {
-    MazeStatement statement;
-    std::stringstream ss(line);
-    ss >> statement;
-    matrix_bottom.push_back(statement);
   }
 }
-
 
 }  // namespace s21

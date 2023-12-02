@@ -2,14 +2,6 @@
 
 namespace s21 {
 
-std::vector<MazeStatement> Maze::GetMazeStatement() {
-  return *maze_statement_;
-}
-
-void Maze::SetMazeStatement(std::vector<MazeStatement> &maze_statement) {
-  *maze_statement_ = maze_statement;
-}
-
 int Maze::GetRows() {
   return rows_;
 }
@@ -26,8 +18,16 @@ void Maze::SetCols(int cols) {
   cols_ = cols;
 }
 
+void Maze::Push(Border border) {
+  matrix_.push_back(border);
+}
+
+std::vector<Border> Maze::GetMatrix() {
+  return matrix_;
+}
+
 void Maze::Clear() {
-  maze_statement_->clear();
+  matrix_.clear();
   rows_ = 0;
   cols_ = 0;
 }

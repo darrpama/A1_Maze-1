@@ -20,11 +20,14 @@ class MazeParser {
   private:
     Maze *maze_;
     std::string filepath_;
-    std::vector<MazeStatement> maze_state_;
+    std::vector<Border> right_matrix_;
+    std::vector<Border> bottom_matrix_;
+    int current_line_ = 0;
 
     void ParseSize(std::string &);
     void ParseMatrixRight(std::string &);
     void ParseMatrixBottom(std::string &);
+    void MergeMatricies();
 };
 
 }
