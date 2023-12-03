@@ -6,7 +6,7 @@
 #define GL_SILENCE_DEPRECATION
 #endif
 
-#include "../controllers/controller.h"
+#include "../controllers/controller_singleton.h"
 
 #include <QtOpenGLWidgets/qopenglwidget.h>
 #include <QOpenGLFunctions>

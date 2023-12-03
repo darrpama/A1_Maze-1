@@ -20,12 +20,15 @@ set(PROJECT_SOURCES
     views/mainwindow.h
     views/mainwindow.cc
     views/mainwindow.ui
-    controllers/controller.cc
-    controllers/controller.h
+    controllers/controller_singleton.cc
+    controllers/controller_singleton.h
     models/model.cc
     models/model.h
-    models/renderer.cc
-    models/renderer.h
+    models/renderer/maze_render_strategy.cc
+    models/renderer/maze_render_strategy.h
+    models/renderer/render_context.cc
+    models/renderer/render_context.h
+    models/renderer/render_strategy.h
 )
 
 

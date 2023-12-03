@@ -2,8 +2,12 @@
 
 namespace s21 {
 
-void RenderContext::Draw() {
-  strategy_->Draw();
+void RenderContext::InitOpenGL() {
+  strategy_->InitOpenGL();
+}
+
+void RenderContext::PaintGL() {
+  strategy_->PaintGL();
 }
 
 }  // namespace s21

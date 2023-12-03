@@ -1,15 +1,19 @@
-#ifndef A1_MAZE_1_SRC_MODELS_RENDERER_RENDERER_STRATEGY_H
-#define A1_MAZE_1_SRC_MODELS_RENDERER_RENDERER_STRATEGY_H
+#ifndef A1_MAZE_1_SRC_MODELS_RENDERER_RENDER_STRATEGY_H
+#define A1_MAZE_1_SRC_MODELS_RENDERER_RENDER_STRATEGY_H
 
-#include <QWidget>
+#include <QtOpenGLWidgets/qopenglwidget.h>
+#include <QOpenGLFunctions>
+
 
 namespace s21 {
 
-class RenderStrategy {
+class RenderStrategy  : public QOpenGLWidget, protected QOpenGLFunctions {
+  Q_OBJECT
  public:
-  virtual void Draw() = 0;
+  virtual void InitOpenGL() = 0;
+  virtual void PaintGL() = 0;
 };
 
 }  // namespace s21
 
-#endif  // A1_MAZE_1_SRC_MODELS_RENDERER_RENDERER_STRATEGY_H
+#endif  // A1_MAZE_1_SRC_MODELS_RENDERER_RENDER_STRATEGY_H
