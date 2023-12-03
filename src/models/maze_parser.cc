@@ -52,7 +52,15 @@ void MazeParser::Parse() {
       std::cerr << e.what() << '\n';
     }
   }
-  MergeMatricies();
+  try
+  {
+    MergeMatricies();
+  }
+  catch(const std::exception& e)
+  {
+    std::cerr << e.what() << '\n';
+  }
+  
   file.close();
 }
 
@@ -110,6 +118,21 @@ void MazeParser::ParseMatrixBottom(std::string &line) {
 }
 
 void MazeParser::MergeMatricies() {
+  if (right_matrix_.size() != bottom_matrix_.size()) {
+    throw std::invalid_argument("Matrix size mismatch: " + filepath_);
+    return;
+  }
+
+  if (right_matrix_.size() != maze_->GetCols() * maze_->GetRows()) {
+    throw std::invalid_argument("First matrix size mismatch: " + filepath_);
+    return;
+  }
+
+  if (bottom_matrix_.size() != maze_->GetCols() * maze_->GetRows()) {
+    throw std::invalid_argument("Second matrix size mismatch: " + filepath_);
+    return;
+  }
+
   for (int i = 0; i < right_matrix_.size(); i++) {
     switch (right_matrix_[i])
     {
