@@ -12,7 +12,7 @@ void Maze::SetCols(int cols) { cols_ = cols; }
 
 void Maze::Push(Border border) { matrix_.push_back(border); }
 
-std::vector<Border> Maze::GetMatrix() { return matrix_; }
+std::vector<Border>& Maze::GetMatrix() { return matrix_; }
 
 void Maze::Clear() {
   matrix_.clear();

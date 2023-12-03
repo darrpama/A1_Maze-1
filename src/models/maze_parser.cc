@@ -6,8 +6,7 @@ void MazeParser::CheckAndFixEndLine() {
   const char *filepath = filepath_.c_str();
   FILE *fp = fopen(filepath, "r+");
   if (fp == NULL) {
-    std::cerr << "Failed to open file: " << filepath_ << std::endl;
-    return;
+    throw std::invalid_argument("Failed to open file: " + filepath_);
   }
   fseek(fp, -1, SEEK_END);
   char c = fgetc(fp);
@@ -21,8 +20,7 @@ void MazeParser::CheckAndFixEndLine() {
 void MazeParser::Parse() {
   std::ifstream file(filepath_);
   if (!file.is_open()) {
-    std::cerr << "Failed to open file: " << filepath_ << std::endl;
-    return;
+    throw std::invalid_argument("Failed to open file: " + filepath_);
   }
 
   CheckAndFixEndLine();
@@ -36,26 +34,17 @@ void MazeParser::Parse() {
   while (pos < file_content_size) {
     size_t line_end = file_content.find('\n', pos);
     std::string line = file_content.substr(pos, line_end - pos);
-    try {
-      if (current_line_ == 0) {
-        ParseSize(line);
-      } else if (current_line_ <= maze_->GetRows()) {
-        ParseMatrixRight(line);
-      } else if (current_line_ >= maze_->GetRows() + 2) {
-        ParseMatrixBottom(line);
-      }
-      current_line_++;
-      pos = line_end + 1;
-    } catch (const std::exception &e) {
-      std::cerr << e.what() << '\n';
+    if (current_line_ == 0) {
+      ParseSize(line);
+    } else if (current_line_ <= maze_->GetRows()) {
+      ParseMatrixRight(line);
+    } else if (current_line_ >= maze_->GetRows() + 2) {
+      ParseMatrixBottom(line);
     }
+    current_line_++;
+    pos = line_end + 1;
   }
-  try {
-    MergeMatricies();
-  } catch (const std::exception &e) {
-    std::cerr << e.what() << '\n';
-  }
-
+  MergeMatricies();
   file.close();
 }
 

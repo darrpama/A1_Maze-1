@@ -23,7 +23,7 @@ class Maze {
   void SetRows(int);
   void SetCols(int);
   void Push(Border);
-  std::vector<Border> GetMatrix();
+  std::vector<Border>& GetMatrix();
 
  private:
   int rows_;
