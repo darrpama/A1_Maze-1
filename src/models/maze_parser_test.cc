@@ -68,6 +68,118 @@ TEST(MazeParserTest, Parse_Positive) {
   }
 }
 
+// Negative test case for Parse function
+TEST(MazeParserTest, Parse_Negative_No_File) {
+  s21::Maze maze(0, 0);
+  s21::MazeParser parser(&maze);
+
+  parser.SetFilePath(
+      "/Users/darrpama/projects/A1_Maze-1/src/assets/maze_no_exist.txt");
+  EXPECT_ANY_THROW(parser.Parse());
+
+  EXPECT_EQ(maze.GetRows(), 0);
+  EXPECT_EQ(maze.GetCols(), 0);
+
+  std::vector<Border> mat = maze.GetMatrix();
+  EXPECT_EQ(mat.size(), 0);
+}
+
+// Negative test case for Parse function
+TEST(MazeParserTest, Parse_Negative_Cols_1_Test) {
+  s21::Maze maze(0, 0);
+  s21::MazeParser parser(&maze);
+
+  parser.SetFilePath(
+      "/Users/darrpama/projects/A1_Maze-1/src/assets/maze_non_eq_cols_1_mat.txt");
+  // EXPECT_ANY_THROW(parser.Parse());
+
+  EXPECT_EQ(maze.GetRows(), 0);
+  EXPECT_EQ(maze.GetCols(), 0);
+
+  std::vector<Border> mat = maze.GetMatrix();
+  EXPECT_EQ(mat.size(), 0);
+}
+
+// Negative test case for Parse function
+TEST(MazeParserTest, Parse_Negative_Cols_2_Test) {
+  s21::Maze maze(0, 0);
+  s21::MazeParser parser(&maze);
+
+  parser.SetFilePath(
+      "/Users/darrpama/projects/A1_Maze-1/src/assets/maze_non_eq_cols_2_mat.txt");
+  // EXPECT_ANY_THROW(parser.Parse());
+
+  EXPECT_EQ(maze.GetRows(), 0);
+  EXPECT_EQ(maze.GetCols(), 0);
+
+  std::vector<Border> mat = maze.GetMatrix();
+  EXPECT_EQ(mat.size(), 0);
+}
+
+// Negative test case for Parse function
+TEST(MazeParserTest, Parse_Negative_Rows_1_Test) {
+  s21::Maze maze(0, 0);
+  s21::MazeParser parser(&maze);
+
+  parser.SetFilePath(
+      "/Users/darrpama/projects/A1_Maze-1/src/assets/maze_non_eq_rows_1_mat.txt");
+  // EXPECT_ANY_THROW(parser.Parse());
+
+  EXPECT_EQ(maze.GetRows(), 3);
+  EXPECT_EQ(maze.GetCols(), 3);
+
+  std::vector<Border> mat = maze.GetMatrix();
+  EXPECT_EQ(mat.size(), 9);
+}
+
+// Negative test case for Parse function
+TEST(MazeParserTest, Parse_Negative_Rows_2_Test) {
+  s21::Maze maze(0, 0);
+  s21::MazeParser parser(&maze);
+
+  parser.SetFilePath(
+      "/Users/darrpama/projects/A1_Maze-1/src/assets/maze_non_eq_rows_2_mat.txt");
+  // EXPECT_ANY_THROW(parser.Parse());
+
+  EXPECT_EQ(maze.GetRows(), 3);
+  EXPECT_EQ(maze.GetCols(), 3);
+
+  std::vector<Border> mat = maze.GetMatrix();
+  EXPECT_EQ(mat.size(), 9);
+}
+
+// Negative test case for Parse function
+TEST(MazeParserTest, Parse_1_Matrix_Test) {
+  s21::Maze maze(0, 0);
+  s21::MazeParser parser(&maze);
+
+  parser.SetFilePath(
+      "/Users/darrpama/projects/A1_Maze-1/src/assets/maze_1_mat_wrong.txt");
+  // EXPECT_ANY_THROW(parser.Parse());
+
+  EXPECT_EQ(maze.GetRows(), 3);
+  EXPECT_EQ(maze.GetCols(), 3);
+
+  std::vector<Border> mat = maze.GetMatrix();
+  EXPECT_EQ(mat.size(), 9);
+}
+
+// Negative test case for Parse function
+TEST(MazeParserTest, Parse_2_Matrix_Test) {
+  s21::Maze maze(0, 0);
+  s21::MazeParser parser(&maze);
+
+  parser.SetFilePath(
+      "/Users/darrpama/projects/A1_Maze-1/src/assets/maze_2_mat_wrong.txt");
+  // EXPECT_ANY_THROW(parser.Parse());
+
+  EXPECT_EQ(maze.GetRows(), 3);
+  EXPECT_EQ(maze.GetCols(), 3);
+
+  std::vector<Border> mat = maze.GetMatrix();
+  EXPECT_EQ(mat.size(), 9);
+}
+
 int main(int argc, char **argv) {
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
