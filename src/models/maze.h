@@ -31,6 +31,6 @@ class Maze {
   std::vector<Border> matrix_;
 };
 
-}
+}  // namespace s21
 
 #endif  // A1_MAZE_1_0_SRC_MAZE_H
