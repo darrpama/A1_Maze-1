@@ -6,7 +6,7 @@
 
 namespace s21 {
 
-enum MazeStatement {
+enum Border {
   NO_BORDER = 0,
   RIGHT_BORDER,
   BOTTOM_BORDER,
@@ -15,22 +15,22 @@ enum MazeStatement {
 
 class Maze {
  public:
-  Maze(int rows, int cols) : rows_(rows), cols_(cols) {}
+  Maze(int rows, int cols) : rows_(rows), cols_(cols), matrix_{} {}
 
   void Clear();
   int GetRows();
   int GetCols();
   void SetRows(int);
   void SetCols(int);
-  void SetMazeStatement(std::vector<MazeStatement> &);
-  std::vector<MazeStatement> GetMazeStatement();
+  void Push(Border);
+  std::vector<Border>& GetMatrix();
 
  private:
   int rows_;
   int cols_;
-  std::vector<MazeStatement> *maze_statement_;
+  std::vector<Border> matrix_;
 };
 
-}
+}  // namespace s21
 
 #endif  // A1_MAZE_1_0_SRC_MAZE_H
