@@ -79,17 +79,12 @@ void MazeParser::ParseSize(std::string &line) {
 void MazeParser::ParseMatrixRight(std::string &line) {
   for (int i = 0; i < line.size(); i++) {
     Border border;
-    switch (line[i]) {
-      case '0':
-        border = NO_BORDER;
-        right_matrix_.push_back(border);
-        break;
-      case '1':
-        border = RIGHT_BORDER;
-        right_matrix_.push_back(border);
-        break;
-      default:
-        break;
+    if (line[i] == '0') {
+      border = NO_BORDER;
+      right_matrix_.push_back(border);
+    } else if (line[i] == '1') {
+      border = RIGHT_BORDER;
+      right_matrix_.push_back(border);
     }
   }
 }
@@ -97,17 +92,12 @@ void MazeParser::ParseMatrixRight(std::string &line) {
 void MazeParser::ParseMatrixBottom(std::string &line) {
   for (int i = 0; i < line.size(); i++) {
     Border border;
-    switch (line[i]) {
-      case '0':
-        border = NO_BORDER;
-        bottom_matrix_.push_back(border);
-        break;
-      case '1':
-        border = BOTTOM_BORDER;
-        bottom_matrix_.push_back(border);
-        break;
-      default:
-        break;
+    if (line[i] == '0') {
+      border = NO_BORDER;
+      bottom_matrix_.push_back(border);
+    } else if (line[i] == '1') {
+      border = BOTTOM_BORDER;
+      bottom_matrix_.push_back(border);
     }
   }
 }
