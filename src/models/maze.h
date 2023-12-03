@@ -15,7 +15,7 @@ enum Border {
 
 class Maze {
  public:
-  Maze(int rows, int cols) : rows_(rows), cols_(cols) {}
+  Maze(int rows, int cols) : rows_(rows), cols_(cols), matrix_{} {}
 
   void Clear();
   int GetRows();

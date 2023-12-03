@@ -72,7 +72,6 @@ void MazeParser::ParseSize(std::string &line) {
     maze_->SetCols(cols);
   } else {
     throw std::invalid_argument("Failed to parse size of matrix: " + filepath_);
-    return;
   }
 }
 
@@ -105,38 +104,29 @@ void MazeParser::ParseMatrixBottom(std::string &line) {
 void MazeParser::MergeMatricies() {
   if (right_matrix_.size() != bottom_matrix_.size()) {
     throw std::invalid_argument("Matrix size mismatch: " + filepath_);
-    return;
   }
 
   if (right_matrix_.size() != maze_->GetCols() * maze_->GetRows()) {
     throw std::invalid_argument("First matrix size mismatch: " + filepath_);
-    return;
   }
 
   if (bottom_matrix_.size() != maze_->GetCols() * maze_->GetRows()) {
     throw std::invalid_argument("Second matrix size mismatch: " + filepath_);
-    return;
   }
 
   for (int i = 0; i < right_matrix_.size(); i++) {
-    switch (right_matrix_[i]) {
-      case NO_BORDER:
-        if (bottom_matrix_[i] == NO_BORDER) {
-          maze_->Push(NO_BORDER);
-        } else if (bottom_matrix_[i] == BOTTOM_BORDER) {
-          maze_->Push(BOTTOM_BORDER);
-        }
-        break;
-      case RIGHT_BORDER:
-        if (bottom_matrix_[i] == NO_BORDER) {
-          maze_->Push(RIGHT_BORDER);
-        } else if (bottom_matrix_[i] == BOTTOM_BORDER) {
-          maze_->Push(BOTH_BORDER);
-        }
-        break;
-
-      default:
-        break;
+    if (right_matrix_[i] == NO_BORDER && bottom_matrix_[i] == NO_BORDER) {
+      maze_->Push(NO_BORDER);
+    }
+    if (right_matrix_[i] == NO_BORDER && bottom_matrix_[i] == BOTTOM_BORDER) {
+      maze_->Push(BOTTOM_BORDER);
+    }
+    if (right_matrix_[i] == RIGHT_BORDER && bottom_matrix_[i] == NO_BORDER) {
+      maze_->Push(RIGHT_BORDER);
+    }
+    if (right_matrix_[i] == RIGHT_BORDER &&
+        bottom_matrix_[i] == BOTTOM_BORDER) {
+      maze_->Push(BOTH_BORDER);
     }
   }
 }
