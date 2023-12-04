@@ -138,6 +138,46 @@ TEST(MazeParserTest, Parse_Negative_Cols_2_Test) {
 }
 
 // Negative test case for Parse function
+TEST(MazeParserTest, Parse_Negative_Cols_3_Test) {
+  s21::Maze maze(0, 0);
+  s21::MazeParser parser(&maze);
+
+  std::filesystem::path path = std::filesystem::current_path();
+  std::string parent_path = path.parent_path();
+  parent_path.append("/assets/maze_non_eq_cols_1_mat_2.txt");
+
+  parser.SetFilePath(parent_path);
+
+  EXPECT_ANY_THROW(parser.Parse());
+
+  EXPECT_EQ(maze.GetRows(), 0);
+  EXPECT_EQ(maze.GetCols(), 0);
+
+  std::vector<Border> mat = maze.GetMatrix();
+  EXPECT_EQ(mat.size(), 0);
+}
+
+// Negative test case for Parse function
+TEST(MazeParserTest, Parse_Negative_Cols_4_Test) {
+  s21::Maze maze(0, 0);
+  s21::MazeParser parser(&maze);
+
+  std::filesystem::path path = std::filesystem::current_path();
+  std::string parent_path = path.parent_path();
+  parent_path.append("/assets/maze_non_eq_cols_2_mat_2.txt");
+
+  parser.SetFilePath(parent_path);
+  
+  EXPECT_ANY_THROW(parser.Parse());
+
+  EXPECT_EQ(maze.GetRows(), 0);
+  EXPECT_EQ(maze.GetCols(), 0);
+
+  std::vector<Border> mat = maze.GetMatrix();
+  EXPECT_EQ(mat.size(), 0);
+}
+
+// Negative test case for Parse function
 TEST(MazeParserTest, Parse_Negative_Rows_1_Test) {
   s21::Maze maze(0, 0);
   s21::MazeParser parser(&maze);
@@ -165,6 +205,46 @@ TEST(MazeParserTest, Parse_Negative_Rows_2_Test) {
   std::filesystem::path path = std::filesystem::current_path();
   std::string parent_path = path.parent_path();
   parent_path.append("/assets/maze_non_eq_rows_2_mat.txt");
+
+  parser.SetFilePath(parent_path);
+
+  EXPECT_ANY_THROW(parser.Parse());
+
+  EXPECT_EQ(maze.GetRows(), 0);
+  EXPECT_EQ(maze.GetCols(), 0);
+
+  std::vector<Border> mat = maze.GetMatrix();
+  EXPECT_EQ(mat.size(), 0);
+}
+
+// Negative test case for Parse function
+TEST(MazeParserTest, Parse_Negative_Rows_3_Test) {
+  s21::Maze maze(0, 0);
+  s21::MazeParser parser(&maze);
+
+  std::filesystem::path path = std::filesystem::current_path();
+  std::string parent_path = path.parent_path();
+  parent_path.append("/assets/maze_non_eq_rows_1_mat_2.txt");
+
+  parser.SetFilePath(parent_path);
+  
+  EXPECT_ANY_THROW(parser.Parse());
+
+  EXPECT_EQ(maze.GetRows(), 0);
+  EXPECT_EQ(maze.GetCols(), 0);
+
+  std::vector<Border> mat = maze.GetMatrix();
+  EXPECT_EQ(mat.size(), 0);
+}
+
+// Negative test case for Parse function
+TEST(MazeParserTest, Parse_Negative_Rows_4_Test) {
+  s21::Maze maze(0, 0);
+  s21::MazeParser parser(&maze);
+
+  std::filesystem::path path = std::filesystem::current_path();
+  std::string parent_path = path.parent_path();
+  parent_path.append("/assets/maze_non_eq_rows_2_mat_2.txt");
 
   parser.SetFilePath(parent_path);
 
