@@ -92,14 +92,17 @@ void MazeParser::ParseMatrixBottom(std::string &line) {
 
 void MazeParser::MergeMatricies() {
   if (right_matrix_.size() != bottom_matrix_.size()) {
+    Reset();
     throw std::invalid_argument("Matrix size mismatch: " + filepath_);
   }
 
   if (right_matrix_.size() != maze_->GetCols() * maze_->GetRows()) {
+    Reset();
     throw std::invalid_argument("First matrix size mismatch: " + filepath_);
   }
 
   if (bottom_matrix_.size() != maze_->GetCols() * maze_->GetRows()) {
+    Reset();
     throw std::invalid_argument("Second matrix size mismatch: " + filepath_);
   }
 
@@ -125,6 +128,7 @@ void MazeParser::Reset() {
   right_matrix_.clear();
   bottom_matrix_.clear();
   current_line_ = 0;
+  maze_->Clear();
 }
 
 }  // namespace s21
