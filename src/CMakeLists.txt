@@ -15,8 +15,6 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets OpenGL Core Gui OpenGLWidgets)
 
 set(PROJECT_SOURCES
     main.cc
-    views/canvas.h
-    views/canvas.cc
     views/mainwindow.h
     views/mainwindow.cc
     views/mainwindow.ui
@@ -24,11 +22,11 @@ set(PROJECT_SOURCES
     controllers/controller_singleton.h
     models/model.cc
     models/model.h
-    models/renderer/maze_render_strategy.cc
-    models/renderer/maze_render_strategy.h
-    models/renderer/render_context.cc
-    models/renderer/render_context.h
-    models/renderer/render_strategy.h
+    models/render/render_strategy.h
+    models/render/render_context.h
+    models/render/render_context.cc
+    models/render/maze_render_strategy.h
+    models/render/maze_render_strategy.cc
 )
 
 

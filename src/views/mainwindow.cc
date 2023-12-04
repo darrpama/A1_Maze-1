@@ -6,8 +6,8 @@ MainWindow::MainWindow(QWidget *parent)
   : QMainWindow(parent)
   , ui_(new Ui::MainWindow)
 {
+  s21::ControllerSingleton::GetInstance().InitRender(s21::RenderType::MAZE);
   ui_->setupUi(this);
-//   canvas_ = findChild<Canvas*>("canvas");
 }
 
 MainWindow::~MainWindow() {

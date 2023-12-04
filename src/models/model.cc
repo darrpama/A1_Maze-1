@@ -1,7 +1,7 @@
 #include "model.h"
 
 namespace s21 {
-void Model::InitOpenGL(RenderType type) {
+void Model::InitRender(RenderType type) {
   if (type == RenderType::MAZE) {
     render_context_->SetStrategy(new MazeRenderStrategy());
   } else if (type == RenderType::CAVE) {
@@ -9,11 +9,11 @@ void Model::InitOpenGL(RenderType type) {
   } else {
     // context.SetStrategy(new CaveRenderStrategy());
   }
-  render_context_->InitOpenGL();
+  render_context_->InitRender();
 }
 
-void Model::PaintGL(RenderType type) {
-  render_context_->PaintGL();
+void Model::Render(RenderType type) {
+  render_context_->Render();
 }
 
 }  // namespace s21

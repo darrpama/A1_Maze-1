@@ -2,7 +2,10 @@
 
 namespace s21 {
 
-void MazeRenderStrategy::InitOpenGL() {
+MazeRenderStrategy::MazeRenderStrategy(QWidget *parent)
+  : QWidget(parent) {}
+
+void MazeRenderStrategy::InitRender() {
   cols_ = 4;
   rows_ = 3;
   cell_width_ = std::round(498.0f / cols_ - 2.0f);
@@ -14,13 +17,12 @@ void MazeRenderStrategy::InitOpenGL() {
   };
 }
 
-void MazeRenderStrategy::PaintGL() {
-  glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+void MazeRenderStrategy::paintEvent(QPaintEvent *event) {
+  InitRender();
 
   setFixedSize(500, 500);
 
-  QPainter p(this);  
+  QPainter p(this);
   size_t index = 0;
   for (size_t i = 0; i < rows_; i++) {
     for (size_t j = 0; j < cols_; j++) {
@@ -32,6 +34,7 @@ void MazeRenderStrategy::PaintGL() {
 
   p.fillRect(0, 0, 500, 2, Qt::black);
   p.fillRect(0, 0, 2, 500, Qt::black);
+  p.end();
 }
 
 void MazeRenderStrategy::DrawCell(QPainter *p, size_t i, size_t j, int wall) {

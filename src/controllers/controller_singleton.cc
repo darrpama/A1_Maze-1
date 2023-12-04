@@ -2,12 +2,12 @@
 
 namespace s21 {
 
-void ControllerSingleton::InitOpenGL(RenderType type) {
-  model_->InitOpenGL(type);
+void ControllerSingleton::InitRender(RenderType type) {
+  model_->InitRender(type);
 }
 
-void ControllerSingleton::PaintGL(RenderType type) {
-  model_->PaintGL(type);
+void ControllerSingleton::Render(RenderType type) {
+  model_->Render(type);
 }
 
 }  // namespace s21

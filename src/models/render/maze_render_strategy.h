@@ -1,24 +1,24 @@
-#ifndef A1_MAZE_1_SRC_MODELS_RENDERER_MAZE_RENDERER_STRATEGY_H
-#define A1_MAZE_1_SRC_MODELS_RENDERER_MAZE_RENDERER_STRATEGY_H
+#ifndef A1_MAZE_1_SRC_MODELS_RENDER_MAZE_RENDER_STRATEGY_H
+#define A1_MAZE_1_SRC_MODELS_RENDER_MAZE_RENDER_STRATEGY_H
 
-#include <QtOpenGLWidgets/qopenglwidget.h>
-#include <QOpenGLFunctions>
-#include <QMouseEvent>
 #include <QPainter>
+#include <QWidget>
 
 #include <vector>
 #include <utility>
-#include <unordered_map>
 #include <iostream>
 
 #include "render_strategy.h"
 
 namespace s21 {
 
-class MazeRenderStrategy : public RenderStrategy {
+class MazeRenderStrategy : public s21::RenderStrategy, public QWidget {
  public:
-  void InitOpenGL() override;
-  void PaintGL() override;
+  MazeRenderStrategy(QWidget *parent = nullptr);
+  void InitRender() override;
+
+ protected:
+  void paintEvent(QPaintEvent *event) override;
 
  private:
   std::vector<int> maze_;
@@ -35,4 +35,4 @@ class MazeRenderStrategy : public RenderStrategy {
 
 }  // namespace s21
 
-#endif  // A1_MAZE_1_SRC_MODELS_RENDERER_MAZE_RENDERER_STRATEGY_H
+#endif  // A1_MAZE_1_SRC_MODELS_RENDER_MAZE_RENDER_STRATEGY_H

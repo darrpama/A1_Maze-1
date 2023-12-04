@@ -11,8 +11,8 @@ class RenderContext {
   explicit RenderContext(RenderStrategy *strategy) : strategy_(strategy) {}
   void SetStrategy(RenderStrategy *strategy) { strategy_ = strategy; }
   // methods
-  void InitOpenGL();
-  void PaintGL();
+  void InitRender();
+  void Render();
 
  private:
   RenderStrategy *strategy_;

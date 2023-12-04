@@ -31,7 +31,7 @@
      <widget class="QGroupBox" name="gridGroupBox">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="Canvas" name="openGLWidget">
+        <widget class="s21::MazeRenderStrategy" name="canvas" native="true">
          <property name="minimumSize">
           <size>
            <width>500</width>
@@ -46,7 +46,7 @@
          </property>
         </widget>
        </item>
-       <item alignment="Qt::AlignLeft|Qt::AlignTop">
+       <item>
         <widget class="QGroupBox" name="verticalGroupBox">
          <property name="maximumSize">
           <size>
@@ -84,9 +84,10 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>Canvas</class>
-   <extends>QOpenGLWidget</extends>
-   <header>views/canvas.h</header>
+   <class>s21::MazeRenderStrategy</class>
+   <extends>QWidget</extends>
+   <header>models/render/maze_render_strategy.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

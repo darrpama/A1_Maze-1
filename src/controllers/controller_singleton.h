@@ -14,8 +14,8 @@ class ControllerSingleton {
   void SetModel(Model *model) { model_ = model; }
 
   // render
-  void InitOpenGL(RenderType);
-  void PaintGL(RenderType);
+  void InitRender(RenderType);
+  void Render(RenderType);
 
  private:
   Model *model_;
