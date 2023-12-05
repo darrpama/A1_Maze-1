@@ -48,7 +48,7 @@ namespace s21 {
         for (size_t cell = 0; cell < static_cast<size_t>(maze.GetCols()); cell++) {
             int cur_cell = cells_[cell];
             size_t bottom_borders = 
-                std::count_if(sets_[cells_[cell]].begin(), sets_[cur_cell].end(), 
+                std::count_if(sets_[cur_cell].begin(), sets_[cur_cell].end(), 
                         [&maze, row](int c) { return maze.GetMatrix()[row * maze.GetCols() + c] == BOTTOM_BORDER ||
                                                     maze.GetMatrix()[row * maze.GetCols() + c] == BOTH_BORDER; });
 
@@ -56,7 +56,7 @@ namespace s21 {
                 maze.GetMatrix()[row * maze.GetCols() + cell] = 
                     (maze.GetMatrix()[row * maze.GetCols() + cell] == RIGHT_BORDER ? BOTH_BORDER : BOTTOM_BORDER);
         
-                sets_[cells_[cell]].erase(std::find(sets_[cells_[cell]].begin(), sets_[cells_[cell]].end(), cell));
+                sets_[cur_cell].erase(std::find(sets_[cur_cell].begin(), sets_[cur_cell].end(), cell));
                 cells_[cell] = kEmptyCell;
             }
             
