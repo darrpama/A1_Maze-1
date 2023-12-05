@@ -28,10 +28,37 @@ TEST(MazeGenerator, SmallMaze) {
 TEST(MazeGenerator, StressTest) {
     for (int i = 0; i < 100; i++) {
         s21::Maze maze = maze_gen.generateMaze(15, 15);
+        
         EXPECT_EQ(maze.GetRows(), 15);
         EXPECT_EQ(maze.GetCols(), 15);
         EXPECT_EQ(maze.IsIdeal(), true);
     }
+}
+
+TEST(MazeGenerator, Chances) {
+    s21::Maze maze = maze_gen.generateMaze(20, 20, 1.0f, 0.0f);
+ 
+    EXPECT_EQ(maze.GetRows(), 20);
+    EXPECT_EQ(maze.GetCols(), 20);
+    EXPECT_EQ(maze.IsIdeal(), true);
+    
+    maze = maze_gen.generateMaze(20, 20, 0.0f, 1.0f);
+ 
+    EXPECT_EQ(maze.GetRows(), 20);
+    EXPECT_EQ(maze.GetCols(), 20);
+    EXPECT_EQ(maze.IsIdeal(), true);
+
+    maze = maze_gen.generateMaze(20, 20, 0.0f, 0.0f);
+ 
+    EXPECT_EQ(maze.GetRows(), 20);
+    EXPECT_EQ(maze.GetCols(), 20);
+    EXPECT_EQ(maze.IsIdeal(), true);
+
+    maze = maze_gen.generateMaze(20, 20, 1.0f, 1.0f);
+ 
+    EXPECT_EQ(maze.GetRows(), 20);
+    EXPECT_EQ(maze.GetCols(), 20);
+    EXPECT_EQ(maze.IsIdeal(), true);
 }
 
 TEST(MazeGenerator, BrokenSize) {
