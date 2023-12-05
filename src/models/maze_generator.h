@@ -5,7 +5,7 @@
 #include <vector>
 #include <random>
 #include <unordered_map>
-#include "../Maze/maze.h"
+#include "maze.h"
 
 namespace s21 {
     class MazeGenerator {
