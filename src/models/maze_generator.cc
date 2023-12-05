@@ -3,8 +3,10 @@
 s21::MazeGenerator::MazeGenerator() { Clear(); }
 
 s21::Maze s21::MazeGenerator::generateMaze(int rows, int cols, float right_wall_chance, float bottom_wall_chance) {
-    this->next_set = 0;
+    if (rows < 1 || cols < 1)
+        throw std::invalid_argument("Invalid maze size");
 
+    this->next_set = 0;
     Maze maze(rows, cols);
     maze.GetMatrix() = std::vector<s21::Border>(rows * cols, NO_BORDER);
     cells = std::vector<int>(cols, kEmptyCell);
