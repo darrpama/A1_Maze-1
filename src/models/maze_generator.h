@@ -16,6 +16,10 @@ namespace s21 {
         Maze generateMaze(int rows, int cols, float right_wall_chance = 0.5, float bottom_wall_chance = 0.5);
        
        private:
+        size_t next_set_;
+        std::unordered_map<size_t, std::vector<size_t>> sets_;
+        std::vector<int> cells_;
+
         void FillEmptyCells(int cols);
         void AddRightWalls(Maze& maze, int row, float right_wall_chance);
         void AddBottomWalls(Maze& maze, int row, float bottom_wall_chance);
@@ -24,10 +28,6 @@ namespace s21 {
         bool RandomChoice(float chance);
         void MergeSets(size_t set1, size_t set2);
         void Clear();
-
-        size_t next_set;
-        std::unordered_map<size_t, std::vector<size_t>> sets;
-        std::vector<int> cells;
     };
 }
 
