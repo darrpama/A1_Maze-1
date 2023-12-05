@@ -21,6 +21,7 @@ namespace s21 {
         void FillEmptyCells(int cols);
         void AddRightWalls(Maze& maze, int row);
         void AddBottomWalls(Maze& maze, int row);
+        void AddNextLine(Maze& maze, int row);
         void AddEndLine(Maze& maze);
 
         bool randomChoice();
