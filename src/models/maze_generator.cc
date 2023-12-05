@@ -12,7 +12,7 @@ namespace s21 {
         maze.GetMatrix() = std::vector<Border>(rows * cols, NO_BORDER);
         cells_ = std::vector<int>(cols, kEmptyCell);
 
-        for (size_t row = 0; row < rows - 1; row++) {
+        for (size_t row = 0; row < static_cast<size_t>(rows - 1); row++) {
             FillEmptyCells(cols);
             AddRightWalls(maze, row, right_wall_chance);
             AddBottomWalls(maze, row, bottom_wall_chance);
@@ -24,7 +24,7 @@ namespace s21 {
     }
 
     void MazeGenerator::FillEmptyCells(int cols) {
-        for (size_t cell = 0; cell < cols; cell++) {
+        for (size_t cell = 0; cell < static_cast<size_t>(cols); cell++) {
             if (cells_[cell] == kEmptyCell) {
                 size_t set = next_set_++;
                 sets_[set].push_back(cell);
@@ -34,7 +34,7 @@ namespace s21 {
     }
 
     void MazeGenerator::AddRightWalls(Maze& maze, int row, float right_wall_chance) {
-        for (size_t cell = 0; cell < maze.GetCols() - 1; cell++) {
+        for (size_t cell = 0; cell < static_cast<size_t>(maze.GetCols() - 1); cell++) {
             if (RandomChoice(right_wall_chance) || cells_[cell] == cells_[cell + 1]) {
                 maze.GetMatrix()[row * maze.GetCols() + cell] = RIGHT_BORDER;
             } else {
@@ -45,9 +45,9 @@ namespace s21 {
     }
 
     void MazeGenerator::AddBottomWalls(Maze &maze, int row, float bottom_wall_chance) {
-        for (size_t cell = 0; cell < maze.GetCols(); cell++) {
+        for (size_t cell = 0; cell < static_cast<size_t>(maze.GetCols()); cell++) {
             int cur_cell = cells_[cell];
-            auto bottom_borders = 
+            size_t bottom_borders = 
                 std::count_if(sets_[cells_[cell]].begin(), sets_[cur_cell].end(), 
                         [&maze, row](int c) { return maze.GetMatrix()[row * maze.GetCols() + c] == BOTTOM_BORDER ||
                                                     maze.GetMatrix()[row * maze.GetCols() + c] == BOTH_BORDER; });
@@ -67,7 +67,7 @@ namespace s21 {
         FillEmptyCells(maze.GetCols());
         AddRightWalls(maze, maze.GetRows() - 1, right_wall_chance);
 
-        for (size_t cell = 0; cell < maze.GetCols() - 1; cell++) {
+        for (size_t cell = 0; cell < static_cast<size_t>(maze.GetCols() - 1); cell++) {
             if (cells_[cell] != cells_[cell + 1]) {
                 maze.GetMatrix()[(maze.GetRows() - 1) * maze.GetCols() + cell] = BOTTOM_BORDER;
                 MergeSets(cells_[cell], cells_[cell + 1]);
