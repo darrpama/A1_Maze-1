@@ -2,7 +2,9 @@
 #define A1_MAZE_1_0_SRC_MAZE_H
 
 #include <iostream>
+#include <algorithm>
 #include <vector>
+#include <queue>
 
 namespace s21 {
 
@@ -17,13 +19,15 @@ class Maze {
  public:
   Maze(int rows, int cols) : rows_(rows), cols_(cols), matrix_{} {}
 
-  void Clear();
   int GetRows();
   int GetCols();
   void SetRows(int);
   void SetCols(int);
   void Push(Border);
   std::vector<Border>& GetMatrix();
+
+  void Clear();
+  bool IsIdeal();
 
  private:
   int rows_;
