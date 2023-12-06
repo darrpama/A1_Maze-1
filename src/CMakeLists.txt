@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(3DViewer_2_0 VERSION 0.1 LANGUAGES CXX)
+project(Maze VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -18,6 +18,12 @@ set(PROJECT_SOURCES
     views/mainwindow.h
     views/mainwindow.cc
     views/mainwindow.ui
+    views/canvas.h
+    views/canvas.cc
+    controllers/controller_singleton.cc
+    controllers/controller_singleton.h
+    models/model.cc
+    models/model.h
 )
 
 

@@ -31,7 +31,7 @@
      <widget class="QGroupBox" name="gridGroupBox">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QOpenGLWidget" name="openGLWidget">
+        <widget class="Canvas" name="canvas" native="true">
          <property name="minimumSize">
           <size>
            <width>500</width>
@@ -46,7 +46,7 @@
          </property>
         </widget>
        </item>
-       <item alignment="Qt::AlignLeft|Qt::AlignTop">
+       <item>
         <widget class="QGroupBox" name="verticalGroupBox">
          <property name="maximumSize">
           <size>
@@ -82,6 +82,14 @@
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Canvas</class>
+   <extends>QWidget</extends>
+   <header>views/canvas.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

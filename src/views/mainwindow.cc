@@ -7,9 +7,9 @@ MainWindow::MainWindow(QWidget *parent)
   , ui_(new Ui::MainWindow)
 {
   ui_->setupUi(this);
-//   canvas_ = findChild<Canvas*>("canvas");
 }
 
 MainWindow::~MainWindow() {
   delete ui_;
 }
+

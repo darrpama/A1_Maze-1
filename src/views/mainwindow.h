@@ -9,6 +9,9 @@
 #include <QtOpenGLWidgets>
 #include <QApplication>
 #include <QMainWindow>
+#include <QPainter>
+
+#include "../controllers/controller_singleton.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -22,7 +25,7 @@ class MainWindow : public QMainWindow
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
 
- private slots:
+//  private slots:
   // some slots
 
 private:
