@@ -1,31 +1,73 @@
 #include "../models/maze_generator.h"
-#include <csignal>
+#include <gtest/gtest.h>
 
-int main() {
-    std::atexit([]() { std::cout << "\n\nsuccess exit\n"; });
-    std::signal(SIGSEGV, [](int sig) { std::cout << sig << "\n\nSegmentation fault\n"; });
-    s21::MazeGenerator mg;
+s21::MazeGenerator maze_gen;
 
-    s21::Maze maze = mg.generateMaze(10, 10);
-    
-    for (int i = 0; i < maze.GetCols(); i++) std::cout << " ___";
+TEST(MazeGenerator, BigMaze) {
+    s21::Maze maze = maze_gen.generateMaze(50, 50);
 
-    for (size_t i = 0; i < maze.GetMatrix().size(); i++) {
-        if (i % maze.GetCols() == 0) std::cout << "\n|";
-        switch (maze.GetMatrix()[i])
-            {
-            case s21::Border::NO_BORDER:
-                std::cout << "    ";
-                break;
-            case s21::Border::RIGHT_BORDER:
-                std::cout << "   |";
-                break;
-            case s21::Border::BOTTOM_BORDER:
-                std::cout << "___ ";
-                break;
-            case s21::Border::BOTH_BORDER:
-                std::cout << "___|";
-                break;
-            }
+    EXPECT_EQ(maze.GetRows(), 50);
+    EXPECT_EQ(maze.GetCols(), 50);
+    EXPECT_EQ(maze.IsIdeal(), true);
+}
+
+TEST(MazeGenerator, SmallMaze) {
+    s21::Maze maze = maze_gen.generateMaze(1, 1);
+
+    EXPECT_EQ(maze.GetRows(), 1);
+    EXPECT_EQ(maze.GetCols(), 1);
+    EXPECT_EQ(maze.IsIdeal(), true);
+
+    maze = maze_gen.generateMaze(2, 2);
+
+    EXPECT_EQ(maze.GetRows(), 2);
+    EXPECT_EQ(maze.GetCols(), 2);
+    EXPECT_EQ(maze.IsIdeal(), true);
+}
+
+TEST(MazeGenerator, StressTest) {
+    for (int i = 0; i < 100; i++) {
+        s21::Maze maze = maze_gen.generateMaze(15, 15);
+        
+        EXPECT_EQ(maze.GetRows(), 15);
+        EXPECT_EQ(maze.GetCols(), 15);
+        EXPECT_EQ(maze.IsIdeal(), true);
     }
+}
+
+TEST(MazeGenerator, Chances) {
+    s21::Maze maze = maze_gen.generateMaze(20, 20, 1.0f, 0.0f);
+ 
+    EXPECT_EQ(maze.GetRows(), 20);
+    EXPECT_EQ(maze.GetCols(), 20);
+    EXPECT_EQ(maze.IsIdeal(), true);
+    
+    maze = maze_gen.generateMaze(20, 20, 0.0f, 1.0f);
+ 
+    EXPECT_EQ(maze.GetRows(), 20);
+    EXPECT_EQ(maze.GetCols(), 20);
+    EXPECT_EQ(maze.IsIdeal(), true);
+
+    maze = maze_gen.generateMaze(20, 20, 0.0f, 0.0f);
+ 
+    EXPECT_EQ(maze.GetRows(), 20);
+    EXPECT_EQ(maze.GetCols(), 20);
+    EXPECT_EQ(maze.IsIdeal(), true);
+
+    maze = maze_gen.generateMaze(20, 20, 1.0f, 1.0f);
+ 
+    EXPECT_EQ(maze.GetRows(), 20);
+    EXPECT_EQ(maze.GetCols(), 20);
+    EXPECT_EQ(maze.IsIdeal(), true);
+}
+
+TEST(MazeGenerator, BrokenSize) {
+    EXPECT_THROW(maze_gen.generateMaze(0, 0), std::invalid_argument);
+    EXPECT_THROW(maze_gen.generateMaze(-1, 5), std::invalid_argument);
+}
+
+
+int main(int argc, char **argv) {
+    testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }
