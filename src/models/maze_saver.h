@@ -24,9 +24,9 @@ class MazeSaver {
   std::vector<Border> bottom_matrix_;
 
   void UnmergeMatricies();
-  void WriteSize();
-  void WriteMatrixRight();
-  void WriteMatrixBottom();
+  void WriteSize(std::ofstream&);
+  void WriteMatrixRight(std::ofstream&);
+  void WriteMatrixBottom(std::ofstream&);
   void Reset();
 
 };
