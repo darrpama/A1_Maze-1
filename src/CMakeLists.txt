@@ -18,15 +18,12 @@ set(PROJECT_SOURCES
     views/mainwindow.h
     views/mainwindow.cc
     views/mainwindow.ui
+    views/canvas.h
+    views/canvas.cc
     controllers/controller_singleton.cc
     controllers/controller_singleton.h
     models/model.cc
     models/model.h
-    models/render/render_strategy.h
-    models/render/render_context.h
-    models/render/render_context.cc
-    models/render/maze_render_strategy.h
-    models/render/maze_render_strategy.cc
 )
 
 

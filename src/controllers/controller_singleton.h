@@ -13,10 +13,6 @@ class ControllerSingleton {
   }
   void SetModel(Model *model) { model_ = model; }
 
-  // render
-  void InitRender(RenderType);
-  void Render(RenderType);
-
  private:
   Model *model_;
 

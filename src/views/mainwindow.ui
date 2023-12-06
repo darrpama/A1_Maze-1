@@ -31,7 +31,7 @@
      <widget class="QGroupBox" name="gridGroupBox">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="s21::MazeRenderStrategy" name="canvas" native="true">
+        <widget class="Canvas" name="canvas" native="true">
          <property name="minimumSize">
           <size>
            <width>500</width>
@@ -84,9 +84,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>s21::MazeRenderStrategy</class>
+   <class>Canvas</class>
    <extends>QWidget</extends>
-   <header>models/render/maze_render_strategy.h</header>
+   <header>views/canvas.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
