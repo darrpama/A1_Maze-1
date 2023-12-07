@@ -2,7 +2,6 @@
 
 #include "controllers/controller_singleton.h"
 #include "models/model.h"
-#include "views/canvas.h"
 #include "views/mainwindow.h"
 
 int main(int argc, char *argv[]) {

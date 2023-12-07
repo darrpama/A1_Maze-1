@@ -1,12 +1,12 @@
-#ifndef CPP4_3DVIEWER_V2_0_2_SRC_VIEWS_CANVAS_H
-#define CPP4_3DVIEWER_V2_0_2_SRC_VIEWS_CANVAS_H
+#ifndef CPP4_3DVIEWER_V2_0_2_SRC_VIEWS_MAZE_CANVAS_H
+#define CPP4_3DVIEWER_V2_0_2_SRC_VIEWS_MAZE_CANVAS_H
 
 #include <QWidget>
 #include <QPainter>
 
-class Canvas : public QWidget {
+class MazeCanvas : public QWidget {
  public:
-  Canvas(QWidget *parent = nullptr) : QWidget(parent) {}
+  MazeCanvas(QWidget *parent = nullptr) : QWidget(parent) {}
   
  protected:
   void paintEvent(QPaintEvent *event) override;
@@ -24,4 +24,4 @@ class Canvas : public QWidget {
   void DrawBottomWall(QPainter *p, size_t i, size_t j);
 };
 
-#endif // CPP4_3DVIEWER_V2_0_2_SRC_VIEWS_CANVAS_H
+#endif // CPP4_3DVIEWER_V2_0_2_SRC_VIEWS_MAZE_CANVAS_H

@@ -18,8 +18,10 @@ set(PROJECT_SOURCES
     views/mainwindow.h
     views/mainwindow.cc
     views/mainwindow.ui
-    views/canvas.h
-    views/canvas.cc
+    views/maze_canvas.h
+    views/maze_canvas.cc
+    views/cave_canvas.h
+    views/cave_canvas.cc
     controllers/controller_singleton.cc
     controllers/controller_singleton.h
     models/model.cc
