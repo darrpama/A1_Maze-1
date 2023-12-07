@@ -15,6 +15,8 @@ TEST(MazeParserTest, MazeSaver_Positive) {
   std::filesystem::path path = std::filesystem::current_path();
   std::string parent_path = path.parent_path();
   parent_path.append("/assets/maze.txt");
+  std::string parent_path_to_save = path.parent_path();
+  parent_path_to_save.append("/assets/saved_maze.txt");
 
   parser.SetFilePath(parent_path);
   parser.Parse();
@@ -49,6 +51,10 @@ TEST(MazeParserTest, MazeSaver_Positive) {
   for (int i = 0; i < mat.size(); i++) {
     EXPECT_EQ(mat[i], expected_mat[i]);
   }
+
+  MazeSaver saver(maze);
+  saver.SetFilePath(parent_path_to_save);
+  EXPECT_NO_THROW(saver.Save());
 
 }
 

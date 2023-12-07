@@ -79,7 +79,6 @@ void MazeSaver::WriteMatrixBottom(std::ofstream& file) {
     }
     i++;
   }
-  file << std::endl;
 }
 
 void MazeSaver::Reset() {
