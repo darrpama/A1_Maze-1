@@ -12,7 +12,8 @@ class MazeCanvas : public QWidget {
   void paintEvent(QPaintEvent *event) override;
 
  private:
-  std::vector<int> maze_;
+  s21::Maze *maze_;
+  std::vector<int> old_maze_;
   int cols_;
   int rows_;
   int cell_width_ = 0;

@@ -10,6 +10,7 @@
 #include <QApplication>
 #include <QMainWindow>
 #include <QPainter>
+#include <QFileDialog>
 
 #include "../controllers/controller_singleton.h"
 
@@ -25,8 +26,8 @@ class MainWindow : public QMainWindow
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
 
-//  private slots:
-  // some slots
+ private slots:
+  void on_upload_btn_clicked();
 
 private:
   Ui::MainWindow *ui_;
