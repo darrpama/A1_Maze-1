@@ -47,19 +47,40 @@ void MazeSaver::WriteSize(std::ofstream& file) {
 }
 
 void MazeSaver::WriteMatrixRight(std::ofstream& file) {
+  int i = 1;
   for (const auto &cell : right_matrix_) {
-    file << cell << " ";
+    if (cell == NO_BORDER) {
+      file << 0;
+    } else if (cell == RIGHT_BORDER) {
+      file << 1;
+    }
+    if (i % maze_->GetCols()) {
+      file << " ";
+    } else {
+      file << std::endl;
+    }
+    i++;
   }
   file << std::endl;
 }
 
 void MazeSaver::WriteMatrixBottom(std::ofstream& file) {
+  int i = 1;
   for (const auto &cell : bottom_matrix_) {
-    file << cell << " ";
+    if (cell == NO_BORDER) {
+      file << 0;
+    } else if (cell == BOTTOM_BORDER) {
+      file << 1;
+    }
+    if (i % maze_->GetCols()) {
+      file << " ";
+    } else {
+      file << std::endl;
+    }
+    i++;
   }
   file << std::endl;
 }
-
 
 void MazeSaver::Reset() {
   filepath_.clear();
