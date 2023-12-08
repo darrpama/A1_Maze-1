@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QPainter>
 
+#include "../controllers/controller_singleton.h"
+
 class MazeCanvas : public QWidget {
  public:
   MazeCanvas(QWidget *parent = nullptr) : QWidget(parent) {}

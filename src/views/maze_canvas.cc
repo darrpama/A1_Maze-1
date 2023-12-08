@@ -1,29 +1,30 @@
 #include "maze_canvas.h"
 
 void MazeCanvas::paintEvent(QPaintEvent *event) {
-  QPainter painter = QPainter(this);
-  setFixedSize(500, 500);
-  std::vector<int> maze = {
-    0, 2, 3, 1,
-    0, 1, 0, 1,
-    3, 2, 3, 1
-  };
-  cols_ = 4;
-  rows_ = 3;
-  cell_width_ = std::round(498.0f / cols_ - 2.0f);
-  cell_height_ = std::round(498.0f / rows_ - 2.0f);
+  maze_ = s21::ControllerSingleton::GetInstance().GetMaze();
+  
+  if (maze_->GetCols() > 0 && maze_->GetRows() > 0) {
+    QPainter painter = QPainter(this);
+    setFixedSize(500, 500);
 
-  size_t index = 0;
-  for (size_t i = 0; i < rows_; i++) {
-    for (size_t j = 0; j < cols_; j++) {
-      int wall = maze[index];
-      DrawCell(&painter, i, j, wall);
-      index++;
+    cols_ = maze_->GetCols();
+    rows_ = maze_->GetRows();
+
+    cell_width_ = std::round(498.0f / cols_ - 2.0f);
+    cell_height_ = std::round(498.0f / rows_ - 2.0f);
+
+    size_t index = 0;
+    for (size_t i = 0; i < rows_; i++) {
+      for (size_t j = 0; j < cols_; j++) {
+        int wall = maze_->GetMatrix()[index];
+        DrawCell(&painter, i, j, wall);
+        index++;
+      }
     }
+    painter.fillRect(0, 0, 500, 2, Qt::black);
+    painter.fillRect(0, 0, 2, 500, Qt::black);
+    painter.end();
   }
-  painter.fillRect(0, 0, 500, 2, Qt::black);
-  painter.fillRect(0, 0, 2, 500, Qt::black);
-  painter.end();
 }
 
 void MazeCanvas::DrawCell(QPainter *p, size_t i, size_t j, int wall) {

@@ -14,6 +14,7 @@ class ControllerSingleton {
     return instance;
   }
   void SetModel(Model *model) { model_ = model; }
+  Maze *GetMaze() { return model_->GetMaze(); }
   void UploadMaze(std::string filename);
 
  private:

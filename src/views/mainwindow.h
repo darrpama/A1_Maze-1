@@ -26,7 +26,10 @@ class MainWindow : public QMainWindow
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
 
- private slots:
+//  private slots:
+  // some slots
+
+private slots:
   void on_upload_btn_clicked();
 
 private:
