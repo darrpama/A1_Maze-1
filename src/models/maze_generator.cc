@@ -3,7 +3,7 @@
 namespace s21 {
     MazeGenerator::MazeGenerator() { Clear(); }
 
-    Maze MazeGenerator::generateMaze(int rows, int cols, float right_wall_chance, float bottom_wall_chance) {
+    Maze MazeGenerator::GenerateMaze(int rows, int cols, float right_wall_chance, float bottom_wall_chance) {
         if (rows < 1 || cols < 1)
             throw std::invalid_argument("Invalid maze size");
 

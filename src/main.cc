@@ -9,16 +9,16 @@
 int main(int argc, char *argv[]) {
   QApplication a(argc, argv);
 
-
   MainWindow *window = new MainWindow();
 
   s21::Maze maze = s21::Maze(0, 0);
   s21::MazeParser maze_parser = s21::MazeParser(&maze);
-  s21::Model model = s21::Model(&maze, &maze_parser);
+  s21::MazeGenerator maze_generator = s21::MazeGenerator();
+  s21::Model model = s21::Model(&maze, &maze_parser, &maze_generator);
   s21::ControllerSingleton &controller = s21::ControllerSingleton::GetInstance();
   controller.SetModel(&model);
 
-  // window->setWindowTitle(QString("Maze"));
+  window->setWindowTitle(QString("Maze"));
   window->show();
 
   return a.exec();

@@ -7,15 +7,15 @@ void MazeCanvas::paintEvent(QPaintEvent *event) {
     QPainter painter = QPainter(this);
     setFixedSize(500, 500);
 
-    cols_ = maze_->GetCols();
-    rows_ = maze_->GetRows();
+    int cols = maze_->GetCols();
+    int rows = maze_->GetRows();
 
-    cell_width_ = std::round(498.0f / cols_ - 2.0f);
-    cell_height_ = std::round(498.0f / rows_ - 2.0f);
+    cell_width_ = std::round(498.0f / cols - 2.0f);
+    cell_height_ = std::round(498.0f / rows - 2.0f);
 
     size_t index = 0;
-    for (size_t i = 0; i < rows_; i++) {
-      for (size_t j = 0; j < cols_; j++) {
+    for (size_t i = 0; i < rows; i++) {
+      for (size_t j = 0; j < cols; j++) {
         int wall = maze_->GetMatrix()[index];
         DrawCell(&painter, i, j, wall);
         index++;

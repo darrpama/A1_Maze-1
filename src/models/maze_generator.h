@@ -13,7 +13,7 @@ namespace s21 {
         const int kEmptyCell = -1;
 
         MazeGenerator();
-        Maze generateMaze(int rows, int cols, float right_wall_chance = 0.5, float bottom_wall_chance = 0.5);
+        Maze GenerateMaze(int rows, int cols, float right_wall_chance = 0.5, float bottom_wall_chance = 0.5);
        
        private:
         size_t next_set_;

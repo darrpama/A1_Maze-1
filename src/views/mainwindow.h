@@ -31,6 +31,7 @@ class MainWindow : public QMainWindow
 
 private slots:
   void on_upload_btn_clicked();
+  void on_generate_btn_clicked();
 
 private:
   Ui::MainWindow *ui_;

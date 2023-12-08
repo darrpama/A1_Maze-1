@@ -3,19 +3,23 @@
 
 #include "maze.h"
 #include "maze_parser.h"
+#include "maze_generator.h"
 #include "../type.h"
 
 namespace s21 {
 
 class Model {
  public:
-  Model(Maze *m, MazeParser *mp) : maze_(m), maze_parser_(mp) {};
+  Model(Maze *m, MazeParser *mp, MazeGenerator *mg) 
+      : maze_(m), maze_parser_(mp), maze_generator_(mg) {};
   void UploadMaze(std::string);
-  Maze *GetMaze() { return maze_; }
+  Maze *GetMaze();
+  void GenerateMaze(int, int);
 
  private:
   Maze *maze_;
   MazeParser *maze_parser_;
+  MazeGenerator *maze_generator_;
 };
 
 }  // namespace s21

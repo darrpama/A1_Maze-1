@@ -15,7 +15,6 @@ class MazeCanvas : public QWidget {
 
  private:
   s21::Maze *maze_;
-  std::vector<int> old_maze_;
   int cols_;
   int rows_;
   int cell_width_ = 0;
