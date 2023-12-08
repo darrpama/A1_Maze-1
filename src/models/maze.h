@@ -6,14 +6,9 @@
 #include <vector>
 #include <queue>
 
-namespace s21 {
+#include "../type.h"
 
-enum Border {
-  NO_BORDER = 0,
-  RIGHT_BORDER,
-  BOTTOM_BORDER,
-  BOTH_BORDER,
-};
+namespace s21 {
 
 class Maze {
  public:

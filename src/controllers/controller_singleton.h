@@ -1,6 +1,8 @@
 #ifndef A1_MAZE_1_SRC_CONTROLLERS_CONTROLLER_SINGLETON_H
 #define A1_MAZE_1_SRC_CONTROLLERS_CONTROLLER_SINGLETON_H
 
+#include <string>
+
 #include "../models/model.h"
 
 namespace s21 {
@@ -11,7 +13,10 @@ class ControllerSingleton {
     static ControllerSingleton instance;
     return instance;
   }
-  void SetModel(Model *model) { model_ = model; }
+  void SetModel(Model *model);
+  Maze *GetMaze();
+  void UploadMaze(std::string filename);
+  void GenerateMaze(int rows, int cols);
 
  private:
   Model *model_;

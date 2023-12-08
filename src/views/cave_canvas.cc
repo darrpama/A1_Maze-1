@@ -1,6 +1,6 @@
-#include "canvas.h"
+#include "cave_canvas.h"
 
-void Canvas::paintEvent(QPaintEvent *event) {
+void CaveCanvas::paintEvent(QPaintEvent *event) {
   QPainter painter = QPainter(this);
   setFixedSize(500, 500);
   std::vector<int> maze = {
@@ -26,7 +26,7 @@ void Canvas::paintEvent(QPaintEvent *event) {
   painter.end();
 }
 
-void Canvas::DrawCell(QPainter *p, size_t i, size_t j, int wall) {
+void CaveCanvas::DrawCell(QPainter *p, size_t i, size_t j, int wall) {
   if (wall == 0) {  // TODO: 0 - нет границ 
     DrawCellBody(p, i, j);
   }
@@ -45,7 +45,7 @@ void Canvas::DrawCell(QPainter *p, size_t i, size_t j, int wall) {
   }
 }
 
-void Canvas::DrawCellBody(QPainter *p, size_t i, size_t j) {
+void CaveCanvas::DrawCellBody(QPainter *p, size_t i, size_t j) {
   p->fillRect(
     (cell_width_ * j) + (j*2),
     (cell_height_ * i) + (i*2),
@@ -55,7 +55,7 @@ void Canvas::DrawCellBody(QPainter *p, size_t i, size_t j) {
   );
 }
 
-void Canvas::DrawRightWall(QPainter *p, size_t i, size_t j) {
+void CaveCanvas::DrawRightWall(QPainter *p, size_t i, size_t j) {
   p->fillRect(
     (cell_width_ * j) + (j*2) + cell_width_,
     (cell_height_ * i) + (i*2),
@@ -65,7 +65,7 @@ void Canvas::DrawRightWall(QPainter *p, size_t i, size_t j) {
   );
 }
 
-void Canvas::DrawBottomWall(QPainter *p, size_t i, size_t j) {
+void CaveCanvas::DrawBottomWall(QPainter *p, size_t i, size_t j) {
   p->fillRect(
     (cell_width_ * j) + (j*2),
     (cell_height_ * i) + (i*2) + cell_height_,
