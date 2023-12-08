@@ -16,8 +16,8 @@ void MazeCanvas::paintEvent(QPaintEvent *event) {
     size_t index = 0;
     for (size_t i = 0; i < rows; i++) {
       for (size_t j = 0; j < cols; j++) {
-        int wall = maze_->GetMatrix()[index];
-        DrawCell(&painter, i, j, wall);
+        s21::Border border = maze_->GetMatrix()[index];
+        DrawCell(&painter, i, j, border);
         index++;
       }
     }
@@ -27,22 +27,22 @@ void MazeCanvas::paintEvent(QPaintEvent *event) {
   }
 }
 
-void MazeCanvas::DrawCell(QPainter *p, size_t i, size_t j, int wall) {
-  if (wall == 0) {  // TODO: 0 - нет границ 
+void MazeCanvas::DrawCell(QPainter *p, size_t i, size_t j, s21::Border border) {
+  if (border == s21::Border::NO_BORDER) {
     DrawCellBody(p, i, j);
   }
-  if (wall == 1) {  // TODO: 1 - граница справа
+  if (border == s21::Border::RIGHT_BORDER) {
     DrawCellBody(p, i, j);
-    DrawRightWall(p, i, j);
+    DrawRightBorder(p, i, j);
   }
-  if (wall == 2) {  // TODO: 2 - граница снизу
+  if (border == s21::Border::BOTTOM_BORDER) {
     DrawCellBody(p, i, j);
-    DrawBottomWall(p, i, j);
+    DrawBottomBorder(p, i, j);
   }
-  if (wall == 3) {  // TODO: 3 - границы и снизу и справа
+  if (border == s21::Border::BOTH_BORDER) {
     DrawCellBody(p, i, j);
-    DrawRightWall(p, i, j);
-    DrawBottomWall(p, i, j);
+    DrawRightBorder(p, i, j);
+    DrawBottomBorder(p, i, j);
   }
 }
 
@@ -56,7 +56,7 @@ void MazeCanvas::DrawCellBody(QPainter *p, size_t i, size_t j) {
   );
 }
 
-void MazeCanvas::DrawRightWall(QPainter *p, size_t i, size_t j) {
+void MazeCanvas::DrawRightBorder(QPainter *p, size_t i, size_t j) {
   p->fillRect(
     (cell_width_ * j) + (j*2) + cell_width_,
     (cell_height_ * i) + (i*2),
@@ -66,7 +66,7 @@ void MazeCanvas::DrawRightWall(QPainter *p, size_t i, size_t j) {
   );
 }
 
-void MazeCanvas::DrawBottomWall(QPainter *p, size_t i, size_t j) {
+void MazeCanvas::DrawBottomBorder(QPainter *p, size_t i, size_t j) {
   p->fillRect(
     (cell_width_ * j) + (j*2),
     (cell_height_ * i) + (i*2) + cell_height_,
