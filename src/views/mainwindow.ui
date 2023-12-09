@@ -48,7 +48,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="maze_tab">
        <attribute name="title">
@@ -183,7 +183,7 @@
             <number>0</number>
            </property>
            <item alignment="Qt::AlignLeft|Qt::AlignBottom">
-            <widget class="QPushButton" name="pushButton">
+            <widget class="QPushButton" name="cave_upload_btn">
              <property name="text">
               <string>upload</string>
              </property>
