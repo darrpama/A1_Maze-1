@@ -35,28 +35,150 @@
         <height>16777215</height>
        </size>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item alignment="Qt::AlignLeft|Qt::AlignTop">
-        <widget class="QGroupBox" name="verticalGroupBox">
-         <property name="maximumSize">
-          <size>
-           <width>320</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item alignment="Qt::AlignHCenter|Qt::AlignTop">
-           <widget class="QGroupBox" name="groupBox">
-            <property name="minimumSize">
-             <size>
-              <width>200</width>
-              <height>150</height>
-             </size>
-            </property>
-            <property name="title">
-             <string>Maze</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="maze_tab">
+       <attribute name="title">
+        <string>Maze</string>
+       </attribute>
+       <widget class="QWidget" name="verticalLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>10</y>
+          <width>531</width>
+          <height>550</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="maze_layout">
+         <item>
+          <layout class="QHBoxLayout" name="maze_control_horizontal_layout">
+           <property name="spacing">
+            <number>5</number>
+           </property>
+           <property name="leftMargin">
+            <number>20</number>
+           </property>
+           <property name="rightMargin">
+            <number>20</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="upload_btn">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>upload maze</string>
+             </property>
+            </widget>
+           </item>
+           <item alignment="Qt::AlignRight|Qt::AlignVCenter">
+            <widget class="QLabel" name="rows_label">
+             <property name="text">
+              <string>rows</string>
+             </property>
+             <property name="margin">
+              <number>5</number>
+             </property>
+            </widget>
+           </item>
+           <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
+            <widget class="QSpinBox" name="rows_input"/>
+           </item>
+           <item alignment="Qt::AlignRight|Qt::AlignVCenter">
+            <widget class="QLabel" name="cols_label">
+             <property name="text">
+              <string>cols</string>
+             </property>
+             <property name="margin">
+              <number>5</number>
+             </property>
+            </widget>
+           </item>
+           <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
+            <widget class="QSpinBox" name="cols_input"/>
+           </item>
+           <item alignment="Qt::AlignVCenter">
+            <widget class="QPushButton" name="generate_btn">
+             <property name="text">
+              <string>generate</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item alignment="Qt::AlignHCenter|Qt::AlignTop">
+          <widget class="MazeCanvas" name="maze_canvas" native="true">
+           <property name="minimumSize">
+            <size>
+             <width>500</width>
+             <height>500</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>500</width>
+             <height>500</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="cave_tab">
+       <property name="minimumSize">
+        <size>
+         <width>600</width>
+         <height>600</height>
+        </size>
+       </property>
+       <attribute name="title">
+        <string>Cave</string>
+       </attribute>
+       <widget class="QWidget" name="verticalLayoutWidget_3">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>10</y>
+          <width>531</width>
+          <height>552</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="cave_layout">
+         <item>
+          <layout class="QHBoxLayout" name="cave_control_layout">
+           <property name="spacing">
+            <number>5</number>
+           </property>
+           <property name="leftMargin">
+            <number>20</number>
+           </property>
+           <property name="rightMargin">
+            <number>20</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item alignment="Qt::AlignLeft|Qt::AlignBottom">
+            <widget class="QPushButton" name="cave_upload_btn">
+             <property name="text">
+              <string>upload</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout">
              <property name="spacing">
               <number>0</number>
              </property>

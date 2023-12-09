@@ -22,6 +22,16 @@ set(PROJECT_SOURCES
     views/canvas.cc
     controllers/controller_singleton.cc
     controllers/controller_singleton.h
+    models/maze_generator.h
+    models/maze_generator.cc
+    models/maze_parser.h
+    models/maze_parser.cc
+    models/maze.h
+    models/maze.cc
+    models/cave_parser.h
+    models/cave_parser.cc
+    models/cave.h
+    models/cave.cc
     models/model.cc
     models/model.h
 )

@@ -28,6 +28,14 @@ class MainWindow : public QMainWindow
 //  private slots:
   // some slots
 
+<<<<<<< HEAD
+=======
+private slots:
+  void on_upload_btn_clicked();
+  void on_generate_btn_clicked();
+  void on_cave_upload_btn_clicked();
+
+>>>>>>> added cave upload, parse and render;
 private:
   Ui::MainWindow *ui_;
 };
