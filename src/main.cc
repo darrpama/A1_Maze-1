@@ -3,7 +3,6 @@
 #include "controllers/controller_singleton.h"
 #include "models/model.h"
 
-#include "views/canvas.h"
 #include "models/maze.h"
 #include "models/maze_parser.h"
 #include "models/cave.h"
