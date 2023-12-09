@@ -29,11 +29,20 @@ class MainWindow : public QMainWindow
 //  private slots:
   // some slots
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 066d36928eeb69553c293e71c998aba6b41d124b
 private slots:
   void on_upload_btn_clicked();
   void on_generate_btn_clicked();
   void on_cave_upload_btn_clicked();
 
+<<<<<<< HEAD
+=======
+>>>>>>> added cave upload, parse and render;
+>>>>>>> 066d36928eeb69553c293e71c998aba6b41d124b
 private:
   Ui::MainWindow *ui_;
 };

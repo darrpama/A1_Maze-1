@@ -2,6 +2,8 @@
 
 #include "controllers/controller_singleton.h"
 #include "models/model.h"
+
+#include "views/canvas.h"
 #include "models/maze.h"
 #include "models/maze_parser.h"
 #include "models/cave.h"
@@ -21,6 +23,7 @@ int main(int argc, char *argv[]) {
   s21::CaveParser cave_parser = s21::CaveParser(&cave);
 
   s21::Model model = s21::Model(&maze, &maze_parser, &maze_generator, &cave, &cave_parser);
+
   s21::ControllerSingleton &controller = s21::ControllerSingleton::GetInstance();
   controller.SetModel(&model);
 
