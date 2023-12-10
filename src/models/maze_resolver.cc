@@ -6,7 +6,7 @@ std::vector<std::pair<size_t, size_t>> MazeResolver::Resolve(std::pair<size_t, s
   std::vector<std::pair<size_t, size_t>> solution{};
   int cols = maze_->GetCols();
   int rows = maze_->GetRows();
-  int matrix_size = cols * rows;
+  int matrix_size = maze_->GetMatrix().size();
 
   std::vector<int> visited(matrix_size, -1);
 
@@ -24,31 +24,17 @@ std::vector<std::pair<size_t, size_t>> MazeResolver::Resolve(std::pair<size_t, s
     int cur_cell = q.front();
     q.pop();
 
-    int current_row = cur_cell / cols;
-    int current_col = cur_cell % cols;
-
-    if (cur_cell == end_cell) {
-      while (cur_cell != init_cell)
-      {
-        int row = cur_cell / cols;
-        int col = cur_cell % cols;
-        solution.push_back(std::make_pair(row, col));
-        cur_cell = visited[cur_cell];
-      }
-      solution.push_back(std::make_pair(init_point.first, init_point.second));
-      std::reverse(solution.begin(), solution.end());
-      break;
-    }
 
     for (auto direction : directions) {
       int neighbor_cell = cur_cell + direction;
 
-      if (neighbor_cell >= 0 && neighbor_cell < matrix_size && visited[neighbor_cell] < 0) {
+      if (neighbor_cell >= 0 && neighbor_cell < matrix_size && visited[neighbor_cell] == -1) {
+        int current_row = cur_cell / cols;
+        int current_col = cur_cell % cols;
         int neighbor_row = neighbor_cell / cols;
         int neighbor_col = neighbor_cell % cols;
-
         Border current_border = maze_->GetMatrix()[current_row * cols + current_col];
-        Border neighbor_border = maze_->GetMatrix()[current_row * cols + current_col];
+        Border neighbor_border = maze_->GetMatrix()[current_row * cols + neighbor_col];
 
         if (current_border == BOTH_BORDER && (direction == 1 || direction == cols))
           continue;
@@ -65,6 +51,14 @@ std::vector<std::pair<size_t, size_t>> MazeResolver::Resolve(std::pair<size_t, s
         q.push(neighbor_cell);
       }
     }
+
+    for (int i = 0; i < matrix_size; i++) {
+      std::cout << visited[i] << '\t';
+      if ((i + 1) % cols == 0) {
+        std::cout << std::endl;
+      }
+    }
+    std::cout << std::endl;
   }
 
   return solution;
