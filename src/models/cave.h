@@ -12,20 +12,20 @@ namespace s21 {
 
 class Cave {
  public:
-  Cave(int rows, int cols) : rows_(rows), cols_(cols), matrix_{} {}
+  Cave(size_t rows, size_t cols) : rows_(rows), cols_(cols), matrix_{} {}
 
-  int GetRows();
-  int GetCols();
-  void SetRows(int);
-  void SetCols(int);
+  size_t GetRows();
+  size_t GetCols();
+  void SetRows(size_t);
+  void SetCols(size_t);
   void Push(unsigned);
   std::vector<unsigned>& GetMatrix();
 
   void Clear();
 
  private:
-  int rows_;
-  int cols_;
+  size_t rows_;
+  size_t cols_;
   std::vector<unsigned> matrix_;
 };
 

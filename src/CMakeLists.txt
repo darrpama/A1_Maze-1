@@ -30,6 +30,8 @@ set(PROJECT_SOURCES
     models/maze_parser.cc
     models/maze.h
     models/maze.cc
+    models/cave_generator.h
+    models/cave_generator.cc
     models/cave_parser.h
     models/cave_parser.cc
     models/cave.h

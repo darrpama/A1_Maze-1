@@ -7,18 +7,27 @@
 #include "maze_generator.h"
 #include "cave.h"
 #include "cave_parser.h"
+#include "cave_generator.h"
 
 namespace s21 {
 
 class Model {
  public:
-  Model(Maze *m, MazeParser *mp, MazeGenerator *mg, Cave *c, CaveParser *cp) 
-      : maze_(m), maze_parser_(mp), maze_generator_(mg), cave_(c), cave_parser_(cp) {};
+  Model(Maze *m, MazeParser *mp, MazeGenerator *mg, Cave *c, CaveParser *cp, CaveGenerator *cg) 
+      : maze_(m)
+      , maze_parser_(mp)
+      , maze_generator_(mg)
+      , cave_(c)
+      , cave_parser_(cp)
+      , cave_generator_(cg) {};
+
   void UploadMaze(std::string);
   Maze *GetMaze();
   void GenerateMaze(int, int);
+
   void UploadCave(std::string);
   Cave *GetCave();
+  void GenerateCave(size_t, size_t, float chance);
 
  private:
   Maze *maze_;
@@ -26,6 +35,7 @@ class Model {
   MazeGenerator *maze_generator_;
   Cave *cave_;
   CaveParser *cave_parser_;
+  CaveGenerator *cave_generator_;
 };
 
 }  // namespace s21

@@ -2,13 +2,13 @@
 
 namespace s21 {
 
-int Cave::GetRows() { return rows_; }
+size_t Cave::GetRows() { return rows_; }
 
-int Cave::GetCols() { return cols_; }
+size_t Cave::GetCols() { return cols_; }
 
-void Cave::SetRows(int rows) { rows_ = rows; }
+void Cave::SetRows(size_t rows) { rows_ = rows; }
 
-void Cave::SetCols(int cols) { cols_ = cols; }
+void Cave::SetCols(size_t cols) { cols_ = cols; }
 
 void Cave::Push(unsigned border) { matrix_.push_back(border); }
 

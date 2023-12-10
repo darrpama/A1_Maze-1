@@ -40,3 +40,12 @@ void MainWindow::on_cave_upload_btn_clicked() {
   }
 }
 
+void MainWindow::on_cave_init_random_btn_clicked() {
+  s21::ControllerSingleton::GetInstance().GenerateCave(
+    static_cast<unsigned>(ui_->cave_rows->value()),
+    static_cast<unsigned>(ui_->cave_cols->value()),
+    static_cast<float>(ui_->cave_cell_chance->value())
+  );
+  ui_->cave_canvas->update();
+}
+

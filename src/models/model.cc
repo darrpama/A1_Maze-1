@@ -32,4 +32,12 @@ Cave *Model::GetCave() {
   return cave_;
 }
 
+void Model::GenerateCave(size_t rows, size_t cols, float chance) {
+  cave_->Clear();
+  Cave cave = cave_generator_->Generate(rows, cols, chance);
+  cave_->SetCols(cave.GetCols());
+  cave_->SetRows(cave.GetRows());
+  cave_->GetMatrix() = cave.GetMatrix();
+}
+
 }  // namespace s21

@@ -26,4 +26,8 @@ Cave *ControllerSingleton::GetCave() {
   return model_->GetCave(); 
 }
 
+void ControllerSingleton::GenerateCave(size_t rows, size_t cols, float chance) {
+  model_->GenerateCave(rows, cols, chance);
+}
+
 }  // namespace s21
