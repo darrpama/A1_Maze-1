@@ -8,14 +8,16 @@
 #include "maze.h"
 
 namespace s21 {
+
     class MazeResolver {
        public:
-        MazeResolver();
-        void ResolveMaze();
+        explicit MazeResolver(Maze &maze) : maze_(&maze){};
+        std::vector<std::pair<size_t, size_t>> Resolve(std::pair<size_t, size_t>, std::pair<size_t, size_t>);
        
        private:
-        void Clear();
+        Maze *maze_;
     };
-}
+
+}  // namespace s21
 
 #endif  // A1_MAZE_1_0_SRC_MAZE_RESOLVER_H
