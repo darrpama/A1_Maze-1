@@ -49,13 +49,16 @@ std::vector<std::pair<size_t, size_t>> MazeResolver::Resolve(std::pair<size_t, s
           continue;
         if (direction == -cols && (neighbor_col != current_col || (neighbor_border == BOTTOM_BORDER || neighbor_border == BOTH_BORDER)))
           continue;
+        
+        q.push(neighbor_cell);
         if (cur_cell == end_cell) {
-          visited[neighbor_cell] = visited[cur_cell] + 1;
+          // visited[neighbor_cell] = visited[cur_cell] + 1;
+          while (!q.empty()) {
+            q.pop();
+          }
           break;
         }
-        
         visited[neighbor_cell] = visited[cur_cell] + 1;
-        q.push(neighbor_cell);
       }
     }
 
