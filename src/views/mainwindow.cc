@@ -49,3 +49,11 @@ void MainWindow::on_cave_init_random_btn_clicked() {
   ui_->cave_canvas->update();
 }
 
+void MainWindow::on_step_render_btn_clicked() {
+  s21::ControllerSingleton::GetInstance().StepRender(
+    static_cast<unsigned>(ui_->die_limit_input->value()),
+    static_cast<unsigned>(ui_->born_limit_input->value())
+  );
+  ui_->cave_canvas->update();
+}
+

@@ -38,7 +38,7 @@
      <height>618</height>
     </size>
    </property>
-   <layout class="QGridLayout" name="gridLayout_15" columnstretch="0,0">
+   <layout class="QGridLayout" name="gridLayout_15" columnstretch="0">
     <item row="0" column="0" alignment="Qt::AlignHCenter">
      <widget class="QTabWidget" name="tabWidget">
       <property name="minimumSize">
@@ -319,7 +319,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QSpinBox" name="spinBox_4">
+                <widget class="QSpinBox" name="die_limit_input">
                  <property name="minimumSize">
                   <size>
                    <width>50</width>
@@ -346,7 +346,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QSpinBox" name="spinBox_3">
+                <widget class="QSpinBox" name="born_limit_input">
                  <property name="minimumSize">
                   <size>
                    <width>50</width>
@@ -361,7 +361,7 @@
               </layout>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_3">
+              <widget class="QPushButton" name="step_render_btn">
                <property name="text">
                 <string>step</string>
                </property>

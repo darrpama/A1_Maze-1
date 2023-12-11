@@ -30,4 +30,8 @@ void ControllerSingleton::GenerateCave(size_t rows, size_t cols, float chance) {
   model_->GenerateCave(rows, cols, chance);
 }
 
+void ControllerSingleton::StepRender(unsigned die_limit, unsigned born_limit) {
+  model_->StepRender(die_limit, born_limit);
+}
+
 }  // namespace s21

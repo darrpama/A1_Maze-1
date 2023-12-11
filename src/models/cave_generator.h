@@ -12,12 +12,23 @@ class CaveGenerator {
  public:
   CaveGenerator();
   Cave Generate(size_t rows, size_t cols, float chance);
+  void Step(Cave *cave, unsigned die_limit, unsigned born_limit);
   
  private:
+  unsigned rows_;
+  unsigned cols_;
   std::vector<unsigned> cells_;
 
-  void AddCell(Cave& cave, size_t row, float chance);
   bool RandomChoice(float chance);
+  size_t GetAliveNeigborsCount(Cave *cave, size_t row, size_t col);
+  size_t GetNorthWest(Cave *cave, size_t row, size_t col);
+  size_t GetNorth(Cave *cave, size_t row, size_t col);
+  size_t GetNorthEast(Cave *cave, size_t row, size_t col);
+  size_t GetEast(Cave *cave, size_t row, size_t col);
+  size_t GetSouthEast(Cave *cave, size_t row, size_t col);
+  size_t GetSouth(Cave *cave, size_t row, size_t col);
+  size_t GetSouthWest(Cave *cave, size_t row, size_t col);
+  size_t GetWest(Cave *cave, size_t row, size_t col);
   void Clear();
 };
 }  // namespace s21

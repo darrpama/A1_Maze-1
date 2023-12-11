@@ -40,4 +40,8 @@ void Model::GenerateCave(size_t rows, size_t cols, float chance) {
   cave_->GetMatrix() = cave.GetMatrix();
 }
 
+void Model::StepRender(unsigned die_limit, unsigned born_limit) {
+  cave_generator_->Step(cave_, die_limit, born_limit);
+}
+
 }  // namespace s21
