@@ -14,7 +14,7 @@ TEST(MazeResolverTest, Parse_Positive) {
 
   std::filesystem::path path = std::filesystem::current_path();
   std::string parent_path = path.parent_path();
-  parent_path.append("/assets/maze_small.txt");
+  parent_path.append("/assets/maze_small_2.txt");
 
   parser.SetFilePath(parent_path);
   parser.Parse();
@@ -22,13 +22,10 @@ TEST(MazeResolverTest, Parse_Positive) {
   size_t init_row = 0;
   size_t init_col = 0;
   size_t end_row = 2;
-  size_t end_col = 2;
+  size_t end_col = 0;
 
   MazeResolver resolver(maze);
   std::vector<std::pair<size_t, size_t>> solution = resolver.Resolve(std::make_pair(init_row, init_col), std::make_pair(end_row, end_col));
-  // for (int i = 0; i < solution.size(); i++) {
-  //   std::cout << solution[i].first << " " << solution[i].second << std::endl;
-  // }
 }
 
 

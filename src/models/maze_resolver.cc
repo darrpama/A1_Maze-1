@@ -10,8 +10,11 @@ std::vector<std::pair<size_t, size_t>> MazeResolver::Resolve(std::pair<size_t, s
 
   std::vector<int> visited(matrix_size, -1);
 
-  int init_cell = init_point.first + cols * init_point.second;
-  int end_cell = end_point.first + cols * end_point.second;
+  int init_cell = init_point.first * cols + init_point.second;
+  int end_cell = end_point.first * cols + end_point.second;
+
+  std::cout << init_cell << std::endl;
+  std::cout << end_cell << std::endl;
 
   visited[init_cell] = 0;
 
@@ -34,7 +37,7 @@ std::vector<std::pair<size_t, size_t>> MazeResolver::Resolve(std::pair<size_t, s
         int neighbor_row = neighbor_cell / cols;
         int neighbor_col = neighbor_cell % cols;
         Border current_border = maze_->GetMatrix()[current_row * cols + current_col];
-        Border neighbor_border = maze_->GetMatrix()[current_row * cols + neighbor_col];
+        Border neighbor_border = maze_->GetMatrix()[neighbor_row * cols + neighbor_col];
 
         if (current_border == BOTH_BORDER && (direction == 1 || direction == cols))
           continue;
@@ -46,6 +49,10 @@ std::vector<std::pair<size_t, size_t>> MazeResolver::Resolve(std::pair<size_t, s
           continue;
         if (direction == -cols && (neighbor_col != current_col || (neighbor_border == BOTTOM_BORDER || neighbor_border == BOTH_BORDER)))
           continue;
+        if (cur_cell == end_cell) {
+          visited[neighbor_cell] = visited[cur_cell] + 1;
+          break;
+        }
         
         visited[neighbor_cell] = visited[cur_cell] + 1;
         q.push(neighbor_cell);
