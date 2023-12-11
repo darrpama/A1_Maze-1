@@ -21,11 +21,14 @@ TEST(MazeResolverTest, Parse_Positive) {
 
   size_t init_row = 0;
   size_t init_col = 0;
-  size_t end_row = 9;
-  size_t end_col = 9;
+  size_t end_row = 0;
+  size_t end_col = 3;
 
   MazeResolver resolver(maze);
   std::vector<std::pair<size_t, size_t>> solution = resolver.Resolve(std::make_pair(init_row, init_col), std::make_pair(end_row, end_col));
+  for (size_t i = 0; i < solution.size(); i++) {
+    std::cout << '[' << i << "]: " << solution[i].first << " " << solution[i].second << std::endl;
+  }
 }
 
 
