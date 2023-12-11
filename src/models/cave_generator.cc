@@ -27,6 +27,30 @@ bool CaveGenerator::RandomChoice(float chance) {
   return bd(gen);
 }
 
+/*
+
+Правила проще, чем в "Жизни" - 
+есть две специальные переменные, 
+  правило для "рождения" "мертвых" клеток (предел "рождения")
+  правило для уничтожения "живых" клеток (предел "смерти").
+
+DeathRule for Alive Cells
+  Если "живая" клетка окружены "живыми" клетками, 
+  количество которых меньше, чем предел "смерти", 
+  они "умирают".
+
+LifeRule for Dead Cells
+  Если "мертвая" клетка находятся рядом с "живыми", 
+  количество которых больше, чем предел "рождения", 
+  они становятся "живыми".
+
+Живая клетка Alive Cell (AC)
+Мертвая клетка Dead Cell (DC)
+
+Окружающие живые клетки Alive Neighbors (AN)
+
+*/
+
 void CaveGenerator::Step(Cave *cave, unsigned die_limit, unsigned born_limit) {
   rows_ = cave->GetRows();
   cols_ = cave->GetCols();
@@ -49,14 +73,10 @@ void CaveGenerator::Step(Cave *cave, unsigned die_limit, unsigned born_limit) {
 }
 
 size_t CaveGenerator::GetAliveNeigborsCount(Cave *cave, size_t row, size_t col) {
-  return GetNorthWest(cave, row, col)
-    + GetNorth(cave, row, col)
-    + GetNorthEast(cave, row, col)
-    + GetEast(cave, row, col)
-    + GetSouthEast(cave, row, col)
-    + GetSouth(cave, row, col)
-    + GetSouthWest(cave, row, col)
-    + GetWest(cave, row, col);
+  return GetNorthWest(cave, row, col) + GetNorth(cave, row, col)
+       + GetNorthEast(cave, row, col) + GetEast(cave, row, col)
+       + GetSouthEast(cave, row, col) + GetSouth(cave, row, col)
+       + GetSouthWest(cave, row, col) + GetWest(cave, row, col);
 }
 
 size_t CaveGenerator::GetNorthWest(Cave *cave, size_t row, size_t col) {
@@ -96,27 +116,3 @@ void CaveGenerator::Clear() {
 }
 
 }  // namespace s21
-
-/*
-
-Правила проще, чем в "Жизни" - 
-есть две специальные переменные, 
-  правило для "рождения" "мертвых" клеток (предел "рождения")
-  правило для уничтожения "живых" клеток (предел "смерти").
-
-DeathRule for Alive Cells
-  Если "живая" клетка окружены "живыми" клетками, 
-  количество которых меньше, чем предел "смерти", 
-  они "умирают".
-
-LifeRule for Dead Cells
-  Если "мертвая" клетка находятся рядом с "живыми", 
-  количество которых больше, чем предел "рождения", 
-  они становятся "живыми".
-
-Живая клетка Alive Cell (AC)
-Мертвая клетка Dead Cell (DC)
-
-Окружающие живые клетки Alive Neighbors (AN)
-
-*/
