@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>564</width>
+    <width>782</width>
     <height>642</height>
    </rect>
   </property>
@@ -18,298 +18,408 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>564</width>
-    <height>642</height>
+    <width>100000</width>
+    <height>100000</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <property name="maximumSize">
+   <property name="minimumSize">
     <size>
-     <width>620</width>
-     <height>640</height>
+     <width>786</width>
+     <height>618</height>
     </size>
    </property>
-   <layout class="QGridLayout" name="gridLayout_15" columnstretch="0,0">
-    <item row="0" column="1" alignment="Qt::AlignLeft|Qt::AlignTop">
+   <property name="maximumSize">
+    <size>
+     <width>786</width>
+     <height>618</height>
+    </size>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_15" columnstretch="0">
+    <item row="0" column="0" alignment="Qt::AlignHCenter">
      <widget class="QTabWidget" name="tabWidget">
       <property name="minimumSize">
        <size>
-        <width>540</width>
-        <height>600</height>
+        <width>760</width>
+        <height>560</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>540</width>
-        <height>600</height>
+        <width>760</width>
+        <height>560</height>
        </size>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="maze_tab">
        <attribute name="title">
         <string>Maze</string>
        </attribute>
-       <widget class="QWidget" name="verticalLayoutWidget">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>10</y>
-          <width>531</width>
-          <height>550</height>
-         </rect>
-        </property>
-        <layout class="QVBoxLayout" name="maze_layout">
-         <item>
-          <layout class="QHBoxLayout" name="maze_control_horizontal_layout">
-           <property name="spacing">
-            <number>5</number>
-           </property>
-           <property name="leftMargin">
-            <number>20</number>
-           </property>
-           <property name="rightMargin">
-            <number>20</number>
-           </property>
-           <item>
-            <widget class="QPushButton" name="upload_btn">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>upload maze</string>
-             </property>
-            </widget>
-           </item>
-           <item alignment="Qt::AlignRight|Qt::AlignVCenter">
-            <widget class="QLabel" name="rows_label">
-             <property name="text">
-              <string>rows</string>
-             </property>
-             <property name="margin">
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item alignment="Qt::AlignLeft|Qt::AlignTop">
+           <widget class="MazeCanvas" name="maze_canvas" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>500</width>
+              <height>500</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>500</width>
+              <height>500</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignTop">
+           <widget class="QGroupBox" name="MazeControls">
+            <layout class="QVBoxLayout" name="verticalLayout_7">
+             <property name="spacing">
               <number>5</number>
              </property>
-            </widget>
-           </item>
-           <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
-            <widget class="QSpinBox" name="rows_input"/>
-           </item>
-           <item alignment="Qt::AlignRight|Qt::AlignVCenter">
-            <widget class="QLabel" name="cols_label">
-             <property name="text">
-              <string>cols</string>
+             <property name="leftMargin">
+              <number>20</number>
              </property>
-             <property name="margin">
-              <number>5</number>
+             <property name="rightMargin">
+              <number>20</number>
              </property>
-            </widget>
-           </item>
-           <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
-            <widget class="QSpinBox" name="cols_input"/>
-           </item>
-           <item alignment="Qt::AlignVCenter">
-            <widget class="QPushButton" name="generate_btn">
-             <property name="text">
-              <string>generate</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item alignment="Qt::AlignHCenter|Qt::AlignTop">
-          <widget class="MazeCanvas" name="maze_canvas" native="true">
-           <property name="minimumSize">
-            <size>
-             <width>500</width>
-             <height>500</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>500</width>
-             <height>500</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
+             <item>
+              <widget class="QPushButton" name="upload_btn">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>upload maze</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_6">
+               <item alignment="Qt::AlignRight|Qt::AlignTop">
+                <widget class="QLabel" name="cols_label">
+                 <property name="text">
+                  <string>cols</string>
+                 </property>
+                 <property name="margin">
+                  <number>5</number>
+                 </property>
+                </widget>
+               </item>
+               <item alignment="Qt::AlignLeft|Qt::AlignTop">
+                <widget class="QSpinBox" name="cols_input"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_7">
+               <item alignment="Qt::AlignRight|Qt::AlignTop">
+                <widget class="QLabel" name="rows_label">
+                 <property name="text">
+                  <string>rows</string>
+                 </property>
+                 <property name="margin">
+                  <number>5</number>
+                 </property>
+                </widget>
+               </item>
+               <item alignment="Qt::AlignLeft|Qt::AlignTop">
+                <widget class="QSpinBox" name="rows_input"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QPushButton" name="generate_btn">
+               <property name="text">
+                <string>generate</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="cave_tab">
        <property name="minimumSize">
         <size>
-         <width>600</width>
-         <height>600</height>
+         <width>0</width>
+         <height>0</height>
         </size>
        </property>
        <attribute name="title">
         <string>Cave</string>
        </attribute>
-       <widget class="QWidget" name="verticalLayoutWidget_3">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>10</y>
-          <width>531</width>
-          <height>552</height>
-         </rect>
-        </property>
-        <layout class="QVBoxLayout" name="cave_layout">
-         <item>
-          <layout class="QHBoxLayout" name="cave_control_layout">
-           <property name="spacing">
-            <number>5</number>
-           </property>
-           <property name="leftMargin">
-            <number>20</number>
-           </property>
-           <property name="rightMargin">
-            <number>20</number>
-           </property>
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
-           <item alignment="Qt::AlignLeft|Qt::AlignBottom">
-            <widget class="QPushButton" name="pushButton">
-             <property name="text">
-              <string>upload</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout">
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <item>
+           <widget class="CaveCanvas" name="cave_canvas" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>500</width>
+              <height>500</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>500</width>
+              <height>500</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignTop">
+           <widget class="QGroupBox" name="CaveControls">
+            <layout class="QVBoxLayout" name="verticalLayout_4">
              <property name="spacing">
-              <number>0</number>
+              <number>5</number>
+             </property>
+             <property name="leftMargin">
+              <number>20</number>
+             </property>
+             <property name="rightMargin">
+              <number>20</number>
              </property>
              <property name="bottomMargin">
-              <number>0</number>
+              <number>1</number>
              </property>
-             <item alignment="Qt::AlignRight|Qt::AlignBottom">
-              <widget class="QLabel" name="label_2">
+             <item>
+              <widget class="QPushButton" name="cave_upload_btn">
                <property name="text">
-                <string>die</string>
-               </property>
-               <property name="margin">
-                <number>5</number>
+                <string>upload</string>
                </property>
               </widget>
              </item>
-             <item alignment="Qt::AlignLeft|Qt::AlignBottom">
-              <widget class="QSpinBox" name="spinBox_4">
-               <property name="minimumSize">
+             <item>
+              <spacer name="horizontalSpacer_4">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
                 <size>
-                 <width>50</width>
-                 <height>0</height>
+                 <width>40</width>
+                 <height>20</height>
                 </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_10">
+               <item>
+                <widget class="QLabel" name="label_4">
+                 <property name="text">
+                  <string>cols</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="cave_cols"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_9">
+               <item>
+                <widget class="QLabel" name="label_3">
+                 <property name="text">
+                  <string>rows</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="cave_rows"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="label_6">
+                 <property name="text">
+                  <string>chance</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="cave_cell_chance"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QPushButton" name="cave_init_random_btn">
+               <property name="text">
+                <string>init random</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item alignment="Qt::AlignRight">
+                <widget class="QLabel" name="label_2">
+                 <property name="text">
+                  <string>die limit</string>
+                 </property>
+                 <property name="margin">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="die_limit_input">
+                 <property name="minimumSize">
+                  <size>
+                   <width>50</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <item alignment="Qt::AlignRight">
+                <widget class="QLabel" name="label">
+                 <property name="text">
+                  <string>born limit</string>
+                 </property>
+                 <property name="margin">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="born_limit_input">
+                 <property name="minimumSize">
+                  <size>
+                   <width>50</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QPushButton" name="step_render_btn">
+               <property name="text">
+                <string>step</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_11">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QSpinBox" name="spinBox_5">
+                 <property name="minimumSize">
+                  <size>
+                   <width>50</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_5">
+                 <property name="text">
+                  <string>ms</string>
+                 </property>
+                 <property name="margin">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_2">
+               <property name="text">
+                <string>auto</string>
                </property>
               </widget>
              </item>
             </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_3">
-             <property name="spacing">
-              <number>0</number>
-             </property>
-             <item alignment="Qt::AlignRight|Qt::AlignBottom">
-              <widget class="QLabel" name="label">
-               <property name="text">
-                <string>born</string>
-               </property>
-               <property name="margin">
-                <number>5</number>
-               </property>
-              </widget>
-             </item>
-             <item alignment="Qt::AlignLeft|Qt::AlignBottom">
-              <widget class="QSpinBox" name="spinBox_3">
-               <property name="minimumSize">
-                <size>
-                 <width>50</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="styleSheet">
-                <string notr="true"/>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_4">
-             <property name="spacing">
-              <number>0</number>
-             </property>
-             <item alignment="Qt::AlignRight|Qt::AlignBottom">
-              <widget class="QLabel" name="label_5">
-               <property name="text">
-                <string>ms</string>
-               </property>
-               <property name="margin">
-                <number>5</number>
-               </property>
-              </widget>
-             </item>
-             <item alignment="Qt::AlignLeft|Qt::AlignBottom">
-              <widget class="QSpinBox" name="spinBox_5">
-               <property name="minimumSize">
-                <size>
-                 <width>50</width>
-                 <height>0</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item alignment="Qt::AlignHCenter|Qt::AlignBottom">
-            <widget class="QPushButton" name="pushButton_3">
-             <property name="text">
-              <string>step</string>
-             </property>
-            </widget>
-           </item>
-           <item alignment="Qt::AlignHCenter|Qt::AlignBottom">
-            <widget class="QPushButton" name="pushButton_2">
-             <property name="text">
-              <string>auto</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item alignment="Qt::AlignHCenter|Qt::AlignBottom">
-          <widget class="CaveCanvas" name="cave_canvas" native="true">
-           <property name="minimumSize">
-            <size>
-             <width>500</width>
-             <height>500</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>500</width>
-             <height>500</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -320,7 +430,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>564</width>
+     <width>782</width>
      <height>24</height>
     </rect>
    </property>

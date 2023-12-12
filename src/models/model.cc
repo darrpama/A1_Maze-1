@@ -19,4 +19,25 @@ void Model::GenerateMaze(int rows, int cols) {
   maze_->GetMatrix() = maze.GetMatrix();
 }
 
+void Model::UploadCave(std::string filepath) {
+  cave_parser_->SetFilePath(filepath);
+  cave_parser_->Parse();
+}
+
+Cave *Model::GetCave() {
+  return cave_;
+}
+
+void Model::GenerateCave(size_t rows, size_t cols, float chance) {
+  cave_->Clear();
+  Cave cave = cave_generator_->Generate(rows, cols, chance);
+  cave_->SetCols(cave.GetCols());
+  cave_->SetRows(cave.GetRows());
+  cave_->GetMatrix() = cave.GetMatrix();
+}
+
+void Model::StepRender(unsigned die_limit, unsigned born_limit) {
+  cave_generator_->Step(cave_, die_limit, born_limit);
+}
+
 }  // namespace s21

@@ -12,7 +12,6 @@ enum Border {
   BOTH_BORDER,
 };
 
-
 }  // namespace s21
 
 #endif  // A1_MAZE_1_SRC_TYPE_H

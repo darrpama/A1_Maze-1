@@ -14,9 +14,15 @@ class ControllerSingleton {
     return instance;
   }
   void SetModel(Model *model);
+
   Maze *GetMaze();
   void UploadMaze(std::string filename);
   void GenerateMaze(int rows, int cols);
+
+  void UploadCave(std::string filename);
+  void GenerateCave(size_t rows, size_t cols, float chance);
+  void StepRender(unsigned die_limit, unsigned born_limit);
+  Cave *GetCave();
 
  private:
   Model *model_;
