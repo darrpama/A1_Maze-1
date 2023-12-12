@@ -4,7 +4,7 @@
 s21::MazeGenerator maze_gen;
 
 TEST(MazeGenerator, BigMaze) {
-    s21::Maze maze = maze_gen.generateMaze(50, 50);
+    s21::Maze maze = maze_gen.GenerateMaze(50, 50);
 
     EXPECT_EQ(maze.GetRows(), 50);
     EXPECT_EQ(maze.GetCols(), 50);
@@ -12,13 +12,13 @@ TEST(MazeGenerator, BigMaze) {
 }
 
 TEST(MazeGenerator, SmallMaze) {
-    s21::Maze maze = maze_gen.generateMaze(1, 1);
+    s21::Maze maze = maze_gen.GenerateMaze(1, 1);
 
     EXPECT_EQ(maze.GetRows(), 1);
     EXPECT_EQ(maze.GetCols(), 1);
     EXPECT_EQ(maze.IsIdeal(), true);
 
-    maze = maze_gen.generateMaze(2, 2);
+    maze = maze_gen.GenerateMaze(2, 2);
 
     EXPECT_EQ(maze.GetRows(), 2);
     EXPECT_EQ(maze.GetCols(), 2);
@@ -27,7 +27,7 @@ TEST(MazeGenerator, SmallMaze) {
 
 TEST(MazeGenerator, StressTest) {
     for (int i = 0; i < 100; i++) {
-        s21::Maze maze = maze_gen.generateMaze(15, 15);
+        s21::Maze maze = maze_gen.GenerateMaze(15, 15);
         
         EXPECT_EQ(maze.GetRows(), 15);
         EXPECT_EQ(maze.GetCols(), 15);
@@ -36,25 +36,25 @@ TEST(MazeGenerator, StressTest) {
 }
 
 TEST(MazeGenerator, Chances) {
-    s21::Maze maze = maze_gen.generateMaze(20, 20, 1.0f, 0.0f);
+    s21::Maze maze = maze_gen.GenerateMaze(20, 20, 1.0f, 0.0f);
  
     EXPECT_EQ(maze.GetRows(), 20);
     EXPECT_EQ(maze.GetCols(), 20);
     EXPECT_EQ(maze.IsIdeal(), true);
     
-    maze = maze_gen.generateMaze(20, 20, 0.0f, 1.0f);
+    maze = maze_gen.GenerateMaze(20, 20, 0.0f, 1.0f);
  
     EXPECT_EQ(maze.GetRows(), 20);
     EXPECT_EQ(maze.GetCols(), 20);
     EXPECT_EQ(maze.IsIdeal(), true);
 
-    maze = maze_gen.generateMaze(20, 20, 0.0f, 0.0f);
+    maze = maze_gen.GenerateMaze(20, 20, 0.0f, 0.0f);
  
     EXPECT_EQ(maze.GetRows(), 20);
     EXPECT_EQ(maze.GetCols(), 20);
     EXPECT_EQ(maze.IsIdeal(), true);
 
-    maze = maze_gen.generateMaze(20, 20, 1.0f, 1.0f);
+    maze = maze_gen.GenerateMaze(20, 20, 1.0f, 1.0f);
  
     EXPECT_EQ(maze.GetRows(), 20);
     EXPECT_EQ(maze.GetCols(), 20);
@@ -62,8 +62,8 @@ TEST(MazeGenerator, Chances) {
 }
 
 TEST(MazeGenerator, BrokenSize) {
-    EXPECT_THROW(maze_gen.generateMaze(0, 0), std::invalid_argument);
-    EXPECT_THROW(maze_gen.generateMaze(-1, 5), std::invalid_argument);
+    EXPECT_THROW(maze_gen.GenerateMaze(0, 0), std::invalid_argument);
+    EXPECT_THROW(maze_gen.GenerateMaze(-1, 5), std::invalid_argument);
 }
 
 

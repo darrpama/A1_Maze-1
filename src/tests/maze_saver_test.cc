@@ -1,5 +1,5 @@
-#include "maze_parser.h"
-#include "maze_saver.h"
+#include "../models/maze_parser.h"
+#include "../models/maze_saver.h"
 
 #include "gtest/gtest.h"
 
