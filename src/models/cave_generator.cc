@@ -1,6 +1,7 @@
 #include "cave_generator.h"
 
 namespace s21 {
+
 CaveGenerator::CaveGenerator() { Clear(); }
 
 Cave CaveGenerator::Generate(size_t rows, size_t cols, float chance) {

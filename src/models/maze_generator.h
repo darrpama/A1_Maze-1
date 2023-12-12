@@ -8,6 +8,7 @@
 #include "maze.h"
 
 namespace s21 {
+
     class MazeGenerator {
        public:
         const int kEmptyCell = -1;
@@ -29,6 +30,7 @@ namespace s21 {
         void MergeSets(size_t set1, size_t set2);
         void Clear();
     };
-}
 
-#endif
+}  // namespace s21
+
+#endif // A1_MAZE_1_0_SRC_MAZE_GENERATOR_H 

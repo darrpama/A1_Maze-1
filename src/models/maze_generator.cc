@@ -1,6 +1,7 @@
 #include "maze_generator.h"
 
 namespace s21 {
+
     MazeGenerator::MazeGenerator() { Clear(); }
 
     Maze MazeGenerator::GenerateMaze(int rows, int cols, float right_wall_chance, float bottom_wall_chance) {
@@ -100,4 +101,5 @@ namespace s21 {
         sets_.clear();
         cells_.clear();
     }
+
 }  // namespace s21

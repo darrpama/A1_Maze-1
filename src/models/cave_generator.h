@@ -8,6 +8,7 @@
 #include "cave.h"
 
 namespace s21 {
+
 class CaveGenerator {
  public:
   CaveGenerator();
@@ -31,6 +32,7 @@ class CaveGenerator {
   size_t GetWest(Cave *cave, size_t row, size_t col);
   void Clear();
 };
+
 }  // namespace s21
 
 #endif  // A1_MAZE_1_SRC_MODELS_CAVE_GENERATOR_H
