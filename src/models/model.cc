@@ -22,10 +22,6 @@ void Model::GenerateMaze(int rows, int cols) {
 void Model::UploadCave(std::string filepath) {
   cave_parser_->SetFilePath(filepath);
   cave_parser_->Parse();
-
-  for (unsigned i = 0; i < cave_->GetMatrix().size(); i++) {
-    std::cout << cave_->GetMatrix().at(i) << std::endl;
-  }
 }
 
 Cave *Model::GetCave() {
