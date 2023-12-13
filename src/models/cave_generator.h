@@ -19,6 +19,7 @@ class CaveGenerator {
   unsigned cols_;
   std::vector<unsigned> cells_;
 
+  bool CompareCaves(Cave *old_cave, Cave *new_cave);
   bool RandomChoice(float chance);
   size_t GetAliveNeigborsCount(Cave *cave, size_t row, size_t col);
   size_t GetNorthWest(Cave *cave, size_t row, size_t col);

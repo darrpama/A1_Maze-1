@@ -66,9 +66,10 @@ void MainWindow::on_auto_render_btn_clicked() {
   unsigned born_limit = static_cast<unsigned>(ui_->born_limit_input->value());
 
   // connect(timer, &QTimer::timeout, this, [die_limit, born_limit, &cave_canvas = ui_->cave_canvas]() {
-  connect(timer, &QTimer::timeout, this, [die_limit, born_limit, &cave_canvas = ui_->cave_canvas]() {
+  connect(timer, &QTimer::timeout, this, [timer, die_limit, born_limit, &cave_canvas = ui_->cave_canvas]() {
     bool stop = s21::ControllerSingleton::GetInstance().StepRender(die_limit, born_limit);
     if (stop) {
+      std::cout << "auto render stoped" << std::endl;
       timer->stop();
     } else {
       cave_canvas->update();
@@ -76,7 +77,6 @@ void MainWindow::on_auto_render_btn_clicked() {
     // code bellow is not work. Why??
   });
 
-  
   timer->start(interval);
 }
 

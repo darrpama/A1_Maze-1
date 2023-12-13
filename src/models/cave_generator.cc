@@ -52,8 +52,8 @@ LifeRule for Dead Cells
 */
 
 bool CaveGenerator::Step(Cave *cave, unsigned die_limit, unsigned born_limit) {
+  Cave old_cave = *cave;
 
-  // need to copy cave and compare them TODO!
   rows_ = cave->GetRows();
   cols_ = cave->GetCols();
   unsigned alive_neighbors_count = 0;
@@ -72,6 +72,30 @@ bool CaveGenerator::Step(Cave *cave, unsigned die_limit, unsigned born_limit) {
       }
     }
   }
+
+  return CompareCaves(&old_cave, cave);
+}
+
+bool CaveGenerator::CompareCaves(Cave *old_cave, Cave *new_cave) {
+  if (old_cave->GetRows() != new_cave->GetRows()) {
+    return false;
+  }
+
+  if (old_cave->GetCols() != new_cave->GetCols()) {
+    return false;
+  }
+
+  for (size_t i = 0; i < old_cave->GetRows(); i++) {
+    for (size_t j = 0; j < old_cave->GetCols(); j++) {
+      bool old_cave_value = old_cave->GetMatrix()[i * old_cave->GetCols() + j];
+      bool new_cave_value = new_cave->GetMatrix()[i * new_cave->GetCols() + j];
+      if (old_cave_value != new_cave_value) {
+        return false;
+      }
+    }
+  }
+
+  return true;
 }
 
 size_t CaveGenerator::GetAliveNeigborsCount(Cave *cave, size_t row, size_t col) {
