@@ -12,7 +12,7 @@ class CaveGenerator {
  public:
   CaveGenerator();
   Cave Generate(size_t rows, size_t cols, float chance);
-  void Step(Cave *cave, unsigned die_limit, unsigned born_limit);
+  bool Step(Cave *cave, unsigned die_limit, unsigned born_limit);
   
  private:
   unsigned rows_;

@@ -51,7 +51,9 @@ LifeRule for Dead Cells
 
 */
 
-void CaveGenerator::Step(Cave *cave, unsigned die_limit, unsigned born_limit) {
+bool CaveGenerator::Step(Cave *cave, unsigned die_limit, unsigned born_limit) {
+
+  // need to copy cave and compare them TODO!
   rows_ = cave->GetRows();
   cols_ = cave->GetCols();
   unsigned alive_neighbors_count = 0;

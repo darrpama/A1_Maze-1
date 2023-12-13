@@ -11,6 +11,7 @@
 #include <QMainWindow>
 #include <QPainter>
 #include <QFileDialog>
+#include <QTimer>
 
 #include "../controllers/controller_singleton.h"
 
@@ -26,15 +27,13 @@ class MainWindow : public QMainWindow
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
 
-//  private slots:
-  // some slots
-
 private slots:
   void on_upload_btn_clicked();
   void on_generate_btn_clicked();
   void on_cave_upload_btn_clicked();
   void on_cave_init_random_btn_clicked();
   void on_step_render_btn_clicked();
+  void on_auto_render_btn_clicked();
 
 private:
   Ui::MainWindow *ui_;

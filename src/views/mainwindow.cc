@@ -57,3 +57,26 @@ void MainWindow::on_step_render_btn_clicked() {
   ui_->cave_canvas->update();
 }
 
+
+void MainWindow::on_auto_render_btn_clicked() {
+  QTimer* timer = new QTimer(this);
+  int interval = ui_->render_timeout_input->value();
+
+  unsigned die_limit = static_cast<unsigned>(ui_->die_limit_input->value());
+  unsigned born_limit = static_cast<unsigned>(ui_->born_limit_input->value());
+
+  // connect(timer, &QTimer::timeout, this, [die_limit, born_limit, &cave_canvas = ui_->cave_canvas]() {
+  connect(timer, &QTimer::timeout, this, [die_limit, born_limit, &cave_canvas = ui_->cave_canvas]() {
+    bool stop = s21::ControllerSingleton::GetInstance().StepRender(die_limit, born_limit);
+    if (stop) {
+      timer->stop();
+    } else {
+      cave_canvas->update();
+    }
+    // code bellow is not work. Why??
+  });
+
+  
+  timer->start(interval);
+}
+
