@@ -14,6 +14,10 @@ void Cave::Push(unsigned border) { matrix_.push_back(border); }
 
 std::vector<unsigned>& Cave::GetMatrix() { return matrix_; }
 
+void Cave::SetMatrix(std::vector<unsigned> matrix) {
+  matrix_ = matrix;
+}
+
 void Cave::Clear() {
   matrix_.clear();
   rows_ = 0;
