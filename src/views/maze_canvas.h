@@ -31,6 +31,8 @@ class MazeCanvas : public QWidget {
   void DrawClickedCellBody(QPainter *p);
   void DrawRightBorder(QPainter *p, size_t i, size_t j);
   void DrawBottomBorder(QPainter *p, size_t i, size_t j);
+  void DrawPathLine(QPainter *p);
+  void DrawLineBetweenCellsCenters(QPainter *p, size_t row_1, size_t col_1, size_t row_2, size_t col_2);
 };
 
 #endif // CPP4_3DVIEWER_V2_0_2_SRC_VIEWS_MAZE_CANVAS_H

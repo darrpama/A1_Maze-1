@@ -1,27 +1,16 @@
 #include "maze_canvas.h"
 
 void MazeCanvas::mousePressEvent(QMouseEvent *event) {
-  if (click_counter_ == 0) {
+  if (click_counter_ < 2) {
     click_counter_ += 1;
-    std::cout << click_counter_ << std::endl;
-    std::cout << "x: " << event->position().x() << std::endl;
-    std::cout << "y: " << event->position().y() << std::endl;
-    int start_x = event->position().x();
-    int start_y = event->position().y();
-    int start_col = start_x / cell_width_;
-    int start_row = start_y / cell_height_;
-    cells_.push_back(std::make_pair(start_row, start_col));
-  } else if (click_counter_ == 1) {
-    click_counter_ += 1;
-    std::cout << "x: " << event->position().x() << std::endl;
-    std::cout << "y: " << event->position().y() << std::endl;
-    int end_x = event->position().x();
-    int end_y = event->position().y();
-    int end_col = end_x / cell_width_;
-    int end_row = end_y / cell_height_;
-    cells_.push_back(std::make_pair(end_row, end_col));
+    int x = event->position().x();
+    int y = event->position().y();
+    int row = y / (cell_width_ + 2);
+    int col = x / (cell_height_ + 2);
+    cells_.push_back(std::make_pair(row, col));
   } else {
     click_counter_ = 0;
+    cells_.clear();
   }
   update();
 }
@@ -51,9 +40,9 @@ void MazeCanvas::paintEvent(QPaintEvent *event) {
     if (click_counter_ > 0) {
       DrawClickedCellBody(&painter);
     }
-    // if (click_counter_ == 2) {
-    //   DrawPath();
-    // }
+    if (click_counter_ == 2) {
+      DrawPathLine(&painter);
+    }
 
     painter.fillRect(0, 0, 500, 2, Qt::black);
     painter.fillRect(0, 0, 2, 500, Qt::black);
@@ -120,4 +109,20 @@ void MazeCanvas::DrawBottomBorder(QPainter *p, size_t i, size_t j) {
     2,
     Qt::GlobalColor::darkBlue
   );
+}
+
+void MazeCanvas::DrawLineBetweenCellsCenters(QPainter *p, size_t row_1, size_t col_1, size_t row_2, size_t col_2) {
+  p->drawLine(
+    (cell_height_ * col_1) + (cell_height_ / 2) + (col_1*2),
+    (cell_width_ * row_1) + (cell_width_ / 2) + (row_1*2),
+    (cell_height_ * col_2) + (cell_height_ / 2) + (col_2*2),
+    (cell_width_ * row_2) + (cell_width_ / 2) + (row_2*2)
+  );
+}
+
+void MazeCanvas::DrawPathLine(QPainter *p) {
+  std::vector<std::pair<size_t, size_t>> path = maze_->Resolve(cells_[0], cells_[1]);
+  for (int i = 0; i < path.size() - 1; i++) {
+    DrawLineBetweenCellsCenters(p, path[i].first, path[i].second, path[i+1].first, path[i+1].second);
+  }
 }

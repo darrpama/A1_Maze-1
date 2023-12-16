@@ -68,15 +68,15 @@ std::vector<std::pair<size_t, size_t>> Maze::Resolve(std::pair<size_t, size_t> i
 bool Maze::CheckBorder(int dir, int c_b, int n_b, int c_r, int c_c, int n_r, int n_c) {
   bool answer = false;
   if (c_b == BOTH_BORDER && (dir == 1 || dir == cols_))
-    answer &= true;
+    answer = true;
   if (c_b == RIGHT_BORDER && dir == 1)
-    answer &= true;
+    answer = true;
   if (c_b == BOTTOM_BORDER && dir == cols_)
-    answer &= true;
+    answer = true;
   if (dir == -1 && (n_r != c_r || (n_b == RIGHT_BORDER || n_b == BOTH_BORDER)))
-    answer &= true;
+    answer = true;
   if (dir == -cols_ && (n_c != c_c || (n_b == BOTTOM_BORDER || n_b == BOTH_BORDER)))
-    answer &= true;
+    answer = true;
   return answer;
 }
 
