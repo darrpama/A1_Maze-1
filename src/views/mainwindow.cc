@@ -26,7 +26,18 @@ void MainWindow::on_upload_btn_clicked() {
 }
 
 void MainWindow::on_generate_btn_clicked() {
-  s21::ControllerSingleton::GetInstance().GenerateMaze(ui_->rows_input->value(), ui_->cols_input->value());
+  try
+  {
+    s21::ControllerSingleton::GetInstance().GenerateMaze(ui_->rows_input->value(), ui_->cols_input->value());
+  }
+  catch(const std::exception& e)
+  {
+    std::cerr << e.what() << '\n';
+    QMessageBox messageBox;
+    messageBox.critical(0,"Error",e.what());
+    messageBox.setFixedSize(500,200);
+  }
+  
   ui_->maze_canvas->update();
 }
 
@@ -41,11 +52,21 @@ void MainWindow::on_cave_upload_btn_clicked() {
 }
 
 void MainWindow::on_cave_init_random_btn_clicked() {
-  s21::ControllerSingleton::GetInstance().GenerateCave(
-    static_cast<unsigned>(ui_->cave_rows->value()),
-    static_cast<unsigned>(ui_->cave_cols->value()),
-    static_cast<float>(ui_->cave_cell_chance->value())
-  );
+  try
+  {
+    s21::ControllerSingleton::GetInstance().GenerateCave(
+      static_cast<unsigned>(ui_->cave_rows->value()),
+      static_cast<unsigned>(ui_->cave_cols->value()),
+      static_cast<float>(ui_->cave_cell_chance->value())
+    );
+  }
+  catch(const std::exception& e)
+  {
+    std::cerr << e.what() << '\n';
+    QMessageBox messageBox;
+    messageBox.critical(0,"Error",e.what());
+    messageBox.setFixedSize(500,200);
+  }
   ui_->cave_canvas->update();
 }
 

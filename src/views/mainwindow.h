@@ -11,6 +11,7 @@
 #include <QMainWindow>
 #include <QPainter>
 #include <QFileDialog>
+#include <QMessageBox>
 
 #include "../controllers/controller_singleton.h"
 
