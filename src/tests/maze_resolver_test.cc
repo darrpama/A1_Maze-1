@@ -1,9 +1,8 @@
+#include <filesystem>
+
 #include "../models/maze.h"
 #include "../models/maze_parser.h"
-
 #include "gtest/gtest.h"
-
-#include <filesystem>
 
 using namespace s21;
 
