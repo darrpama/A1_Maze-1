@@ -1,13 +1,14 @@
-#include <filesystem>
-
 #include "../models/maze.h"
 #include "../models/maze_parser.h"
+
 #include "gtest/gtest.h"
+
+#include <filesystem>
 
 using namespace s21;
 
-// Positive test case for Parse function
-TEST(MazeResolverTest, Parse_Positive) {
+// Positive test case for resolve function
+TEST(MazeResolverTest, Resolve_Positive) {
   s21::Maze maze(0, 0);
   s21::MazeParser parser(&maze);
 
