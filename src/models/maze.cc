@@ -36,11 +36,11 @@ bool Maze::IsIdeal() {
     q.pop();
 
     for (auto direction : directions) {
-      size_t neighbor_cell = cur_cell + direction;
-      size_t neighbor_row = neighbor_cell / cols_;
-      size_t neighbor_col = neighbor_cell % cols_;
+      int neighbor_cell = cur_cell + direction;
+      int neighbor_row = neighbor_cell / cols_;
+      int neighbor_col = neighbor_cell % cols_;
 
-      if (neighbor_cell >= 0 && neighbor_cell < matrix_.size() &&
+      if (neighbor_cell >= 0 && neighbor_cell < (int)matrix_.size() &&
           !visited[neighbor_cell]) {
         Border current_border = matrix_[current_row * cols_ + current_col];
         Border neighbor_border = matrix_[neighbor_row * cols_ + neighbor_col];
@@ -128,7 +128,7 @@ std::vector<int> Maze::FindPath(std::pair<size_t, size_t> init_point,
 
 std::vector<std::pair<size_t, size_t>> Maze::FindSolution(
     std::pair<size_t, size_t> init_point, std::pair<size_t, size_t> end_point,
-    std::vector<int> visited) {
+    const std::vector<int>& visited) {
   int matrix_size = GetMatrix().size();
   int init_cell = init_point.first * cols_ + init_point.second;
   int end_cell = end_point.first * cols_ + end_point.second;

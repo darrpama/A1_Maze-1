@@ -1,6 +1,6 @@
 CC = g++
 CCFLAGS = -g -std=c++17 -Wall -Werror -Wextra 
-LDFLAGS = -fprofile-arcs -ftest-coverage --coverage
+LDFLAGS = -fprofile-arcs -ftest-coverage
 PROJECTDIR = $(CURDIR)
 BUILDDIR = $(PROJECTDIR)/build
 EXECUTABLE = test.out
@@ -69,7 +69,7 @@ dist: build
 
 check:
 	clang-format -i --style="Google" $(SOURCES) $(HEADERS) $(OTHERS)
-	# cppcheck --std=c++17 --language=c++ --enable=all --suppress=unusedStructMember --suppress=unusedFunction --suppress=missingInclude $(SOURCES) $(OTHERS) $(HEADERS)
+	cppcheck --std=c++17 --language=c++ --enable=all --suppress=unusedStructMember --suppress=unusedFunction --suppress=missingInclude --suppress=missingIncludeSystem $(SOURCES) $(OTHERS) $(HEADERS)
 
 leaks: $(EXECUTABLE)
 	leaks -atExit -- ./$(EXECUTABLE)

@@ -25,9 +25,9 @@ class MazeParser {
   int current_line_ = 0;
 
   void CheckAndFixEndLine();
-  void ParseSize(std::string &);
-  void ParseMatrixRight(std::string &);
-  void ParseMatrixBottom(std::string &);
+  void ParseSize(const std::string &);
+  void ParseMatrixRight(const std::string &);
+  void ParseMatrixBottom(const std::string &);
   void MergeMatricies();
   void Reset();
 };

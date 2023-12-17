@@ -28,7 +28,7 @@ class Maze {
                             std::pair<size_t, size_t>);
   std::vector<std::pair<size_t, size_t>> FindSolution(std::pair<size_t, size_t>,
                                                       std::pair<size_t, size_t>,
-                                                      std::vector<int>);
+                                                      const std::vector<int>&);
   std::vector<std::pair<size_t, size_t>> Resolve(std::pair<size_t, size_t>,
                                                  std::pair<size_t, size_t>);
 

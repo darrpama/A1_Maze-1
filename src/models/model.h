@@ -22,11 +22,11 @@ class Model {
         cave_parser_(cp),
         cave_generator_(cg){};
 
-  void UploadMaze(std::string);
+  void UploadMaze(const std::string &);
   Maze *GetMaze();
   void GenerateMaze(int, int);
 
-  void UploadCave(std::string);
+  void UploadCave(const std::string &);
   Cave *GetCave();
   void GenerateCave(size_t, size_t, float chance);
   void StepRender(unsigned die_limit, unsigned born_limit);

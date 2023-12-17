@@ -53,7 +53,7 @@ void MazeParser::SetFilePath(const std::string &filepath) {
   filepath_ = filepath;
 }
 
-void MazeParser::ParseSize(std::string &line) {
+void MazeParser::ParseSize(const std::string &line) {
   std::stringstream ss(line);
   int rows, cols;
   if (ss >> rows >> cols) {
@@ -64,7 +64,7 @@ void MazeParser::ParseSize(std::string &line) {
   }
 }
 
-void MazeParser::ParseMatrixRight(std::string &line) {
+void MazeParser::ParseMatrixRight(const std::string &line) {
   for (size_t i = 0; i < line.size(); i++) {
     Border border;
     if (line[i] == '0') {
@@ -77,7 +77,7 @@ void MazeParser::ParseMatrixRight(std::string &line) {
   }
 }
 
-void MazeParser::ParseMatrixBottom(std::string &line) {
+void MazeParser::ParseMatrixBottom(const std::string &line) {
   for (size_t i = 0; i < line.size(); i++) {
     Border border;
     if (line[i] == '0') {
