@@ -24,11 +24,10 @@ class MazeSaver {
   std::vector<Border> bottom_matrix_;
 
   void UnmergeMatricies();
-  void WriteSize(std::ofstream&);
-  void WriteMatrixRight(std::ofstream&);
-  void WriteMatrixBottom(std::ofstream&);
+  void WriteSize(std::ofstream &);
+  void WriteMatrixRight(std::ofstream &);
+  void WriteMatrixBottom(std::ofstream &);
   void Reset();
-
 };
 
 }  // namespace s21

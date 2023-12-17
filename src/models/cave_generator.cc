@@ -30,19 +30,19 @@ bool CaveGenerator::RandomChoice(float chance) {
 
 /*
 
-Правила проще, чем в "Жизни" - 
-есть две специальные переменные, 
+Правила проще, чем в "Жизни" -
+есть две специальные переменные,
   правило для "рождения" "мертвых" клеток (предел "рождения")
   правило для уничтожения "живых" клеток (предел "смерти").
 
 DeathRule for Alive Cells
-  Если "живая" клетка окружены "живыми" клетками, 
-  количество которых меньше, чем предел "смерти", 
+  Если "живая" клетка окружены "живыми" клетками,
+  количество которых меньше, чем предел "смерти",
   они "умирают".
 
 LifeRule for Dead Cells
-  Если "мертвая" клетка находятся рядом с "живыми", 
-  количество которых больше, чем предел "рождения", 
+  Если "мертвая" клетка находятся рядом с "живыми",
+  количество которых больше, чем предел "рождения",
   они становятся "живыми".
 
 Живая клетка Alive Cell (AC)
@@ -60,7 +60,8 @@ void CaveGenerator::Step(Cave *cave, unsigned die_limit, unsigned born_limit) {
   for (size_t row = 0; row < rows_; row++) {
     for (size_t col = 0; col < cols_; col++) {
       alive_neighbors_count = GetAliveNeigborsCount(cave, row, col);
-      if (cave->GetMatrix()[row * cols_ + col] == 1) {  // alive cell (death rule)
+      if (cave->GetMatrix()[row * cols_ + col] ==
+          1) {  // alive cell (death rule)
         if (alive_neighbors_count < die_limit) {
           cave->GetMatrix()[row * cols_ + col] = 0;
         }
@@ -73,15 +74,18 @@ void CaveGenerator::Step(Cave *cave, unsigned die_limit, unsigned born_limit) {
   }
 }
 
-size_t CaveGenerator::GetAliveNeigborsCount(Cave *cave, size_t row, size_t col) {
-  return GetNorthWest(cave, row, col) + GetNorth(cave, row, col)
-       + GetNorthEast(cave, row, col) + GetEast(cave, row, col)
-       + GetSouthEast(cave, row, col) + GetSouth(cave, row, col)
-       + GetSouthWest(cave, row, col) + GetWest(cave, row, col);
+size_t CaveGenerator::GetAliveNeigborsCount(Cave *cave, size_t row,
+                                            size_t col) {
+  return GetNorthWest(cave, row, col) + GetNorth(cave, row, col) +
+         GetNorthEast(cave, row, col) + GetEast(cave, row, col) +
+         GetSouthEast(cave, row, col) + GetSouth(cave, row, col) +
+         GetSouthWest(cave, row, col) + GetWest(cave, row, col);
 }
 
 size_t CaveGenerator::GetNorthWest(Cave *cave, size_t row, size_t col) {
-  return (((row - 1) < 0) || ((col - 1) < 0)) ? 1 : cave->GetMatrix()[(row - 1) * cols_ + (col - 1)];
+  return (((row - 1) < 0) || ((col - 1) < 0))
+             ? 1
+             : cave->GetMatrix()[(row - 1) * cols_ + (col - 1)];
 }
 
 size_t CaveGenerator::GetNorth(Cave *cave, size_t row, size_t col) {
@@ -89,7 +93,9 @@ size_t CaveGenerator::GetNorth(Cave *cave, size_t row, size_t col) {
 }
 
 size_t CaveGenerator::GetNorthEast(Cave *cave, size_t row, size_t col) {
-  return (((row - 1) < 0) || ((col + 1) >= cols_)) ? 1 : cave->GetMatrix()[(row - 1) * cols_ + (col + 1)];
+  return (((row - 1) < 0) || ((col + 1) >= cols_))
+             ? 1
+             : cave->GetMatrix()[(row - 1) * cols_ + (col + 1)];
 }
 
 size_t CaveGenerator::GetEast(Cave *cave, size_t row, size_t col) {
@@ -97,7 +103,9 @@ size_t CaveGenerator::GetEast(Cave *cave, size_t row, size_t col) {
 }
 
 size_t CaveGenerator::GetSouthEast(Cave *cave, size_t row, size_t col) {
-  return (((row + 1) >= rows_) || ((col + 1) >= cols_)) ? 1 : cave->GetMatrix()[(row + 1) * cols_ + (col + 1)];
+  return (((row + 1) >= rows_) || ((col + 1) >= cols_))
+             ? 1
+             : cave->GetMatrix()[(row + 1) * cols_ + (col + 1)];
 }
 
 size_t CaveGenerator::GetSouth(Cave *cave, size_t row, size_t col) {
@@ -105,15 +113,15 @@ size_t CaveGenerator::GetSouth(Cave *cave, size_t row, size_t col) {
 }
 
 size_t CaveGenerator::GetSouthWest(Cave *cave, size_t row, size_t col) {
-  return (((row + 1) >= rows_) || ((col - 1) < 0)) ? 1 : cave->GetMatrix()[(row + 1) * cols_ + (col - 1)];
+  return (((row + 1) >= rows_) || ((col - 1) < 0))
+             ? 1
+             : cave->GetMatrix()[(row + 1) * cols_ + (col - 1)];
 }
 
 size_t CaveGenerator::GetWest(Cave *cave, size_t row, size_t col) {
   return ((col - 1) < 0) ? 1 : cave->GetMatrix()[row * cols_ + (col - 1)];
 }
 
-void CaveGenerator::Clear() {
-  cells_.clear();
-}
+void CaveGenerator::Clear() { cells_.clear(); }
 
 }  // namespace s21

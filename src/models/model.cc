@@ -7,9 +7,7 @@ void Model::UploadMaze(std::string filepath) {
   maze_parser_->Parse();
 }
 
-Maze *Model::GetMaze() {
-  return maze_;
-}
+Maze *Model::GetMaze() { return maze_; }
 
 void Model::GenerateMaze(int rows, int cols) {
   maze_->Clear();
@@ -24,9 +22,7 @@ void Model::UploadCave(std::string filepath) {
   cave_parser_->Parse();
 }
 
-Cave *Model::GetCave() {
-  return cave_;
-}
+Cave *Model::GetCave() { return cave_; }
 
 void Model::GenerateCave(size_t rows, size_t cols, float chance) {
   cave_->Clear();

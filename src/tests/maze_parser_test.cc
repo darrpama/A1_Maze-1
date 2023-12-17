@@ -1,8 +1,8 @@
 #include "../models/maze_parser.h"
 
-#include "gtest/gtest.h"
-
 #include <filesystem>
+
+#include "gtest/gtest.h"
 
 using namespace s21;
 
@@ -127,7 +127,7 @@ TEST(MazeParserTest, Parse_Negative_Cols_2_Test) {
   parent_path.append("/assets/maze_non_eq_cols_2_mat.txt");
 
   parser.SetFilePath(parent_path);
-  
+
   EXPECT_ANY_THROW(parser.Parse());
 
   EXPECT_EQ(maze.GetRows(), 0);
@@ -167,7 +167,7 @@ TEST(MazeParserTest, Parse_Negative_Cols_4_Test) {
   parent_path.append("/assets/maze_non_eq_cols_2_mat_2.txt");
 
   parser.SetFilePath(parent_path);
-  
+
   EXPECT_ANY_THROW(parser.Parse());
 
   EXPECT_EQ(maze.GetRows(), 0);
@@ -187,7 +187,7 @@ TEST(MazeParserTest, Parse_Negative_Rows_1_Test) {
   parent_path.append("/assets/maze_non_eq_rows_1_mat.txt");
 
   parser.SetFilePath(parent_path);
-  
+
   EXPECT_NO_THROW(parser.Parse());
 
   EXPECT_EQ(maze.GetRows(), 3);
@@ -227,7 +227,7 @@ TEST(MazeParserTest, Parse_Negative_Rows_3_Test) {
   parent_path.append("/assets/maze_non_eq_rows_1_mat_2.txt");
 
   parser.SetFilePath(parent_path);
-  
+
   EXPECT_ANY_THROW(parser.Parse());
 
   EXPECT_EQ(maze.GetRows(), 0);
@@ -335,9 +335,4 @@ TEST(MazeParserTest, Parse_Size_Cols_Test) {
 
   std::vector<Border> mat = maze.GetMatrix();
   EXPECT_EQ(mat.size(), 0);
-}
-
-int main(int argc, char **argv) {
-  testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
 }

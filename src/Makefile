@@ -1,0 +1,101 @@
+CC = g++
+CCFLAGS = -g -std=c++17 -Wall -Werror -Wextra
+LDFLAGS = -lgtest -fprofile-arcs -ftest-coverage
+PROJECTDIR = $(CURDIR)
+BUILDDIR = $(PROJECTDIR)/build
+EXECUTABLE = test.out
+STATICLIB = Maze.a
+DISTDIR = ../distributive
+
+HEADERS = \
+	$(PROJECTDIR)/models/cave_generator.h \
+	$(PROJECTDIR)/models/cave_parser.h \
+	$(PROJECTDIR)/models/cave.h \
+	$(PROJECTDIR)/models/maze_generator.h \
+	$(PROJECTDIR)/models/maze_parser.h \
+	$(PROJECTDIR)/models/maze_saver.h \
+	$(PROJECTDIR)/models/maze.h \
+	$(PROJECTDIR)/models/model.h
+
+SOURCES = \
+	$(PROJECTDIR)/models/cave_generator.cc \
+	$(PROJECTDIR)/models/cave_parser.cc \
+	$(PROJECTDIR)/models/cave.cc \
+	$(PROJECTDIR)/models/maze_generator.cc \
+	$(PROJECTDIR)/models/maze_parser.cc \
+	$(PROJECTDIR)/models/maze_saver.cc \
+	$(PROJECTDIR)/models/maze.cc \
+	$(PROJECTDIR)/models/model.cc \
+	$(PROJECTDIR)/tests/maze_generator_test.cc \
+	$(PROJECTDIR)/tests/maze_parser_test.cc \
+	$(PROJECTDIR)/tests/maze_resolver_test.cc \
+	$(PROJECTDIR)/tests/maze_saver_test.cc \
+	$(PROJECTDIR)/tests/run_all_tests.cc
+
+OTHERS = \
+	$(PROJECTDIR)/controllers/controller_singleton.h \
+	$(PROJECTDIR)/controllers/controller_singleton.cc
+
+OBJECTS = $(SOURCES:.cc=.o)
+GCDA = $(SOURCES:.cc=.gcda)
+GCNO = $(SOURCES:.cc=.gcno)
+
+all: install
+
+tests: $(SOURCES) $(EXECUTABLE)
+
+dvi:
+	open ./README.pdf
+
+build:
+	cd $(PROJECTDIR) && ls -la && mkdir $(BUILDDIR) && cd $(BUILDDIR) && cmake .. && make
+
+install:
+	@read -p "Enter path to install: " path; \
+	if [ -z "$$path" ]; then \
+        path="./"; \
+    fi; \
+	cd $$path && ls -la && mkdir $(BUILDDIR) && cd $(BUILDDIR) && cmake .. && make
+	$(BUILDDIR)/3DViewer_2_0.app/Contents/MacOS/3DViewer_2_0
+
+uninstall: clean
+
+dist: build
+	rm -rf $(DISTDIR)
+	mkdir $(DISTDIR)
+	cp -r $(PROJECTDIR) $(DISTDIR)
+	cd .. && tar -czvf distributive.tgz distributive
+	rm -rf $(DISTDIR)
+
+check:
+	clang-format -i --style="Google" $(SOURCES) $(HEADERS) $(OTHERS)
+	# cppcheck --std=c++17 --language=c++ --enable=all --suppress=unusedStructMember --suppress=unusedFunction --suppress=missingInclude $(SOURCES) $(OTHERS) $(HEADERS)
+
+leaks: $(EXECUTABLE)
+	leaks -atExit -- ./$(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(OBJECTS) $(INCLUDE) -o $@ $(LDFLAGS)
+	./$(EXECUTABLE) 
+
+%.o: %.cc
+	$(CC) $(CCFLAGS) $(INCLUDE) -o $@ -c $< $(LDFLAGS)
+
+$(STATICLIB): $(OBJECTS)
+	ar rcs $(STATICLIB) $^
+
+gcov_report: $(EXECUTABLE)
+	./$(EXECUTABLE)
+	lcov -t "./test.out" -o test.info --no-external -c -d . --ignore-errors mismatch
+	genhtml -o report test.info
+	open report/index.html
+
+.PHONY: clean test dvi dist check leaks gcov_report
+clean:
+	rm -rf $(OBJECTS)
+	rm -rf $(EXECUTABLE)
+	rm -rf $(STATICLIB)
+	rm -rf $(BUILDDIR)
+	rm -rf *.gcno $(GCDA) $(GCNO) *.info
+	rm -rf report
+	rm -rf *.tgz ../*.tgz

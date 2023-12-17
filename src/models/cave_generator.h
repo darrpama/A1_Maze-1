@@ -2,9 +2,10 @@
 #define A1_MAZE_1_SRC_MODELS_CAVE_GENERATOR_H
 
 #include <algorithm>
-#include <vector>
 #include <random>
 #include <unordered_map>
+#include <vector>
+
 #include "cave.h"
 
 namespace s21 {
@@ -14,7 +15,7 @@ class CaveGenerator {
   CaveGenerator();
   Cave Generate(size_t rows, size_t cols, float chance);
   void Step(Cave *cave, unsigned die_limit, unsigned born_limit);
-  
+
  private:
   unsigned rows_;
   unsigned cols_;

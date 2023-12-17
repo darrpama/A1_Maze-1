@@ -1,9 +1,9 @@
-#include "../models/maze_parser.h"
 #include "../models/maze_saver.h"
 
-#include "gtest/gtest.h"
-
 #include <filesystem>
+
+#include "../models/maze_parser.h"
+#include "gtest/gtest.h"
 
 using namespace s21;
 
@@ -67,10 +67,4 @@ TEST(MazeParserTest, MazeSaver_Positive) {
   for (int i = 0; i < mat2.size(); i++) {
     EXPECT_EQ(mat2[i], expected_mat[i]);
   }
-
-}
-
-int main(int argc, char **argv) {
-  testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
 }
