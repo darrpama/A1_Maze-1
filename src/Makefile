@@ -1,6 +1,6 @@
 CC = g++
-CCFLAGS = -std=c++17 -Wall -Werror -Wextra
-LDFLAGS = -fprofile-arcs -ftest-coverage
+CCFLAGS = -g -std=c++17 -Wall -Werror -Wextra 
+LDFLAGS = -fprofile-arcs -ftest-coverage --coverage
 PROJECTDIR = $(CURDIR)
 BUILDDIR = $(PROJECTDIR)/build
 EXECUTABLE = test.out
@@ -75,11 +75,11 @@ leaks: $(EXECUTABLE)
 	leaks -atExit -- ./$(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
-	$(CC) $(OBJECTS) $(INCLUDE) -o $@ $(LDFLAGS) -lgtest
+	$(CC) $(OBJECTS) -o $@ $(LDFLAGS) -lgtest
 	./$(EXECUTABLE) 
 
 %.o: %.cc
-	$(CC) $(CCFLAGS) $(INCLUDE) -o $@ -c $< $(LDFLAGS)
+	$(CC) $(CCFLAGS) -o $@ -c $< $(LDFLAGS)
 
 $(STATICLIB): $(OBJECTS)
 	ar rcs $(STATICLIB) $^
