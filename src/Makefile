@@ -1,6 +1,6 @@
 CC = g++
-CCFLAGS = -g -std=c++17 -Wall -Werror -Wextra
-LDFLAGS = -lgtest -fprofile-arcs -ftest-coverage
+CCFLAGS = -std=c++17 -Wall -Werror -Wextra
+LDFLAGS = -fprofile-arcs -ftest-coverage
 PROJECTDIR = $(CURDIR)
 BUILDDIR = $(PROJECTDIR)/build
 EXECUTABLE = test.out
@@ -56,7 +56,7 @@ install:
         path="./"; \
     fi; \
 	cd $$path && ls -la && mkdir $(BUILDDIR) && cd $(BUILDDIR) && cmake .. && make
-	$(BUILDDIR)/3DViewer_2_0.app/Contents/MacOS/3DViewer_2_0
+	$(BUILDDIR)/Maze.app/Contents/MacOS/Maze 
 
 uninstall: clean
 
@@ -75,7 +75,7 @@ leaks: $(EXECUTABLE)
 	leaks -atExit -- ./$(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
-	$(CC) $(OBJECTS) $(INCLUDE) -o $@ $(LDFLAGS)
+	$(CC) $(OBJECTS) $(INCLUDE) -o $@ $(LDFLAGS) -lgtest
 	./$(EXECUTABLE) 
 
 %.o: %.cc

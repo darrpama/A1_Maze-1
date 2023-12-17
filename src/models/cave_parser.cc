@@ -63,7 +63,7 @@ void CaveParser::ParseSize(std::string &line) {
 }
 
 void CaveParser::ParseMatrix(std::string &line) {
-  for (int i = 0; i < line.size(); i++) {
+  for (size_t i = 0; i < line.size(); i++) {
     if (line[i] == '0') {
       cave_->Push(0);
     } else if (line[i] == '1') {

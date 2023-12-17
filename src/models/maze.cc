@@ -36,9 +36,9 @@ bool Maze::IsIdeal() {
     q.pop();
 
     for (auto direction : directions) {
-      int neighbor_cell = cur_cell + direction;
-      int neighbor_row = neighbor_cell / cols_;
-      int neighbor_col = neighbor_cell % cols_;
+      size_t neighbor_cell = cur_cell + direction;
+      size_t neighbor_row = neighbor_cell / cols_;
+      size_t neighbor_col = neighbor_cell % cols_;
 
       if (neighbor_cell >= 0 && neighbor_cell < matrix_.size() &&
           !visited[neighbor_cell]) {
@@ -61,9 +61,6 @@ bool Maze::IsIdeal() {
 
 std::vector<std::pair<size_t, size_t>> Maze::Resolve(
     std::pair<size_t, size_t> init_point, std::pair<size_t, size_t> end_point) {
-  int cols = GetCols();
-  int rows = GetRows();
-  int matrix_size = GetMatrix().size();
   std::vector<int> visited = FindPath(init_point, end_point);
   return (FindSolution(init_point, end_point, visited));
 }
