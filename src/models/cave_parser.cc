@@ -51,7 +51,7 @@ void CaveParser::SetFilePath(const std::string &filepath) {
   filepath_ = filepath;
 }
 
-void CaveParser::ParseSize(std::string &line) {
+void CaveParser::ParseSize(const std::string &line) {
   std::stringstream ss(line);
   int rows, cols;
   if (ss >> rows >> cols) {
@@ -62,8 +62,8 @@ void CaveParser::ParseSize(std::string &line) {
   }
 }
 
-void CaveParser::ParseMatrix(std::string &line) {
-  for (int i = 0; i < line.size(); i++) {
+void CaveParser::ParseMatrix(const std::string &line) {
+  for (size_t i = 0; i < line.size(); i++) {
     if (line[i] == '0') {
       cave_->Push(0);
     } else if (line[i] == '1') {

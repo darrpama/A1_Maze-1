@@ -11,6 +11,7 @@
 #include <QMainWindow>
 #include <QPainter>
 #include <QFileDialog>
+#include <QMessageBox>
 
 #include "../controllers/controller_singleton.h"
 
@@ -38,6 +39,7 @@ private slots:
 
 private:
   Ui::MainWindow *ui_;
+  void ShowErrorMessage(const std::exception&);
 };
 
 #endif // CPP4_3DVIEWER_V2_0_2_SRC_VIEWS_MAINWINDOW_H
