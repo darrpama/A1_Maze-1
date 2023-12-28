@@ -86,6 +86,12 @@ void MainWindow::on_step_render_btn_clicked() {
   ui_->cave_canvas->update();
 }
 
+void MainWindow::ShowErrorMessage(const std::exception& e) {
+    std::cerr << e.what() << '\n';
+    QMessageBox messageBox;
+    messageBox.critical(0,"Error",e.what());
+    messageBox.setFixedSize(500,200);
+}
 
 void MainWindow::on_auto_render_btn_clicked() {
   QTimer* timer = new QTimer(this);
