@@ -1,10 +1,10 @@
 #ifndef A1_MAZE_1_0_SRC_MAZE_H
 #define A1_MAZE_1_0_SRC_MAZE_H
 
-#include <iostream>
 #include <algorithm>
-#include <vector>
+#include <iostream>
 #include <queue>
+#include <vector>
 
 #include "../type.h"
 
@@ -22,7 +22,15 @@ class Maze {
   std::vector<Border>& GetMatrix();
 
   void Clear();
+  bool CheckBorder(int, int, int, int, int, int, int);
   bool IsIdeal();
+  std::vector<int> FindPath(std::pair<size_t, size_t>,
+                            std::pair<size_t, size_t>);
+  std::vector<std::pair<size_t, size_t>> FindSolution(std::pair<size_t, size_t>,
+                                                      std::pair<size_t, size_t>,
+                                                      const std::vector<int>&);
+  std::vector<std::pair<size_t, size_t>> Resolve(std::pair<size_t, size_t>,
+                                                 std::pair<size_t, size_t>);
 
  private:
   int rows_;

@@ -1,10 +1,10 @@
 #ifndef A1_MAZE_1_0_SRC_MODEL_CAVE_H
 #define A1_MAZE_1_0_SRC_MODEL_CAVE_H
 
-#include <iostream>
 #include <algorithm>
-#include <vector>
+#include <iostream>
 #include <queue>
+#include <vector>
 
 #include "../type.h"
 

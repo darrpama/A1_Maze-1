@@ -1,7 +1,12 @@
 #include "cave_generator.h"
 
 namespace s21 {
-CaveGenerator::CaveGenerator() { Clear(); }
+
+CaveGenerator::CaveGenerator() {
+  rows_ = 0;
+  cols_ = 0;
+  Clear();
+}
 
 Cave CaveGenerator::Generate(size_t rows, size_t cols, float chance) {
   if (rows < 1 || cols < 1) {
@@ -141,8 +146,6 @@ size_t CaveGenerator::GetWest(Cave *cave) {
     : cave->GetMatrix()[current_row_ * cols_ + (current_col_ - 1)];
 }
 
-void CaveGenerator::Clear() {
-  cells_.clear();
-}
+void CaveGenerator::Clear() { cells_.clear(); }
 
 }  // namespace s21

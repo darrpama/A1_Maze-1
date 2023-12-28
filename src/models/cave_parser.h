@@ -24,8 +24,8 @@ class CaveParser {
   int current_line_ = 0;
 
   void CheckAndFixEndLine();
-  void ParseSize(std::string &);
-  void ParseMatrix(std::string &);
+  void ParseSize(const std::string &);
+  void ParseMatrix(const std::string &);
   void Reset();
 };
 

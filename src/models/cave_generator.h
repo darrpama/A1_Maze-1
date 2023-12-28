@@ -2,12 +2,14 @@
 #define A1_MAZE_1_SRC_MODELS_CAVE_GENERATOR_H
 
 #include <algorithm>
-#include <vector>
 #include <random>
 #include <unordered_map>
+#include <vector>
+
 #include "cave.h"
 
 namespace s21 {
+
 class CaveGenerator {
  public:
   CaveGenerator();
@@ -34,6 +36,7 @@ class CaveGenerator {
   size_t GetWest(Cave *cave);
   void Clear();
 };
+
 }  // namespace s21
 
 #endif  // A1_MAZE_1_SRC_MODELS_CAVE_GENERATOR_H
