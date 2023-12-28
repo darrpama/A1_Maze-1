@@ -1,7 +1,9 @@
 #include "cave_canvas.h"
 
 void CaveCanvas::paintEvent(QPaintEvent *event) {
-  cave_ = s21::ControllerSingleton::GetInstance().GetCave();  
+  
+  cave_ = s21::ControllerSingleton::GetInstance().GetCave();
+  
   if (cave_->GetCols() > 0 && cave_->GetRows() > 0) {
     QPainter painter = QPainter(this);
     setFixedSize(500, 500);

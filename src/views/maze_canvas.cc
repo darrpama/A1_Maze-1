@@ -25,8 +25,8 @@ void MazeCanvas::paintEvent(QPaintEvent *event) {
     int cols = maze_->GetCols();
     int rows = maze_->GetRows();
 
-    cell_width_ = std::round(498.0f / cols - 2.0f);
-    cell_height_ = std::round(498.0f / rows - 2.0f);
+    cell_width_ = 496.0f / cols;
+    cell_height_ = 496.0f / rows;
 
     size_t index = 0;
     for (size_t i = 0; i < rows; i++) {

@@ -29,7 +29,7 @@ class Model {
   void UploadCave(const std::string &);
   Cave *GetCave();
   void GenerateCave(size_t, size_t, float chance);
-  void StepRender(unsigned die_limit, unsigned born_limit);
+  bool StepRender(unsigned die_limit, unsigned born_limit);
 
  private:
   Maze *maze_;

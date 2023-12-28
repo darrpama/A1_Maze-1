@@ -21,7 +21,7 @@ class ControllerSingleton {
 
   void UploadCave(const std::string &filename);
   void GenerateCave(size_t rows, size_t cols, float chance);
-  void StepRender(unsigned die_limit, unsigned born_limit);
+  bool StepRender(unsigned die_limit, unsigned born_limit);
   Cave *GetCave();
 
  private:

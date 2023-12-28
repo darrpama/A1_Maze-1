@@ -54,7 +54,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="maze_tab">
        <attribute name="title">
@@ -386,12 +386,18 @@
                 <number>0</number>
                </property>
                <item>
-                <widget class="QSpinBox" name="spinBox_5">
+                <widget class="QSpinBox" name="render_timeout_input">
                  <property name="minimumSize">
                   <size>
                    <width>50</width>
                    <height>0</height>
                   </size>
+                 </property>
+                 <property name="maximum">
+                  <number>10000</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>100</number>
                  </property>
                 </widget>
                </item>
@@ -408,7 +414,7 @@
               </layout>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_2">
+              <widget class="QPushButton" name="auto_render_btn">
                <property name="text">
                 <string>auto</string>
                </property>

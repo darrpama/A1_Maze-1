@@ -21,8 +21,8 @@ class MazeCanvas : public QWidget {
   s21::Maze *maze_;
   int cols_;
   int rows_;
-  int cell_width_ = 0;
-  int cell_height_ = 0;
+  double cell_width_ = 0;
+  double cell_height_ = 0;
   int click_counter_ = 0;
   std::vector<std::pair<int, int>> cells_;
 
