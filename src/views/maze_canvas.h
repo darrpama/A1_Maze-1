@@ -18,8 +18,8 @@ class MazeCanvas : public QWidget {
   s21::Maze *maze_;
   int cols_;
   int rows_;
-  int cell_width_ = 0;
-  int cell_height_ = 0;
+  double cell_width_ = 0;
+  double cell_height_ = 0;
 
   void DrawCell(QPainter *p, size_t i, size_t j, s21::Border border);
   void DrawCellBody(QPainter *p, size_t i, size_t j);
