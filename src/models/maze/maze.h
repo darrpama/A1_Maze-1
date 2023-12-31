@@ -24,17 +24,13 @@ class Maze {
   void Clear();
   bool CheckBorder(int, int, int, int, int, int, int);
   bool IsIdeal();
-  std::vector<int> FindPath(std::pair<size_t, size_t>,
-                            std::pair<size_t, size_t>);
-  std::vector<std::pair<size_t, size_t>> FindSolution(std::pair<size_t, size_t>,
-                                                      std::pair<size_t, size_t>,
-                                                      const std::vector<int>&);
-  std::vector<std::pair<size_t, size_t>> Resolve(std::pair<size_t, size_t>,
-                                                 std::pair<size_t, size_t>);
+  std::vector<int> FindPath(Vector2D, Vector2D);
+  std::vector<Vector2D> FindSolution(Vector2D, Vector2D, const std::vector<int>&);
+  std::vector<Vector2D> Resolve(Vector2D, Vector2D);
 
  private:
-  int rows_;
-  int cols_;
+  int rows_ = 0;
+  int cols_ = 0;
   std::vector<Border> matrix_;
 };
 

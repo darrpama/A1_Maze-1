@@ -2,12 +2,22 @@
 
 namespace s21 {
 
+// MAZE
 void Model::UploadMaze(const std::string& filepath) {
   maze_parser_->SetFilePath(filepath);
   maze_parser_->Parse();
 }
 
-Maze* Model::GetMaze() { return maze_; }
+std::vector<Border> &Model::GetMazeMatrix() { 
+  return maze_->GetMatrix();
+}
+
+int Model::GetMazeCols() {
+  return maze_->GetCols();
+}
+int Model::GetMazeRows() {
+  return maze_->GetRows();
+}
 
 void Model::GenerateMaze(int rows, int cols) {
   maze_->Clear();
@@ -17,6 +27,11 @@ void Model::GenerateMaze(int rows, int cols) {
   maze_->GetMatrix() = maze.GetMatrix();
 }
 
+std::vector<Vector2D> Model::ResolveMaze(Vector2D a, Vector2D b) {
+  return maze_->Resolve(a, b);
+}
+
+// CAVE
 void Model::UploadCave(const std::string& filepath) {
   cave_parser_->SetFilePath(filepath);
   cave_parser_->Parse();

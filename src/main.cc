@@ -3,10 +3,10 @@
 #include "controllers/controller_singleton.h"
 #include "models/model.h"
 
-#include "models/maze.h"
-#include "models/maze_parser.h"
-#include "models/cave.h"
-#include "models/cave_parser.h"
+#include "models/maze/maze.h"
+#include "models/maze/maze_parser.h"
+#include "models/cave/cave.h"
+#include "models/cave/cave_parser.h"
 #include "views/mainwindow.h"
 
 int main(int argc, char *argv[]) {

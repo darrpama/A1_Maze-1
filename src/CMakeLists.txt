@@ -24,18 +24,18 @@ set(PROJECT_SOURCES
     views/cave_canvas.cc
     controllers/controller_singleton.cc
     controllers/controller_singleton.h
-    models/maze_generator.h
-    models/maze_generator.cc
-    models/maze_parser.h
-    models/maze_parser.cc
-    models/maze.h
-    models/maze.cc
-    models/cave_generator.h
-    models/cave_generator.cc
-    models/cave_parser.h
-    models/cave_parser.cc
-    models/cave.h
-    models/cave.cc
+    models/maze/maze_generator.h
+    models/maze/maze_generator.cc
+    models/maze/maze_parser.h
+    models/maze/maze_parser.cc
+    models/maze/maze.h
+    models/maze/maze.cc
+    models/cave/cave_generator.h
+    models/cave/cave_generator.cc
+    models/cave/cave_parser.h
+    models/cave/cave_parser.cc
+    models/cave/cave.h
+    models/cave/cave.cc
     models/model.cc
     models/model.h
 )

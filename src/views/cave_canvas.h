@@ -5,7 +5,6 @@
 #include <QPainter>
 
 #include "../controllers/controller_singleton.h"
-#include "../type.h"
 
 class CaveCanvas : public QWidget {
  public:

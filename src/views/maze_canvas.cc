@@ -1,5 +1,7 @@
 #include "maze_canvas.h"
 
+MazeCanvas::MazeCanvas(QWidget *parent) : QWidget(parent) {}
+
 void MazeCanvas::mousePressEvent(QMouseEvent *event) {
   if (click_counter_ < 2) {
     click_counter_ += 1;
@@ -7,54 +9,69 @@ void MazeCanvas::mousePressEvent(QMouseEvent *event) {
     int y = event->position().y();
     int row = y / (cell_width_ + 2);
     int col = x / (cell_height_ + 2);
-    cells_.push_back(std::make_pair(row, col));
+    path_cells_.push_back(s21::Vector2D(row, col));
   } else {
     click_counter_ = 0;
-    cells_.clear();
+    path_cells_.clear();
   }
   update();
 }
 
 void MazeCanvas::paintEvent(QPaintEvent *event) {
-  maze_ = s21::ControllerSingleton::GetInstance().GetMaze();
-  
-  if (maze_->GetCols() > 0 && maze_->GetRows() > 0) {
-    QPainter painter = QPainter(this);
-    setFixedSize(500, 500);
+  matrix_ = s21::ControllerSingleton::GetInstance().GetMazeMatrix();
+  cols_ = s21::ControllerSingleton::GetInstance().GetMazeCols();
+  rows_ = s21::ControllerSingleton::GetInstance().GetMazeRows();
 
-    int cols = maze_->GetCols();
-    int rows = maze_->GetRows();
+  width_ = 500;
+  height_ = 500;
+  border_size_ = 2.0f;
 
-    cell_width_ = 496.0f / cols;
-    cell_height_ = 496.0f / rows;
+  cell_width_ = (static_cast<float>(width_) / cols_) - border_size_;
+  cell_height_ = (static_cast<float>(height_) / rows_) - border_size_;
+  painter_ = new QPainter(this);
 
-    size_t index = 0;
-    for (size_t i = 0; i < rows; i++) {
-      for (size_t j = 0; j < cols; j++) {
-        s21::Border border = maze_->GetMatrix()[index];
-        DrawCell(&painter, i, j, border);
-        index++;
-      }
+  if (cols_ > 0 && rows_ > 0) {
+    DrawMaze();
+    DrawPath();
+    DrawFrames();
+  }
+  painter_->end();
+}
+
+void MazeCanvas::DrawMaze() {
+  setFixedSize(width_, height_);
+  size_t index = 0;
+
+  for (size_t i = 0; i < rows_; i++) {
+    for (size_t j = 0; j < cols_; j++) {
+      s21::Border border = matrix_[index];
+      DrawCell(i, j, border);
+      index++;
     }
-
-    if (click_counter_ > 0) {
-      DrawClickedCellBody(&painter);
-    }
-    if (click_counter_ == 2) {
-      DrawPathLine(&painter);
-    }
-
-    painter.fillRect(0, 0, 500, 2, Qt::black);
-    painter.fillRect(0, 0, 2, 500, Qt::black);
-    painter.end();
   }
 }
 
-void MazeCanvas::DrawClickedCellBody(QPainter *p) {
-  for (auto cell : cells_) {
-    p->fillRect(
-      (cell_width_ * cell.second) + (cell.second*2),
-      (cell_height_ * cell.first) + (cell.first*2),
+void MazeCanvas::DrawPath() {
+  if (click_counter_ > 0) {
+    DrawClickedCellBody();
+  }
+  if (click_counter_ == 2) {
+    DrawPathLine();
+  }
+}
+
+void MazeCanvas::DrawFrames() {
+  painter_->fillRect(0, 0, 500, 2, Qt::black);
+  painter_->fillRect(0, 0, 2, 500, Qt::black);
+  painter_->fillRect(498, 0, 2, 500, Qt::black);
+  painter_->fillRect(0, 498, 500, 2, Qt::black);
+}
+
+void MazeCanvas::DrawClickedCellBody() {
+  for (auto cell : path_cells_) {
+    painter_->fillRect(
+      (cell_width_ * cell.y_) + (cell.y_*2),
+      (cell_height_ * cell.x_) + (cell.x_*2),
       cell_width_,
       cell_height_, 
       Qt::GlobalColor::yellow
@@ -62,27 +79,22 @@ void MazeCanvas::DrawClickedCellBody(QPainter *p) {
   }
 }
 
-void MazeCanvas::DrawCell(QPainter *p, size_t i, size_t j, s21::Border border) {
-  if (border == s21::Border::NO_BORDER) {
-    DrawCellBody(p, i, j);
-  }
+void MazeCanvas::DrawCell(size_t i, size_t j, s21::Border border) {
+  DrawCellBody(i, j);
   if (border == s21::Border::RIGHT_BORDER) {
-    DrawCellBody(p, i, j);
-    DrawRightBorder(p, i, j);
+    DrawRightBorder(i, j);
   }
   if (border == s21::Border::BOTTOM_BORDER) {
-    DrawCellBody(p, i, j);
-    DrawBottomBorder(p, i, j);
+    DrawBottomBorder(i, j);
   }
   if (border == s21::Border::BOTH_BORDER) {
-    DrawCellBody(p, i, j);
-    DrawRightBorder(p, i, j);
-    DrawBottomBorder(p, i, j);
+    DrawRightBorder(i, j);
+    DrawBottomBorder(i, j);
   }
 }
 
-void MazeCanvas::DrawCellBody(QPainter *p, size_t i, size_t j) {
-  p->fillRect(
+void MazeCanvas::DrawCellBody(size_t i, size_t j) {
+  painter_->fillRect(
     (cell_width_ * j) + (j*2),
     (cell_height_ * i) + (i*2),
     cell_width_,
@@ -91,8 +103,8 @@ void MazeCanvas::DrawCellBody(QPainter *p, size_t i, size_t j) {
   );
 }
 
-void MazeCanvas::DrawRightBorder(QPainter *p, size_t i, size_t j) {
-  p->fillRect(
+void MazeCanvas::DrawRightBorder(size_t i, size_t j) {
+  painter_->fillRect(
     (cell_width_ * j) + (j*2) + cell_width_,
     (cell_height_ * i) + (i*2),
     2,
@@ -101,8 +113,8 @@ void MazeCanvas::DrawRightBorder(QPainter *p, size_t i, size_t j) {
   );
 }
 
-void MazeCanvas::DrawBottomBorder(QPainter *p, size_t i, size_t j) {
-  p->fillRect(
+void MazeCanvas::DrawBottomBorder(size_t i, size_t j) {
+  painter_->fillRect(
     (cell_width_ * j) + (j*2),
     (cell_height_ * i) + (i*2) + cell_height_,
     cell_width_,
@@ -111,8 +123,8 @@ void MazeCanvas::DrawBottomBorder(QPainter *p, size_t i, size_t j) {
   );
 }
 
-void MazeCanvas::DrawLineBetweenCellsCenters(QPainter *p, size_t row_1, size_t col_1, size_t row_2, size_t col_2) {
-  p->drawLine(
+void MazeCanvas::DrawLineBetweenCellsCenters(size_t row_1, size_t col_1, size_t row_2, size_t col_2) {
+  painter_->drawLine(
     (cell_height_ * col_1) + (cell_height_ / 2) + (col_1*2),
     (cell_width_ * row_1) + (cell_width_ / 2) + (row_1*2),
     (cell_height_ * col_2) + (cell_height_ / 2) + (col_2*2),
@@ -120,9 +132,9 @@ void MazeCanvas::DrawLineBetweenCellsCenters(QPainter *p, size_t row_1, size_t c
   );
 }
 
-void MazeCanvas::DrawPathLine(QPainter *p) {
-  std::vector<std::pair<size_t, size_t>> path = maze_->Resolve(cells_[0], cells_[1]);
+void MazeCanvas::DrawPathLine() {
+  std::vector<s21::Vector2D> path = s21::ControllerSingleton::GetInstance().ResolveMaze(path_cells_[0], path_cells_[1]);
   for (int i = 0; i < path.size() - 1; i++) {
-    DrawLineBetweenCellsCenters(p, path[i].first, path[i].second, path[i+1].first, path[i+1].second);
+    DrawLineBetweenCellsCenters(path[i].x_, path[i].y_, path[i+1].x_, path[i+1].y_);
   }
 }

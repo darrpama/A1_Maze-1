@@ -1,4 +1,4 @@
-#include "../models/maze_generator.h"
+#include "../models/maze/maze_generator.h"
 
 #include <gtest/gtest.h>
 

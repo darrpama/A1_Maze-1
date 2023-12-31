@@ -15,9 +15,12 @@ class ControllerSingleton {
   }
   void SetModel(Model *model);
 
-  Maze *GetMaze();
+  std::vector<Border> &GetMazeMatrix();
+  int GetMazeRows();
+  int GetMazeCols();
   void UploadMaze(const std::string &filename);
   void GenerateMaze(int rows, int cols);
+  std::vector<Vector2D> ResolveMaze(Vector2D, Vector2D);
 
   void UploadCave(const std::string &filename);
   void GenerateCave(size_t rows, size_t cols, float chance);

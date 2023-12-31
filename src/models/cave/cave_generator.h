@@ -18,22 +18,22 @@ class CaveGenerator {
   
  private:
   std::vector<unsigned> cells_;
-  size_t rows_;
-  size_t cols_;
-  size_t current_row_;
-  size_t current_col_;
+  int rows_;
+  int cols_;
+  int current_row_;
+  int current_col_;
 
   bool CompareCaves(Cave *old_cave, Cave *new_cave);
   bool RandomChoice(float chance);
-  size_t GetAliveNeigborsCount(Cave *cave);
-  size_t GetNorthWest(Cave *cave);
-  size_t GetNorth(Cave *cave);
-  size_t GetNorthEast(Cave *cave);
-  size_t GetEast(Cave *cave);
-  size_t GetSouthEast(Cave *cave);
-  size_t GetSouth(Cave *cave);
-  size_t GetSouthWest(Cave *cave);
-  size_t GetWest(Cave *cave);
+  int GetAliveNeigborsCount(Cave *cave);
+  int GetNorthWest(Cave *cave);
+  int GetNorth(Cave *cave);
+  int GetNorthEast(Cave *cave);
+  int GetEast(Cave *cave);
+  int GetSouthEast(Cave *cave);
+  int GetSouth(Cave *cave);
+  int GetSouthWest(Cave *cave);
+  int GetWest(Cave *cave);
   void Clear();
 };
 

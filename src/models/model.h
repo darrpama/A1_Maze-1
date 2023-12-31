@@ -1,13 +1,13 @@
 #ifndef A1_MAZE_1_SRC_MODELS_MODEL_H
 #define A1_MAZE_1_SRC_MODELS_MODEL_H
 
-#include "../type.h"
-#include "cave.h"
-#include "cave_generator.h"
-#include "cave_parser.h"
-#include "maze.h"
-#include "maze_generator.h"
-#include "maze_parser.h"
+#include "type.h"
+#include "cave/cave.h"
+#include "cave/cave_generator.h"
+#include "cave/cave_parser.h"
+#include "maze/maze.h"
+#include "maze/maze_generator.h"
+#include "maze/maze_parser.h"
 
 namespace s21 {
 
@@ -23,8 +23,11 @@ class Model {
         cave_generator_(cg){};
 
   void UploadMaze(const std::string &);
-  Maze *GetMaze();
+  std::vector<Border> &GetMazeMatrix();
+  int GetMazeRows();
+  int GetMazeCols();
   void GenerateMaze(int, int);
+  std::vector<Vector2D> ResolveMaze(Vector2D, Vector2D);
 
   void UploadCave(const std::string &);
   Cave *GetCave();

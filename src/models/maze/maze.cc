@@ -59,10 +59,9 @@ bool Maze::IsIdeal() {
   return std::all_of(visited.begin(), visited.end(), [](bool v) { return v; });
 }
 
-std::vector<std::pair<size_t, size_t>> Maze::Resolve(
-    std::pair<size_t, size_t> init_point, std::pair<size_t, size_t> end_point) {
-  std::vector<int> visited = FindPath(init_point, end_point);
-  return (FindSolution(init_point, end_point, visited));
+std::vector<Vector2D> Maze::Resolve(Vector2D start_point, Vector2D end_point) {
+  std::vector<int> visited = FindPath(start_point, end_point);
+  return (FindSolution(start_point, end_point, visited));
 }
 
 bool Maze::CheckBorder(int dir, int c_b, int n_b, int c_r, int c_c, int n_r,
@@ -79,11 +78,10 @@ bool Maze::CheckBorder(int dir, int c_b, int n_b, int c_r, int c_c, int n_r,
   return answer;
 }
 
-std::vector<int> Maze::FindPath(std::pair<size_t, size_t> init_point,
-                                std::pair<size_t, size_t> end_point) {
+std::vector<int> Maze::FindPath(Vector2D init_point, Vector2D end_point) {
   int matrix_size = GetMatrix().size();
-  int init_cell = init_point.first * cols_ + init_point.second;
-  int end_cell = end_point.first * cols_ + end_point.second;
+  int init_cell = init_point.x_ * cols_ + init_point.y_;
+  int end_cell = end_point.x_ * cols_ + end_point.y_;
   std::vector<int> visited(matrix_size, -1);
   visited[init_cell] = 0;
   std::vector<int> directions = {1, -cols_, -1, cols_};
@@ -126,16 +124,14 @@ std::vector<int> Maze::FindPath(std::pair<size_t, size_t> init_point,
   return visited;
 }
 
-std::vector<std::pair<size_t, size_t>> Maze::FindSolution(
-    std::pair<size_t, size_t> init_point, std::pair<size_t, size_t> end_point,
-    const std::vector<int>& visited) {
+std::vector<Vector2D> Maze::FindSolution(Vector2D init_point, Vector2D end_point, const std::vector<int>& visited) {
   int matrix_size = GetMatrix().size();
-  int init_cell = init_point.first * cols_ + init_point.second;
-  int end_cell = end_point.first * cols_ + end_point.second;
-  std::vector<std::pair<size_t, size_t>> solution{};
+  int init_cell = init_point.x_ * cols_ + init_point.y_;
+  int end_cell = end_point.x_ * cols_ + end_point.y_;
+  std::vector<Vector2D> solution{};
   solution.reserve(matrix_size);
-  if (init_point.first == end_point.first &&
-      init_point.second == end_point.second) {
+  if (init_point.x_ == end_point.x_ &&
+      init_point.y_ == end_point.y_) {
     solution.push_back(init_point);
     solution.push_back(end_point);
     return solution;
@@ -143,7 +139,7 @@ std::vector<std::pair<size_t, size_t>> Maze::FindSolution(
   std::vector<int> directions = {1, -cols_, -1, cols_};
   std::queue<int> q;
   q.push(end_cell);
-  solution.push_back(std::make_pair(end_point.first, end_point.second));
+  solution.push_back(Vector2D(end_point.x_, end_point.y_));
 
   while (!q.empty()) {
     int cur_cell = q.front();
@@ -165,7 +161,7 @@ std::vector<std::pair<size_t, size_t>> Maze::FindSolution(
 
       if (visited[cur_cell] - visited[neighbor_cell] == 1) {
         q.push(neighbor_cell);
-        solution.push_back(std::make_pair(neighbor_row, neighbor_col));
+        solution.push_back(Vector2D(neighbor_row, neighbor_col));
       }
       if (cur_cell == init_cell) {
         while (!q.empty()) {

@@ -8,10 +8,23 @@ void ControllerSingleton::UploadMaze(const std::string &filepath) {
   model_->UploadMaze(filepath);
 }
 
-Maze *ControllerSingleton::GetMaze() { return model_->GetMaze(); }
+std::vector<Border> &ControllerSingleton::GetMazeMatrix() { 
+  return model_->GetMazeMatrix();
+}
+
+int ControllerSingleton::GetMazeRows() {
+  return model_->GetMazeCols();
+}
+int ControllerSingleton::GetMazeCols() {
+  return model_->GetMazeRows();
+}
 
 void ControllerSingleton::GenerateMaze(int rows, int cols) {
   model_->GenerateMaze(rows, cols);
+}
+
+std::vector<Vector2D> ControllerSingleton::ResolveMaze(Vector2D a, Vector2D b) {
+  return model_->ResolveMaze(a, b);
 }
 
 void ControllerSingleton::UploadCave(const std::string &filepath) {

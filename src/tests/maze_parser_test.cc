@@ -1,4 +1,4 @@
-#include "../models/maze_parser.h"
+#include "../models/maze/maze_parser.h"
 
 #include <filesystem>
 

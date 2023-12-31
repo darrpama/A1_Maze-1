@@ -54,9 +54,9 @@ bool CaveGenerator::Step(Cave *cave, unsigned die_limit, unsigned born_limit) {
   current_row_ = 0;
   unsigned alive_neighbors_count = 0;
 
-  for (size_t row = 0; row < rows_; row++) {
+  for (int row = 0; row < rows_; row++) {
     current_row_ = row;
-    for (size_t col = 0; col < cols_; col++) {
+    for (int col = 0; col < cols_; col++) {
       current_col_ = col;
       alive_neighbors_count = GetAliveNeigborsCount(&new_cave);
       if (new_cave.GetMatrix()[row * cols_ + col] == 1) {  
@@ -99,49 +99,49 @@ bool CaveGenerator::CompareCaves(Cave *old_cave, Cave *new_cave) {
   return true;
 }
 
-size_t CaveGenerator::GetAliveNeigborsCount(Cave *cave) {
+int CaveGenerator::GetAliveNeigborsCount(Cave *cave) {
   return GetNorthWest(cave) + GetNorth(cave)
        + GetNorthEast(cave) + GetEast(cave)
        + GetSouthEast(cave) + GetSouth(cave)
        + GetSouthWest(cave) + GetWest(cave);
 }
 
-size_t CaveGenerator::GetNorthWest(Cave *cave) {
+int CaveGenerator::GetNorthWest(Cave *cave) {
   return (((current_row_ - 1) < 0) || ((current_col_ - 1) < 0)) ? 1 
     : cave->GetMatrix()[(current_row_ - 1) * cols_ + (current_col_ - 1)];
 }
 
-size_t CaveGenerator::GetNorth(Cave *cave) {
+int CaveGenerator::GetNorth(Cave *cave) {
   return ((current_row_ - 1) < 0) ? 1 
     : cave->GetMatrix()[(current_row_ - 1) * cols_ + current_col_];
 }
 
-size_t CaveGenerator::GetNorthEast(Cave *cave) {
+int CaveGenerator::GetNorthEast(Cave *cave) {
   return (((current_row_ - 1) < 0) || ((current_col_ + 1) >= cols_)) ? 1 
     : cave->GetMatrix()[(current_row_ - 1) * cols_ + (current_col_ + 1)];
 }
 
-size_t CaveGenerator::GetEast(Cave *cave) {
+int CaveGenerator::GetEast(Cave *cave) {
   return ((current_col_ + 1) >= cols_) ? 1 
     : cave->GetMatrix()[current_row_ * cols_ + (current_col_ + 1)];
 }
 
-size_t CaveGenerator::GetSouthEast(Cave *cave) {
+int CaveGenerator::GetSouthEast(Cave *cave) {
   return (((current_row_ + 1) >= rows_) || ((current_col_ + 1) >= cols_)) ? 1 
     : cave->GetMatrix()[(current_row_ + 1) * cols_ + (current_col_ + 1)];
 }
 
-size_t CaveGenerator::GetSouth(Cave *cave) {
+int CaveGenerator::GetSouth(Cave *cave) {
   return ((current_row_ + 1) >= rows_) ? 1 
     : cave->GetMatrix()[(current_row_ + 1) * cols_ + current_col_];
 }
 
-size_t CaveGenerator::GetSouthWest(Cave *cave) {
+int CaveGenerator::GetSouthWest(Cave *cave) {
   return (((current_row_ + 1) >= rows_) || ((current_col_ - 1) < 0)) ? 1 
     : cave->GetMatrix()[(current_row_ + 1) * cols_ + (current_col_ - 1)];
 }
 
-size_t CaveGenerator::GetWest(Cave *cave) {
+int CaveGenerator::GetWest(Cave *cave) {
   return ((current_col_ - 1) < 0) ? 1 
     : cave->GetMatrix()[current_row_ * cols_ + (current_col_ - 1)];
 }
