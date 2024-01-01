@@ -15,35 +15,19 @@ class Cave {
   Cave(size_t rows, size_t cols) : rows_(rows), cols_(cols), matrix_{} {}
   Cave(Cave&& o) noexcept : rows_(o.rows_), cols_(o.cols_), matrix_(std::move(o.matrix_)) {}
   Cave(const Cave& o) : rows_(o.rows_), cols_(o.cols_), matrix_(o.matrix_) {}
+  Cave& operator=(Cave&& other) noexcept;
+  Cave& operator=(const Cave& other);
 
-  Cave& operator=(Cave&& other) noexcept {
-    if (this != &other) {
-      rows_ = other.rows_;
-      cols_ = other.cols_;
-      matrix_ = std::move(other.matrix_);
-    }
-    return *this;
-  }
+  ~Cave() = default;
 
-  Cave& operator=(const Cave& other) {
-    if (this != &other) {
-      rows_ = other.rows_;
-      cols_ = other.cols_;
-      matrix_ = other.matrix_;
-    }
-    return *this;
-  }
-
-  ~Cave() {}
-
+  std::vector<unsigned>& GetMatrix();
   size_t GetRows();
   size_t GetCols();
+  void SetMatrix(std::vector<unsigned>);
   void SetRows(size_t);
   void SetCols(size_t);
-  void Push(unsigned);
-  std::vector<unsigned>& GetMatrix();
-  void SetMatrix(std::vector<unsigned>);
 
+  void Push(unsigned);
   void Clear();
 
  private:

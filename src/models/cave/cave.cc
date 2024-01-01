@@ -2,6 +2,24 @@
 
 namespace s21 {
 
+Cave& Cave::operator=(Cave&& other) noexcept {
+  if (this != &other) {
+    rows_ = other.rows_;
+    cols_ = other.cols_;
+    matrix_ = std::move(other.matrix_);
+  }
+  return *this;
+}
+
+Cave& Cave::operator=(const Cave& other) {
+  if (this != &other) {
+    rows_ = other.rows_;
+    cols_ = other.cols_;
+    matrix_ = other.matrix_;
+  }
+  return *this;
+}
+
 size_t Cave::GetRows() { return rows_; }
 
 size_t Cave::GetCols() { return cols_; }
