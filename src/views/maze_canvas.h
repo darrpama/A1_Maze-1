@@ -39,7 +39,7 @@ class MazeCanvas : public QWidget {
   void DrawRightBorder(size_t i, size_t j);
   void DrawBottomBorder(size_t i, size_t j);
   void DrawPathLine();
-  void DrawLineBetweenCellsCenters(size_t row_1, size_t col_1, size_t row_2, size_t col_2);
+  void DrawLineBetweenCellsCenters(s21::Vector2D, s21::Vector2D);
 };
 
 #endif // CPP4_3DVIEWER_V2_0_2_SRC_VIEWS_MAZE_CANVAS_H

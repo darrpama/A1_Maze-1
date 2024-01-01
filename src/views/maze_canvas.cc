@@ -28,6 +28,7 @@ void MazeCanvas::paintEvent(QPaintEvent *event) {
 
   cell_width_ = (static_cast<float>(width_) / cols_) - border_size_;
   cell_height_ = (static_cast<float>(height_) / rows_) - border_size_;
+  
   painter_ = new QPainter(this);
 
   if (cols_ > 0 && rows_ > 0) {
@@ -123,18 +124,18 @@ void MazeCanvas::DrawBottomBorder(size_t i, size_t j) {
   );
 }
 
-void MazeCanvas::DrawLineBetweenCellsCenters(size_t row_1, size_t col_1, size_t row_2, size_t col_2) {
+void MazeCanvas::DrawLineBetweenCellsCenters(s21::Vector2D a, s21::Vector2D b) {
   painter_->drawLine(
-    (cell_height_ * col_1) + (cell_height_ / 2) + (col_1*2),
-    (cell_width_ * row_1) + (cell_width_ / 2) + (row_1*2),
-    (cell_height_ * col_2) + (cell_height_ / 2) + (col_2*2),
-    (cell_width_ * row_2) + (cell_width_ / 2) + (row_2*2)
+    (cell_height_ * a.y_) + (cell_height_ / 2) + (a.y_ * 2),
+    (cell_width_ * a.x_) + (cell_width_ / 2) + (a.x_ * 2),
+    (cell_height_ * b.y_) + (cell_height_ / 2) + (b.y_ * 2),
+    (cell_width_ * b.x_) + (cell_width_ / 2) + (b.x_ * 2)
   );
 }
 
 void MazeCanvas::DrawPathLine() {
   std::vector<s21::Vector2D> path = s21::ControllerSingleton::GetInstance().ResolveMaze(path_cells_[0], path_cells_[1]);
   for (int i = 0; i < path.size() - 1; i++) {
-    DrawLineBetweenCellsCenters(path[i].x_, path[i].y_, path[i+1].x_, path[i+1].y_);
+    DrawLineBetweenCellsCenters(path[i], path[i+1]);
   }
 }
