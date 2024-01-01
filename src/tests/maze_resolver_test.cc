@@ -23,14 +23,17 @@ TEST(MazeResolverTest, Resolve_Positive) {
   size_t end_row = 0;
   size_t end_col = 3;
 
-  std::vector<std::pair<size_t, size_t>> solution = maze.Resolve(
-      std::make_pair(init_row, init_col), std::make_pair(end_row, end_col));
+  std::vector<s21::Vector2D> solution = maze.Resolve(
+    s21::Vector2D(init_row, init_col), 
+    s21::Vector2D(end_row, end_col)
+  );
 
-  std::vector<std::pair<size_t, size_t>> correct_solution{
+  std::vector<s21::Vector2D> correct_solution{
       {0, 3}, {1, 3}, {2, 3}, {2, 4}, {2, 5}, {3, 5}, {3, 4}, {4, 4}, {4, 3},
       {3, 3}, {3, 2}, {3, 1}, {2, 1}, {2, 2}, {1, 2}, {0, 2}, {0, 1}, {0, 0}};
 
   for (size_t i = 0; i < solution.size(); i++) {
-    EXPECT_EQ(solution[i], correct_solution[i]);
+    EXPECT_EQ(solution[i].x_, correct_solution[i].x_);
+    EXPECT_EQ(solution[i].y_, correct_solution[i].y_);
   }
 }
