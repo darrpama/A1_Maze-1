@@ -23,8 +23,8 @@ class MazeCanvas : public QWidget {
   float width_;
   float height_;
   float border_size_;
-  double cell_width_ = 0.0f;
-  double cell_height_ = 0.0f;
+  float cell_width_ = 0.0f;
+  float cell_height_ = 0.0f;
   int cols_ = 0;
   int rows_ = 0;
   int click_counter_ = 0;

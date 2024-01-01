@@ -14,13 +14,7 @@ namespace s21 {
 class Model {
  public:
   Model(Maze *m, MazeParser *mp, MazeGenerator *mg, Cave *c, CaveParser *cp,
-        CaveGenerator *cg)
-      : maze_(m),
-        maze_parser_(mp),
-        maze_generator_(mg),
-        cave_(c),
-        cave_parser_(cp),
-        cave_generator_(cg){};
+        CaveGenerator *cg);
 
   void UploadMaze(const std::string &);
   std::vector<Border> &GetMazeMatrix();
@@ -30,7 +24,9 @@ class Model {
   std::vector<Vector2D> ResolveMaze(Vector2D, Vector2D);
 
   void UploadCave(const std::string &);
-  Cave *GetCave();
+  std::vector<unsigned> &GetCaveMatrix();
+  int GetCaveRows();
+  int GetCaveCols();
   void GenerateCave(size_t, size_t, float chance);
   bool StepRender(unsigned die_limit, unsigned born_limit);
 

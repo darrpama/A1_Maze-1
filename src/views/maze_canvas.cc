@@ -29,14 +29,14 @@ void MazeCanvas::paintEvent(QPaintEvent *event) {
   cell_width_ = (static_cast<float>(width_) / cols_) - border_size_;
   cell_height_ = (static_cast<float>(height_) / rows_) - border_size_;
   
-  painter_ = new QPainter(this);
 
   if (cols_ > 0 && rows_ > 0) {
+    painter_ = new QPainter(this);
     DrawMaze();
     DrawPath();
     DrawFrames();
+    painter_->end();
   }
-  painter_->end();
 }
 
 void MazeCanvas::DrawMaze() {

@@ -22,6 +22,9 @@ class ControllerSingleton {
   void GenerateMaze(int rows, int cols);
   std::vector<Vector2D> ResolveMaze(Vector2D, Vector2D);
 
+  std::vector<unsigned> &GetCaveMatrix();
+  int GetCaveRows();
+  int GetCaveCols();
   void UploadCave(const std::string &filename);
   void GenerateCave(size_t rows, size_t cols, float chance);
   bool StepRender(unsigned die_limit, unsigned born_limit);
