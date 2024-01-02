@@ -8,29 +8,23 @@ STATICLIB = Maze.a
 DISTDIR = ../distributive
 
 HEADERS = \
-	$(PROJECTDIR)/models/cave/cave_generator.h \
-	$(PROJECTDIR)/models/cave/cave_parser.h \
 	$(PROJECTDIR)/models/cave/cave.h \
 	$(PROJECTDIR)/models/maze/maze_generator.h \
 	$(PROJECTDIR)/models/maze/maze_parser.h \
 	$(PROJECTDIR)/models/maze/maze_saver.h \
-	$(PROJECTDIR)/models/maze/maze.h \
-	$(PROJECTDIR)/models/model.h
+	$(PROJECTDIR)/models/maze/maze.h
 
 SOURCES = \
-	$(PROJECTDIR)/models/cave/cave_generator.cc \
-	$(PROJECTDIR)/models/cave/cave_parser.cc \
 	$(PROJECTDIR)/models/cave/cave.cc \
 	$(PROJECTDIR)/models/maze/maze_generator.cc \
 	$(PROJECTDIR)/models/maze/maze_parser.cc \
 	$(PROJECTDIR)/models/maze/maze_saver.cc \
 	$(PROJECTDIR)/models/maze/maze.cc \
-	$(PROJECTDIR)/models/model.cc \
+	$(PROJECTDIR)/tests/cave_generator_test.cc \
 	$(PROJECTDIR)/tests/maze_generator_test.cc \
 	$(PROJECTDIR)/tests/maze_parser_test.cc \
 	$(PROJECTDIR)/tests/maze_resolver_test.cc \
 	$(PROJECTDIR)/tests/maze_saver_test.cc \
-	$(PROJECTDIR)/tests/cave_generator_test.cc \
 	$(PROJECTDIR)/tests/run_all_tests.cc
 
 OTHERS = \

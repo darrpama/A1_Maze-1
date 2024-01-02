@@ -66,9 +66,9 @@ bool Cave::StepRender(unsigned die_limit, unsigned born_limit) {
   int current_row = 0;
   unsigned alive_neighbors_count = 0;
 
-  for (int row = 0; row < rows_; row++) {
+  for (int row = 0; row < static_cast<int>(rows_); row++) {
     current_row = row;
-    for (int col = 0; col < cols_; col++) {
+    for (int col = 0; col < static_cast<int>(cols_); col++) {
       current_col = col;
       alive_neighbors_count = GetAliveNeigborsCount(current_row, current_col);
       if (matrix_[row * cols_ + col] == 1) {  
@@ -110,11 +110,11 @@ bool Cave::CompareCaves(Cave *old_cave, Cave *new_cave) {
 int Cave::GetAliveNeigborsCount(int r, int c) {
   int top_left = ((((r-1) < 0) || ((c-1) < 0)) ? 1 : matrix_[(r-1) * cols_ + (c-1)]);
   int top = (((r-1) < 0) ? 1 : matrix_[(r-1) * cols_ + c]);
-  int top_right = ((((r-1) < 0) || ((c+1) >= cols_)) ? 1 : matrix_[(r-1) * cols_ + (c+1)]);
-  int right = (((c+1) >= cols_) ? 1 : matrix_[r * cols_ + (c+1)]);
-  int bottom_right = ((((r+1) >= rows_) || ((c+1) >= cols_)) ? 1 : matrix_[(r+1) * cols_ + (c+1)]);
-  int bottom = (((r+1) >= rows_) ? 1 : matrix_[(r+1) * cols_ + c]);
-  int bottom_left = (((r+1) >= rows_) || ((c-1) < 0)) ? 1 : matrix_[(r+1) * cols_ + (c-1)];
+  int top_right = ((((r-1) < 0) || ((c+1) >= static_cast<int>(cols_))) ? 1 : matrix_[(r-1) * cols_ + (c+1)]);
+  int right = (((c+1) >= static_cast<int>(cols_)) ? 1 : matrix_[r * cols_ + (c+1)]);
+  int bottom_right = ((((r+1) >= static_cast<int>(rows_)) || ((c+1) >= static_cast<int>(cols_))) ? 1 : matrix_[(r+1) * cols_ + (c+1)]);
+  int bottom = (((r+1) >= static_cast<int>(rows_)) ? 1 : matrix_[(r+1) * cols_ + c]);
+  int bottom_left = (((r+1) >= static_cast<int>(rows_)) || ((c-1) < 0)) ? 1 : matrix_[(r+1) * cols_ + (c-1)];
   int left = (((c-1) < 0) ? 1 : matrix_[r * cols_ + (c-1)]);
   
   return top_left + top + top_right + right + bottom_right + bottom + bottom_left + left;
