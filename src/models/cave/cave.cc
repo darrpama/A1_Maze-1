@@ -28,8 +28,6 @@ void Cave::SetRows(size_t rows) { rows_ = rows; }
 
 void Cave::SetCols(size_t cols) { cols_ = cols; }
 
-void Cave::Push(unsigned border) { matrix_.push_back(border); }
-
 std::vector<unsigned>& Cave::GetMatrix() { return matrix_; }
 
 void Cave::SetMatrix(std::vector<unsigned> matrix) {
@@ -109,51 +107,85 @@ bool Cave::CompareCaves(Cave *old_cave, Cave *new_cave) {
   return true;
 }
 
-int Cave::GetAliveNeigborsCount(int current_row, int current_col) {
-  return GetNorthWest(current_row, current_col) + GetNorth(current_row, current_col)
-       + GetNorthEast(current_row, current_col) + GetEast(current_row, current_col)
-       + GetSouthEast(current_row, current_col) + GetSouth(current_row, current_col)
-       + GetSouthWest(current_row, current_col) + GetWest(current_row, current_col);
+int Cave::GetAliveNeigborsCount(int r, int c) {
+  int top_left = ((((r-1) < 0) || ((c-1) < 0)) ? 1 : matrix_[(r-1) * cols_ + (c-1)]);
+  int top = (((r-1) < 0) ? 1 : matrix_[(r-1) * cols_ + c]);
+  int top_right = ((((r-1) < 0) || ((c+1) >= cols_)) ? 1 : matrix_[(r-1) * cols_ + (c+1)]);
+  int right = (((c+1) >= cols_) ? 1 : matrix_[r * cols_ + (c+1)]);
+  int bottom_right = ((((r+1) >= rows_) || ((c+1) >= cols_)) ? 1 : matrix_[(r+1) * cols_ + (c+1)]);
+  int bottom = (((r+1) >= rows_) ? 1 : matrix_[(r+1) * cols_ + c]);
+  int bottom_left = (((r+1) >= rows_) || ((c-1) < 0)) ? 1 : matrix_[(r+1) * cols_ + (c-1)];
+  int left = (((c-1) < 0) ? 1 : matrix_[r * cols_ + (c-1)]);
+  
+  return top_left + top + top_right + right + bottom_right + bottom + bottom_left + left;
 }
 
-int Cave::GetNorthWest(int current_row, int current_col) {
-  return (((current_row - 1) < 0) || ((current_col - 1) < 0)) ? 1 
-    : GetMatrix()[(current_row - 1) * cols_ + (current_col - 1)];
+
+// PARSER
+// ==================================================================
+void Cave::CheckAndFixEndLine(std::string filepath) {
+  FILE *fp = fopen(filepath.c_str(), "r+");
+  if (fp == NULL) {
+    throw std::invalid_argument("Failed to open file: " + filepath);
+  }
+  fseek(fp, -1, SEEK_END);
+  char c = fgetc(fp);
+  if (c != '\n') {
+    fseek(fp, -1, SEEK_END);
+    fputc('\n', fp);
+  }
+  fclose(fp);
 }
 
-int Cave::GetNorth(int current_row, int current_col) {
-  return ((current_row - 1) < 0) ? 1 
-    : matrix_[(current_row - 1) * cols_ + current_col];
+void Cave::Parse(std::string filepath) {
+  CheckAndFixEndLine(filepath);
+
+  std::ifstream file(filepath);
+  if (!file.is_open()) {
+    throw std::invalid_argument("Failed to open file: " + filepath);
+  }
+
+  std::stringstream buffer;
+  buffer << file.rdbuf();
+  std::string file_content = buffer.str();
+  size_t pos = 0;
+  size_t file_content_size = file_content.size();
+  int current_line = 0;
+
+  while (pos < file_content_size) {
+    size_t line_end = file_content.find('\n', pos);
+    std::string line = file_content.substr(pos, line_end - pos);
+    if (current_line == 0) {
+      ParseSize(line);
+    } else {
+      ParseMatrix(line);
+    }
+    current_line++;
+    pos = line_end + 1;
+  }
+
+  file.close();
 }
 
-int Cave::GetNorthEast(int current_row, int current_col) {
-  return (((current_row - 1) < 0) || ((current_col + 1) >= cols_)) ? 1 
-    : matrix_[(current_row - 1) * cols_ + (current_col + 1)];
+void Cave::ParseSize(const std::string &line) {
+  std::stringstream ss(line);
+  int rows, cols;
+  if (ss >> rows >> cols) {
+    SetRows(rows);
+    SetCols(cols);
+  } else {
+    throw std::invalid_argument("Failed to parse size of matrix");
+  }
 }
 
-int Cave::GetEast(int current_row, int current_col) {
-  return ((current_col + 1) >= cols_) ? 1 
-    : matrix_[current_row * cols_ + (current_col + 1)];
-}
-
-int Cave::GetSouthEast(int current_row, int current_col) {
-  return (((current_row + 1) >= rows_) || ((current_col + 1) >= cols_)) ? 1 
-    : matrix_[(current_row + 1) * cols_ + (current_col + 1)];
-}
-
-int Cave::GetSouth(int current_row, int current_col) {
-  return ((current_row + 1) >= rows_) ? 1 
-    : matrix_[(current_row + 1) * cols_ + current_col];
-}
-
-int Cave::GetSouthWest(int current_row, int current_col) {
-  return (((current_row + 1) >= rows_) || ((current_col - 1) < 0)) ? 1 
-    : matrix_[(current_row + 1) * cols_ + (current_col - 1)];
-}
-
-int Cave::GetWest(int current_row, int current_col) {
-  return ((current_col - 1) < 0) ? 1 
-    : matrix_[current_row * cols_ + (current_col - 1)];
+void Cave::ParseMatrix(const std::string &line) {
+  for (size_t i = 0; i < line.size(); i++) {
+    if (line[i] == '0') {
+      matrix_.push_back(0);
+    } else if (line[i] == '1') {
+      matrix_.push_back(1);
+    }
+  }
 }
 
 }  // namespace s21

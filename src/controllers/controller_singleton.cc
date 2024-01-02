@@ -1,5 +1,4 @@
 #include "controller_singleton.h"
-#include "controller_singleton.h"
 
 namespace s21 {
 
@@ -35,8 +34,7 @@ std::vector<Vector2D> ControllerSingleton::ResolveMaze(Vector2D a, Vector2D b) {
 
 // CAVE
 void ControllerSingleton::UploadCave(const std::string &filepath) {
-  cave_parser_->SetFilePath(filepath);
-  cave_parser_->Parse();
+  cave_->Parse(filepath);
 }
 std::vector<unsigned> &ControllerSingleton::GetCaveMatrix() {
   return cave_->GetMatrix();

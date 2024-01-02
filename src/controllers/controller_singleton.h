@@ -5,7 +5,6 @@
 
 #include "models/type.h"
 #include "models/cave/cave.h"
-#include "models/cave/cave_parser.h"
 #include "models/maze/maze.h"
 #include "models/maze/maze_generator.h"
 #include "models/maze/maze_parser.h"
@@ -23,7 +22,6 @@ class ControllerSingleton {
   void SetMazeParser(MazeParser *mp) { maze_parser_ = mp; }
   void SetMazeGenerator(MazeGenerator *mg) { maze_generator_ = mg; }
   void SetCave(Cave *c) { cave_ = c; }
-  void SetCaveParser(CaveParser *cp) { cave_parser_ = cp; }
 
   std::vector<Border> &GetMazeMatrix();
   int GetMazeRows();
@@ -44,7 +42,6 @@ class ControllerSingleton {
   MazeParser *maze_parser_;
   MazeGenerator *maze_generator_;
   Cave *cave_;
-  CaveParser *cave_parser_;
 
   ControllerSingleton() {};
   ControllerSingleton(const ControllerSingleton &);

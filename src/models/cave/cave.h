@@ -6,6 +6,8 @@
 #include <queue>
 #include <vector>
 #include <random>
+#include <fstream>
+#include <sstream>
 
 #include "../type.h"
 
@@ -27,28 +29,27 @@ class Cave {
   void SetRows(size_t);
   void SetCols(size_t);
 
-  void Push(unsigned);
   void Clear();
 
-  void Generate(size_t rows, size_t cols, float chance);
-  bool StepRender(unsigned die_limit, unsigned born_limit);
+  // generator
+  void Generate(size_t, size_t, float);
+  bool StepRender(unsigned, unsigned);
+
+  // parser
+  void Parse(std::string);
 
  private:
   size_t rows_;
   size_t cols_;
   std::vector<unsigned> matrix_;
 
-  bool RandomChoice(float chance);
-  bool CompareCaves(Cave *old_cave, Cave *new_cave);
+  bool RandomChoice(float);
+  bool CompareCaves(Cave *, Cave *);
   int GetAliveNeigborsCount(int, int);
-  int GetNorthWest(int, int);
-  int GetNorth(int, int);
-  int GetNorthEast(int, int);
-  int GetEast(int, int);
-  int GetSouthEast(int, int);
-  int GetSouth(int, int);
-  int GetSouthWest(int, int);
-  int GetWest(int, int);
+
+  void CheckAndFixEndLine(std::string);
+  void ParseSize(const std::string &);
+  void ParseMatrix(const std::string &);
 };
 
 }  // namespace s21

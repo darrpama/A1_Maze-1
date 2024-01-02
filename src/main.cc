@@ -5,7 +5,6 @@
 #include "models/maze/maze.h"
 #include "models/maze/maze_parser.h"
 #include "models/cave/cave.h"
-#include "models/cave/cave_parser.h"
 #include "views/mainwindow.h"
 
 int main(int argc, char *argv[]) {
@@ -18,14 +17,12 @@ int main(int argc, char *argv[]) {
   s21::MazeGenerator maze_generator = s21::MazeGenerator();
 
   s21::Cave cave = s21::Cave(0, 0);
-  s21::CaveParser cave_parser = s21::CaveParser(&cave);
 
   s21::ControllerSingleton &controller = s21::ControllerSingleton::GetInstance();
   controller.SetMaze(&maze);
   controller.SetMazeParser(&maze_parser);
   controller.SetMazeGenerator(&maze_generator);
   controller.SetCave(&cave);
-  controller.SetCaveParser(&cave_parser);
 
   window->setWindowTitle(QString("Maze"));
   window->show();
