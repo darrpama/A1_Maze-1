@@ -5,6 +5,7 @@
 #include <iostream>
 #include <queue>
 #include <vector>
+#include <random>
 
 #include "../type.h"
 
@@ -17,7 +18,6 @@ class Cave {
   Cave(const Cave& o) : rows_(o.rows_), cols_(o.cols_), matrix_(o.matrix_) {}
   Cave& operator=(Cave&& other) noexcept;
   Cave& operator=(const Cave& other);
-
   ~Cave() = default;
 
   std::vector<unsigned>& GetMatrix();
@@ -30,10 +30,25 @@ class Cave {
   void Push(unsigned);
   void Clear();
 
+  void Generate(size_t rows, size_t cols, float chance);
+  bool StepRender(unsigned die_limit, unsigned born_limit);
+
  private:
   size_t rows_;
   size_t cols_;
   std::vector<unsigned> matrix_;
+
+  bool RandomChoice(float chance);
+  bool CompareCaves(Cave *old_cave, Cave *new_cave);
+  int GetAliveNeigborsCount(int, int);
+  int GetNorthWest(int, int);
+  int GetNorth(int, int);
+  int GetNorthEast(int, int);
+  int GetEast(int, int);
+  int GetSouthEast(int, int);
+  int GetSouth(int, int);
+  int GetSouthWest(int, int);
+  int GetWest(int, int);
 };
 
 }  // namespace s21

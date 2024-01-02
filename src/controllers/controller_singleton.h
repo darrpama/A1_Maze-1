@@ -3,7 +3,12 @@
 
 #include <string>
 
-#include "../models/model.h"
+#include "models/type.h"
+#include "models/cave/cave.h"
+#include "models/cave/cave_parser.h"
+#include "models/maze/maze.h"
+#include "models/maze/maze_generator.h"
+#include "models/maze/maze_parser.h"
 
 namespace s21 {
 
@@ -13,7 +18,12 @@ class ControllerSingleton {
     static ControllerSingleton instance;
     return instance;
   }
-  void SetModel(Model *model);
+
+  void SetMaze(Maze *m) { maze_ = m; }
+  void SetMazeParser(MazeParser *mp) { maze_parser_ = mp; }
+  void SetMazeGenerator(MazeGenerator *mg) { maze_generator_ = mg; }
+  void SetCave(Cave *c) { cave_ = c; }
+  void SetCaveParser(CaveParser *cp) { cave_parser_ = cp; }
 
   std::vector<Border> &GetMazeMatrix();
   int GetMazeRows();
@@ -28,12 +38,15 @@ class ControllerSingleton {
   void UploadCave(const std::string &filename);
   void GenerateCave(size_t rows, size_t cols, float chance);
   bool StepRender(unsigned die_limit, unsigned born_limit);
-  Cave *GetCave();
 
  private:
-  Model *model_;
+  Maze *maze_;
+  MazeParser *maze_parser_;
+  MazeGenerator *maze_generator_;
+  Cave *cave_;
+  CaveParser *cave_parser_;
 
-  ControllerSingleton() : model_(){};
+  ControllerSingleton() {};
   ControllerSingleton(const ControllerSingleton &);
   ControllerSingleton &operator=(const ControllerSingleton &) = delete;
 };

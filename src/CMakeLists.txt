@@ -30,14 +30,10 @@ set(PROJECT_SOURCES
     models/maze/maze_parser.cc
     models/maze/maze.h
     models/maze/maze.cc
-    models/cave/cave_generator.h
-    models/cave/cave_generator.cc
     models/cave/cave_parser.h
     models/cave/cave_parser.cc
     models/cave/cave.h
     models/cave/cave.cc
-    models/model.cc
-    models/model.h
 )
 
 

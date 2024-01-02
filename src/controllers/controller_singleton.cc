@@ -3,54 +3,59 @@
 
 namespace s21 {
 
-void ControllerSingleton::SetModel(Model *model) { model_ = model; }
-
 // MAZE
 void ControllerSingleton::UploadMaze(const std::string &filepath) {
-  model_->UploadMaze(filepath);
+  maze_parser_->SetFilePath(filepath);
+  maze_parser_->Parse();
 }
 
 std::vector<Border> &ControllerSingleton::GetMazeMatrix() { 
-  return model_->GetMazeMatrix();
+  return maze_->GetMatrix();
 }
 
 int ControllerSingleton::GetMazeRows() {
-  return model_->GetMazeCols();
+  return maze_->GetCols();
 }
+
 int ControllerSingleton::GetMazeCols() {
-  return model_->GetMazeRows();
+  return maze_->GetRows();
 }
 
 void ControllerSingleton::GenerateMaze(int rows, int cols) {
-  model_->GenerateMaze(rows, cols);
+  maze_->Clear();
+  Maze maze = maze_generator_->GenerateMaze(rows, cols);
+  maze_->SetCols(maze.GetCols());
+  maze_->SetRows(maze.GetRows());
+  maze_->GetMatrix() = maze.GetMatrix();
 }
 
 std::vector<Vector2D> ControllerSingleton::ResolveMaze(Vector2D a, Vector2D b) {
-  return model_->ResolveMaze(a, b);
+  return maze_->Resolve(a, b);
 }
 
 // CAVE
 void ControllerSingleton::UploadCave(const std::string &filepath) {
-  model_->UploadCave(filepath);
+  cave_parser_->SetFilePath(filepath);
+  cave_parser_->Parse();
 }
 std::vector<unsigned> &ControllerSingleton::GetCaveMatrix() {
-  return model_->GetCaveMatrix();
+  return cave_->GetMatrix();
 }
 
 int ControllerSingleton::GetCaveRows() {
-  return model_->GetCaveCols();
+  return cave_->GetCols();
 }
 
 int ControllerSingleton::GetCaveCols() {
-  return model_->GetCaveRows();
+  return cave_->GetRows();
 }
 
 void ControllerSingleton::GenerateCave(size_t rows, size_t cols, float chance) {
-  model_->GenerateCave(rows, cols, chance);
+  cave_->Generate(rows, cols, chance);
 }
 
 bool ControllerSingleton::StepRender(unsigned die_limit, unsigned born_limit) {
-  return model_->StepRender(die_limit, born_limit);
+  return cave_->StepRender(die_limit, born_limit);
 }
 
 
