@@ -136,7 +136,14 @@
                 </widget>
                </item>
                <item alignment="Qt::AlignLeft|Qt::AlignTop">
-                <widget class="QSpinBox" name="cols_input"/>
+                <widget class="QSpinBox" name="cols_input">
+                 <property name="maximum">
+                  <number>50</number>
+                 </property>
+                 <property name="value">
+                  <number>20</number>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
@@ -153,7 +160,14 @@
                 </widget>
                </item>
                <item alignment="Qt::AlignLeft|Qt::AlignTop">
-                <widget class="QSpinBox" name="rows_input"/>
+                <widget class="QSpinBox" name="rows_input">
+                 <property name="maximum">
+                  <number>50</number>
+                 </property>
+                 <property name="value">
+                  <number>20</number>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
@@ -245,7 +259,14 @@
                 </widget>
                </item>
                <item>
-                <widget class="QSpinBox" name="cave_cols"/>
+                <widget class="QSpinBox" name="cave_cols">
+                 <property name="maximum">
+                  <number>50</number>
+                 </property>
+                 <property name="value">
+                  <number>20</number>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
@@ -259,7 +280,14 @@
                 </widget>
                </item>
                <item>
-                <widget class="QSpinBox" name="cave_rows"/>
+                <widget class="QSpinBox" name="cave_rows">
+                 <property name="maximum">
+                  <number>50</number>
+                 </property>
+                 <property name="value">
+                  <number>20</number>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
@@ -276,7 +304,17 @@
                 </widget>
                </item>
                <item>
-                <widget class="QDoubleSpinBox" name="cave_cell_chance"/>
+                <widget class="QDoubleSpinBox" name="cave_cell_chance">
+                 <property name="maximum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.010000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>0.500000000000000</double>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
@@ -326,6 +364,15 @@
                    <height>0</height>
                   </size>
                  </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>7</number>
+                 </property>
+                 <property name="value">
+                  <number>3</number>
+                 </property>
                 </widget>
                </item>
               </layout>
@@ -355,6 +402,15 @@
                  </property>
                  <property name="styleSheet">
                   <string notr="true"/>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>7</number>
+                 </property>
+                 <property name="value">
+                  <number>6</number>
                  </property>
                 </widget>
                </item>
@@ -392,6 +448,9 @@
                    <width>50</width>
                    <height>0</height>
                   </size>
+                 </property>
+                 <property name="minimum">
+                  <number>100</number>
                  </property>
                  <property name="maximum">
                   <number>10000</number>

@@ -25,6 +25,10 @@ void MazeCanvas::paintEvent(QPaintEvent *event) {
   width_ = 500;
   height_ = 500;
   border_size_ = 2.0f;
+  border_color_ = QColor("#aaaaaa");
+  frame_color_ = QColor("#aaaaaa");
+  line_color_ = QColor("#cc0000");
+  background_color_ = QColor("#ffffff");
 
   cell_width_ = (static_cast<float>(width_) / cols_) - border_size_;
   cell_height_ = (static_cast<float>(height_) / rows_) - border_size_;
@@ -32,6 +36,7 @@ void MazeCanvas::paintEvent(QPaintEvent *event) {
 
   if (cols_ > 0 && rows_ > 0) {
     painter_ = new QPainter(this);
+    DrawBackground();
     DrawMaze();
     DrawPath();
     DrawFrames();
@@ -61,11 +66,14 @@ void MazeCanvas::DrawPath() {
   }
 }
 
+void MazeCanvas::DrawBackground() {
+  painter_->fillRect(0, 0, 500, 500, background_color_);
+}
 void MazeCanvas::DrawFrames() {
-  painter_->fillRect(0, 0, 500, 2, Qt::black);
-  painter_->fillRect(0, 0, 2, 500, Qt::black);
-  painter_->fillRect(498, 0, 2, 500, Qt::black);
-  painter_->fillRect(0, 498, 500, 2, Qt::black);
+  painter_->fillRect(0, 0, 500, 2, frame_color_);
+  painter_->fillRect(0, 0, 2, 500, frame_color_);
+  painter_->fillRect(498, 0, 2, 500, frame_color_);
+  painter_->fillRect(0, 498, 500, 2, frame_color_);
 }
 
 void MazeCanvas::DrawClickedCellBody() {
@@ -106,25 +114,27 @@ void MazeCanvas::DrawCellBody(size_t i, size_t j) {
 
 void MazeCanvas::DrawRightBorder(size_t i, size_t j) {
   painter_->fillRect(
-    (cell_width_ * j) + (j*2) + cell_width_,
-    (cell_height_ * i) + (i*2),
+    ((cell_width_ * j) + (j*2) + cell_width_),
+    ((cell_height_ * i) + (i*2)) - 2,
     2,
-    cell_height_,
-    Qt::GlobalColor::darkBlue
+    cell_height_ + 4,
+    border_color_
   );
 }
 
 void MazeCanvas::DrawBottomBorder(size_t i, size_t j) {
   painter_->fillRect(
-    (cell_width_ * j) + (j*2),
+    (cell_width_ * j) + (j*2) - 2,
     (cell_height_ * i) + (i*2) + cell_height_,
-    cell_width_,
+    cell_width_ + 4,
     2,
-    Qt::GlobalColor::darkBlue
+    border_color_
   );
 }
 
 void MazeCanvas::DrawLineBetweenCellsCenters(s21::Vector2D a, s21::Vector2D b) {
+  QPen pen(line_color_, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+  painter_->setPen(pen);
   painter_->drawLine(
     (cell_height_ * a.y_) + (cell_height_ / 2) + (a.y_ * 2),
     (cell_width_ * a.x_) + (cell_width_ / 2) + (a.x_ * 2),

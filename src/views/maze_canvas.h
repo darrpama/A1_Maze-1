@@ -23,6 +23,11 @@ class MazeCanvas : public QWidget {
   float width_;
   float height_;
   float border_size_;
+  QColor border_color_;
+  QColor frame_color_;
+  QColor line_color_;
+  QColor background_color_;
+  
   float cell_width_ = 0.0f;
   float cell_height_ = 0.0f;
   int cols_ = 0;
@@ -31,6 +36,7 @@ class MazeCanvas : public QWidget {
   std::vector<s21::Vector2D> path_cells_;
 
   void DrawMaze();
+  void DrawBackground();
   void DrawFrames();
   void DrawPath();
   void DrawCell(size_t i, size_t j, s21::Border border);
