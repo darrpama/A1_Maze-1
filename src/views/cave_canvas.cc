@@ -7,8 +7,9 @@ void CaveCanvas::paintEvent(QPaintEvent *event) {
   width_ = 500.0f;
   height_ = 500.0f;
   border_size_ = 2.0f;
-  cell_width_ = std::round(width_ / cols_);
-  cell_height_ = std::round(height_ / rows_);
+  
+  cell_width_ = width_ / static_cast<float>(cols_);
+  cell_height_ = height_ / static_cast<float>(rows_);
   
   if (cols_ > 0 && rows_ > 0) {
     painter_ = new QPainter(this);
@@ -23,8 +24,7 @@ void CaveCanvas::DrawCave() {
   size_t index = 0;
   for (size_t i = 0; i < rows_; i++) {
     for (size_t j = 0; j < cols_; j++) {
-      unsigned cell = matrix_[index];
-      DrawCell(i, j, cell);
+      DrawCell(i, j, matrix_[index]);
       index++;
     }
   }
@@ -38,20 +38,9 @@ void CaveCanvas::DrawFrames() {
 }
 
 void CaveCanvas::DrawCell(size_t i, size_t j, unsigned cell) {
-  if (cell == 0) {
-    DrawCellBody(i, j, Qt::GlobalColor::white);
-  } else {
-    DrawCellBody(i, j, Qt::GlobalColor::black);
-  }
-}
-
-void CaveCanvas::DrawCellBody(size_t i, size_t j, Qt::GlobalColor color) {
   painter_->fillRect(
-    (cell_width_ * j),
-    (cell_height_ * i),
-    cell_width_,
-    cell_height_, 
-    color
+    (cell_width_ * static_cast<float>(j)), (cell_height_ * static_cast<float>(i)),
+    cell_width_, cell_height_,
+    (cell == 0) ? Qt::GlobalColor::white : Qt::GlobalColor::black
   );
 }
-

@@ -22,8 +22,8 @@ void MazeCanvas::paintEvent(QPaintEvent *event) {
   cols_ = s21::ControllerSingleton::GetInstance().GetMazeCols();
   rows_ = s21::ControllerSingleton::GetInstance().GetMazeRows();
 
-  width_ = 500;
-  height_ = 500;
+  width_ = 500.0f;
+  height_ = 500.0f;
   border_size_ = 2.0f;
   border_color_ = QColor("#aaaaaa");
   frame_color_ = QColor("#aaaaaa");
