@@ -12,6 +12,7 @@
 class MazeCanvas : public QWidget {
  public:
   MazeCanvas(QWidget *parent = nullptr);
+  ~MazeCanvas();
 
  protected:
   void paintEvent(QPaintEvent *event) override;

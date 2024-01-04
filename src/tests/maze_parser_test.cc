@@ -12,7 +12,7 @@ TEST(MazeParserTest, ParseSize_Positive) {
   s21::MazeParser parser(&maze);
 
   std::filesystem::path path = std::filesystem::current_path();
-  std::string parent_path = path.parent_path();
+  std::string parent_path = path.parent_path().string();
   parent_path.append("/src/assets/maze.txt");
 
   parser.SetFilePath(parent_path);
@@ -56,7 +56,7 @@ TEST(MazeParserTest, Parse_Positive) {
   s21::MazeParser parser(&maze);
 
   std::filesystem::path path = std::filesystem::current_path();
-  std::string parent_path = path.parent_path();
+  std::string parent_path = path.parent_path().string();
   parent_path.append("/src/assets/maze_small.txt");
 
   parser.SetFilePath(parent_path);
@@ -83,7 +83,7 @@ TEST(MazeParserTest, Parse_Negative_No_File) {
   s21::MazeParser parser(&maze);
 
   std::filesystem::path path = std::filesystem::current_path();
-  std::string parent_path = path.parent_path();
+  std::string parent_path = path.parent_path().string();
   parent_path.append("/src/assets/maze_no_exist.txt");
 
   parser.SetFilePath(parent_path);
@@ -103,7 +103,7 @@ TEST(MazeParserTest, Parse_Negative_Cols_1_Test) {
   s21::MazeParser parser(&maze);
 
   std::filesystem::path path = std::filesystem::current_path();
-  std::string parent_path = path.parent_path();
+  std::string parent_path = path.parent_path().string();
   parent_path.append("/src/assets/maze_non_eq_cols_1_mat.txt");
 
   parser.SetFilePath(parent_path);
@@ -123,7 +123,7 @@ TEST(MazeParserTest, Parse_Negative_Cols_2_Test) {
   s21::MazeParser parser(&maze);
 
   std::filesystem::path path = std::filesystem::current_path();
-  std::string parent_path = path.parent_path();
+  std::string parent_path = path.parent_path().string();
   parent_path.append("/src/assets/maze_non_eq_cols_2_mat.txt");
 
   parser.SetFilePath(parent_path);
@@ -143,7 +143,7 @@ TEST(MazeParserTest, Parse_Negative_Cols_3_Test) {
   s21::MazeParser parser(&maze);
 
   std::filesystem::path path = std::filesystem::current_path();
-  std::string parent_path = path.parent_path();
+  std::string parent_path = path.parent_path().string();
   parent_path.append("/src/assets/maze_non_eq_cols_1_mat_2.txt");
 
   parser.SetFilePath(parent_path);
@@ -163,7 +163,7 @@ TEST(MazeParserTest, Parse_Negative_Cols_4_Test) {
   s21::MazeParser parser(&maze);
 
   std::filesystem::path path = std::filesystem::current_path();
-  std::string parent_path = path.parent_path();
+  std::string parent_path = path.parent_path().string();
   parent_path.append("/src/assets/maze_non_eq_cols_2_mat_2.txt");
 
   parser.SetFilePath(parent_path);
@@ -183,7 +183,7 @@ TEST(MazeParserTest, Parse_Negative_Rows_1_Test) {
   s21::MazeParser parser(&maze);
 
   std::filesystem::path path = std::filesystem::current_path();
-  std::string parent_path = path.parent_path();
+  std::string parent_path = path.parent_path().string();
   parent_path.append("/src/assets/maze_non_eq_rows_1_mat.txt");
 
   parser.SetFilePath(parent_path);
@@ -203,7 +203,7 @@ TEST(MazeParserTest, Parse_Negative_Rows_2_Test) {
   s21::MazeParser parser(&maze);
 
   std::filesystem::path path = std::filesystem::current_path();
-  std::string parent_path = path.parent_path();
+  std::string parent_path = path.parent_path().string();
   parent_path.append("/src/assets/maze_non_eq_rows_2_mat.txt");
 
   parser.SetFilePath(parent_path);
@@ -223,7 +223,7 @@ TEST(MazeParserTest, Parse_Negative_Rows_3_Test) {
   s21::MazeParser parser(&maze);
 
   std::filesystem::path path = std::filesystem::current_path();
-  std::string parent_path = path.parent_path();
+  std::string parent_path = path.parent_path().string();
   parent_path.append("/src/assets/maze_non_eq_rows_1_mat_2.txt");
 
   parser.SetFilePath(parent_path);
@@ -243,7 +243,7 @@ TEST(MazeParserTest, Parse_Negative_Rows_4_Test) {
   s21::MazeParser parser(&maze);
 
   std::filesystem::path path = std::filesystem::current_path();
-  std::string parent_path = path.parent_path();
+  std::string parent_path = path.parent_path().string();
   parent_path.append("/src/assets/maze_non_eq_rows_2_mat_2.txt");
 
   parser.SetFilePath(parent_path);
@@ -263,7 +263,7 @@ TEST(MazeParserTest, Parse_1_Matrix_Test) {
   s21::MazeParser parser(&maze);
 
   std::filesystem::path path = std::filesystem::current_path();
-  std::string parent_path = path.parent_path();
+  std::string parent_path = path.parent_path().string();
   parent_path.append("/src/assets/maze_1_mat_wrong.txt");
 
   parser.SetFilePath(parent_path);
@@ -283,7 +283,7 @@ TEST(MazeParserTest, Parse_2_Matrix_Test) {
   s21::MazeParser parser(&maze);
 
   std::filesystem::path path = std::filesystem::current_path();
-  std::string parent_path = path.parent_path();
+  std::string parent_path = path.parent_path().string();
   parent_path.append("/src/assets/maze_2_mat_wrong.txt");
 
   parser.SetFilePath(parent_path);
@@ -303,7 +303,7 @@ TEST(MazeParserTest, Parse_Size_Rows_Test) {
   s21::MazeParser parser(&maze);
 
   std::filesystem::path path = std::filesystem::current_path();
-  std::string parent_path = path.parent_path();
+  std::string parent_path = path.parent_path().string();
   parent_path.append("/src/assets/maze_rows_wrong.txt");
 
   parser.SetFilePath(parent_path);
@@ -323,7 +323,7 @@ TEST(MazeParserTest, Parse_Size_Cols_Test) {
   s21::MazeParser parser(&maze);
 
   std::filesystem::path path = std::filesystem::current_path();
-  std::string parent_path = path.parent_path();
+  std::string parent_path = path.parent_path().string();
   parent_path.append("/src/assets/maze_cols_wrong.txt");
 
   parser.SetFilePath(parent_path);

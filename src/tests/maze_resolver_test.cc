@@ -12,7 +12,7 @@ TEST(MazeResolverTest, Resolve_Positive) {
   s21::MazeParser parser(&maze);
 
   std::filesystem::path path = std::filesystem::current_path();
-  std::string parent_path = path.parent_path();
+  std::string parent_path = path.parent_path().string();
   parent_path.append("/src/assets/maze.txt");
 
   parser.SetFilePath(parent_path);

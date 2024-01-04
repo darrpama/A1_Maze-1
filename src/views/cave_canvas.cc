@@ -1,5 +1,15 @@
 #include "cave_canvas.h"
 
+CaveCanvas::CaveCanvas(QWidget * parent) : QWidget(parent) {
+  painter_ = nullptr;
+}
+
+CaveCanvas::~CaveCanvas() {
+  if (painter_) {
+    delete painter_;
+  }
+}
+
 void CaveCanvas::paintEvent(QPaintEvent *event) {
   matrix_ = s21::ControllerSingleton::GetInstance().GetCaveMatrix();
   cols_ = s21::ControllerSingleton::GetInstance().GetCaveCols();
@@ -7,11 +17,15 @@ void CaveCanvas::paintEvent(QPaintEvent *event) {
   width_ = 500.0f;
   height_ = 500.0f;
   border_size_ = 2.0f;
-  
+
   cell_width_ = width_ / static_cast<float>(cols_);
   cell_height_ = height_ / static_cast<float>(rows_);
-  
+
   if (cols_ > 0 && rows_ > 0) {
+    if (painter_) {
+      delete painter_;
+      painter_ = nullptr;
+    }
     painter_ = new QPainter(this);
     DrawCave();
     DrawFrames();

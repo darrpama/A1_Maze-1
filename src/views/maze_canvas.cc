@@ -1,6 +1,14 @@
 #include "maze_canvas.h"
 
-MazeCanvas::MazeCanvas(QWidget *parent) : QWidget(parent) {}
+MazeCanvas::MazeCanvas(QWidget *parent) : QWidget(parent) { 
+  painter_ = nullptr;
+}
+
+MazeCanvas::~MazeCanvas() {
+  if (painter_) {
+    delete painter_;
+  }
+}
 
 void MazeCanvas::mousePressEvent(QMouseEvent *event) {
   if (click_counter_ < 2) {
@@ -35,6 +43,11 @@ void MazeCanvas::paintEvent(QPaintEvent *event) {
   
 
   if (cols_ > 0 && rows_ > 0) {
+    if (painter_) {
+      delete painter_;
+      painter_ = nullptr;
+    }
+
     painter_ = new QPainter(this);
     DrawBackground();
     DrawMaze();

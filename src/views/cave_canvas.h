@@ -8,7 +8,8 @@
 
 class CaveCanvas : public QWidget {
  public:
-  CaveCanvas(QWidget *parent = nullptr) : QWidget(parent) {}
+  CaveCanvas(QWidget *parent = nullptr);
+  ~CaveCanvas();
   
  protected:
   void paintEvent(QPaintEvent *event) override;

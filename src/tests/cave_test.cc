@@ -37,7 +37,7 @@ TEST(Cave, test1) {
       1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 
   std::filesystem::path path = std::filesystem::current_path();
-  std::string filepath = path.parent_path();
+  std::string filepath = path.parent_path().string();
   filepath.append("/src/assets/cave10x10.txt");
 
   s21::Cave cave;

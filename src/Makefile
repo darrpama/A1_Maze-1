@@ -23,10 +23,10 @@ SOURCES = \
 	$(PROJECTDIR)/models/maze/maze.cc \
 	$(PROJECTDIR)/tests/cave_test.cc \
 	$(PROJECTDIR)/tests/maze_generator_test.cc \
+	$(PROJECTDIR)/tests/run_all_tests.cc \
 	$(PROJECTDIR)/tests/maze_parser_test.cc \
 	$(PROJECTDIR)/tests/maze_resolver_test.cc \
-	$(PROJECTDIR)/tests/maze_saver_test.cc \
-	$(PROJECTDIR)/tests/run_all_tests.cc
+	$(PROJECTDIR)/tests/maze_saver_test.cc 
 
 OTHERS = \
 	$(PROJECTDIR)/controllers/controller_singleton.h \
@@ -44,14 +44,14 @@ dvi:
 	open ./README.pdf
 
 build:
-	cd $(PROJECTDIR) && ls -la && mkdir $(BUILDDIR) && cd $(BUILDDIR) && cmake .. && make
+	cd $(PROJECTDIR) && ls -la && mkdir $(BUILDDIR) && cd $(BUILDDIR) && cmake .. -G "Unix Makefiles" && make
 
 install:
 	@read -p "Enter path to install: " path; \
 	if [ -z "$$path" ]; then \
         path="./"; \
     fi; \
-	cd $$path && ls -la && mkdir $(BUILDDIR) && cd $(BUILDDIR) && cmake .. && make
+	cd $$path && ls -la && mkdir -p $(BUILDDIR) && cd $(BUILDDIR) && cmake .. -G "Unix Makefiles" && make
 	$(BUILDDIR)/Maze.app/Contents/MacOS/Maze 
 
 uninstall: clean
