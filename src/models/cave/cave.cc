@@ -2,16 +2,6 @@
 
 namespace s21 {
 
-int Cave::GetRows() { return rows_; }
-
-int Cave::GetCols() { return cols_; }
-
-void Cave::SetRows(int rows) { rows_ = rows; }
-
-void Cave::SetCols(int cols) { cols_ = cols; }
-
-std::vector<unsigned>& Cave::GetMatrix() { return matrix_; }
-
 void Cave::Clear() {
   matrix_.clear();
   rows_ = 0;
@@ -32,31 +22,34 @@ void Cave::Generate(int rows, int cols, float chance) {
 
 bool Cave::StepRender(unsigned die_limit, unsigned born_limit) {
   Cave old_cave = *this;
-
+  die_limit_ = die_limit;
+  born_limit_ = born_limit;
   int current_col = 0;
   int current_row = 0;
-  unsigned alive_neighbors_count = 0;
-
   for (int row = 0; row < rows_; row++) {
     current_row = row;
     for (int col = 0; col < cols_; col++) {
       current_col = col;
-      alive_neighbors_count = GetAliveNeigborsCount(&old_cave, current_row, current_col);
-      // alive cell (death rule)
-      if (matrix_[row * cols_ + col] == 1) {  
-        if (alive_neighbors_count < die_limit) {
-          matrix_[row * cols_ + col] = 0;
-        }
-      // death cell (alive rule)
-      } else {  
-        if (alive_neighbors_count > born_limit) {
-          matrix_[row * cols_ + col] = 1;
-        }
-      }
+      unsigned index = row * cols_ + col;
+      ApplyRules(index, GetAliveNeigborsCount(&old_cave, current_row, current_col));
     }
   }
 
   return CompareCaves(&old_cave, this);
+}
+
+void Cave::ApplyRules(unsigned index, unsigned alive_neighbors_count) {
+  // alive cell (death rule)
+  if (matrix_[index] == 1) {
+    if (alive_neighbors_count < die_limit_) {
+      matrix_[index] = 0;
+    }
+  // death cell (alive rule)
+  } else {
+    if (alive_neighbors_count > born_limit_) {
+      matrix_[index] = 1;
+    }
+  }
 }
 
 bool Cave::CompareCaves(Cave *old_cave, Cave *new_cave) {

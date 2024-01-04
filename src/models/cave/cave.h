@@ -16,28 +16,32 @@ namespace s21 {
 
 class Cave {
  public:
-  Cave() : rows_{}, cols_{}, matrix_{} {}
-  Cave(int rows, int cols) : rows_(rows), cols_(cols), matrix_{} {}
+  Cave() : matrix_{}, rows_{}, cols_{} {}
+  Cave(int rows, int cols) : matrix_{}, rows_(rows), cols_(cols) {}
 
-  std::vector<unsigned>& GetMatrix();
-  int GetRows();
-  int GetCols();
-  void SetRows(int);
-  void SetCols(int);
+  int GetRows() { return rows_; }
+  int GetCols() { return cols_; }
+  void SetRows(int rows) { rows_ = rows; }
+  void SetCols(int cols) { cols_ = cols; }
+  std::vector<unsigned>& GetMatrix() { return matrix_; }
+  
   void Generate(int, int, float);
   bool StepRender(unsigned, unsigned);
   void ParseFromFile(std::string);
 
  private:
+  std::vector<unsigned> matrix_;
   int rows_;
   int cols_;
-  std::vector<unsigned> matrix_;
+  unsigned die_limit_;
+  unsigned born_limit_;
 
   void Clear();
   bool CompareCaves(Cave *, Cave *);
   int GetAliveNeigborsCount(Cave *, int, int);
   void ParseSize(const std::string &);
   void ParseMatrix(const std::string &);
+  void ApplyRules(unsigned index, unsigned alive_neighbors_count);
 };
 
 }  // namespace s21
