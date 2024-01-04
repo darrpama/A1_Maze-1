@@ -34,7 +34,7 @@ std::vector<Vector2D> ControllerSingleton::ResolveMaze(Vector2D a, Vector2D b) {
 
 // CAVE
 void ControllerSingleton::UploadCave(const std::string &filepath) {
-  cave_->Parse(filepath);
+  cave_->ParseFromFile(filepath);
 }
 std::vector<unsigned> &ControllerSingleton::GetCaveMatrix() {
   return cave_->GetMatrix();
@@ -48,7 +48,7 @@ int ControllerSingleton::GetCaveCols() {
   return cave_->GetRows();
 }
 
-void ControllerSingleton::GenerateCave(size_t rows, size_t cols, float chance) {
+void ControllerSingleton::GenerateCave(int rows, int cols, float chance) {
   cave_->Generate(rows, cols, chance);
 }
 

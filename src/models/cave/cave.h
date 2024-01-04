@@ -15,37 +15,33 @@ namespace s21 {
 
 class Cave {
  public:
-  Cave(size_t rows, size_t cols) : rows_(rows), cols_(cols), matrix_{} {}
-  Cave(Cave&& o) noexcept : rows_(o.rows_), cols_(o.cols_), matrix_(std::move(o.matrix_)) {}
-  Cave(const Cave& o) : rows_(o.rows_), cols_(o.cols_), matrix_(o.matrix_) {}
-  Cave& operator=(Cave&& other) noexcept;
-  Cave& operator=(const Cave& other);
+  Cave() : rows_{}, cols_{}, matrix_{} {}
+  Cave(int rows, int cols) : rows_(rows), cols_(cols), matrix_{} {}
   ~Cave() = default;
 
   std::vector<unsigned>& GetMatrix();
-  size_t GetRows();
-  size_t GetCols();
-  void SetMatrix(std::vector<unsigned>);
-  void SetRows(size_t);
-  void SetCols(size_t);
+  int GetRows();
+  int GetCols();
+  void SetRows(int);
+  void SetCols(int);
 
   void Clear();
 
   // generator
-  void Generate(size_t, size_t, float);
+  void Generate(int, int, float);
   bool StepRender(unsigned, unsigned);
 
   // parser
-  void Parse(std::string);
+  void ParseFromFile(std::string);
 
  private:
-  size_t rows_;
-  size_t cols_;
+  int rows_;
+  int cols_;
   std::vector<unsigned> matrix_;
 
   bool RandomChoice(float);
   bool CompareCaves(Cave *, Cave *);
-  int GetAliveNeigborsCount(int, int);
+  int GetAliveNeigborsCount(Cave *, int, int);
 
   void CheckAndFixEndLine(std::string);
   void ParseSize(const std::string &);

@@ -34,7 +34,7 @@ class ControllerSingleton {
   int GetCaveRows();
   int GetCaveCols();
   void UploadCave(const std::string &filename);
-  void GenerateCave(size_t rows, size_t cols, float chance);
+  void GenerateCave(int rows, int cols, float chance);
   bool StepRender(unsigned die_limit, unsigned born_limit);
 
  private:

@@ -66,8 +66,8 @@ void MainWindow::on_cave_init_random_btn_clicked() {
   try
   {
     s21::ControllerSingleton::GetInstance().GenerateCave(
-      static_cast<unsigned>(ui_->cave_rows->value()),
-      static_cast<unsigned>(ui_->cave_cols->value()),
+      ui_->cave_rows->value(),
+      ui_->cave_cols->value(),
       static_cast<float>(ui_->cave_cell_chance->value())
     );
   }
@@ -100,7 +100,6 @@ void MainWindow::on_auto_render_btn_clicked() {
   unsigned die_limit = static_cast<unsigned>(ui_->die_limit_input->value());
   unsigned born_limit = static_cast<unsigned>(ui_->born_limit_input->value());
 
-  // connect(timer, &QTimer::timeout, this, [die_limit, born_limit, &cave_canvas = ui_->cave_canvas]() {
   connect(timer, &QTimer::timeout, this, [timer, die_limit, born_limit, &cave_canvas = ui_->cave_canvas]() {
     bool stop = s21::ControllerSingleton::GetInstance().StepRender(die_limit, born_limit);
     if (stop) {
@@ -109,7 +108,6 @@ void MainWindow::on_auto_render_btn_clicked() {
     } else {
       cave_canvas->update();
     }
-    // code bellow is not work. Why??
   });
 
   timer->start(interval);

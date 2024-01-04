@@ -20,7 +20,7 @@ SOURCES = \
 	$(PROJECTDIR)/models/maze/maze_parser.cc \
 	$(PROJECTDIR)/models/maze/maze_saver.cc \
 	$(PROJECTDIR)/models/maze/maze.cc \
-	$(PROJECTDIR)/tests/cave_generator_test.cc \
+	$(PROJECTDIR)/tests/cave_test.cc \
 	$(PROJECTDIR)/tests/maze_generator_test.cc \
 	$(PROJECTDIR)/tests/maze_parser_test.cc \
 	$(PROJECTDIR)/tests/maze_resolver_test.cc \
