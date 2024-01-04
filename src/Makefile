@@ -68,7 +68,8 @@ check:
 	cppcheck --std=c++17 --language=c++ --enable=all --suppress=unusedStructMember --suppress=unusedFunction --suppress=missingInclude --suppress=missingIncludeSystem $(SOURCES) $(OTHERS) $(HEADERS)
 
 leaks: $(EXECUTABLE)
-	leaks -atExit -- ./$(EXECUTABLE)
+	leaks --atExit -- ./$(EXECUTABLE)
+	leaks --atExit -- "./build/Maze.app/Contents/MacOS/Maze"
 
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(OBJECTS) -o $@ $(LDFLAGS) -lgtest
