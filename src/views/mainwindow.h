@@ -28,16 +28,17 @@ class MainWindow : public QMainWindow
   ~MainWindow();
 
 private slots:
-  void on_upload_btn_clicked();
   void on_generate_btn_clicked();
   void on_cave_upload_btn_clicked();
   void on_cave_init_random_btn_clicked();
   void on_step_render_btn_clicked();
   void on_auto_render_btn_clicked();
+  void on_emergency_stop_btn_clicked();
 
 private:
   Ui::MainWindow *ui_;
   void ShowErrorMessage(const std::exception&);
+  bool emergency_stop_ = false;
 };
 
 #endif // CPP4_3DVIEWER_V2_0_2_SRC_VIEWS_MAINWINDOW_H

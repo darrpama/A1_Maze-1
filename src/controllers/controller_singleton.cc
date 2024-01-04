@@ -56,5 +56,4 @@ bool ControllerSingleton::StepRender(unsigned die_limit, unsigned born_limit) {
   return cave_->StepRender(die_limit, born_limit);
 }
 
-
 } // namespace s21

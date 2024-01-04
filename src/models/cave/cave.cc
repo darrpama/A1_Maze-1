@@ -103,7 +103,6 @@ int Cave::GetAliveNeigborsCount(Cave *cave, int r, int c) {
   return top_left + top + top_right + right + bottom_right + bottom + bottom_left + left;
 }
 
-
 // PARSER
 // ==================================================================
 void Cave::ParseFromFile(std::string filepath) {

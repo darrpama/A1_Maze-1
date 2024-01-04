@@ -479,6 +479,13 @@
                </property>
               </widget>
              </item>
+             <item>
+              <widget class="QPushButton" name="emergency_stop_btn">
+               <property name="text">
+                <string>emergency stop</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
