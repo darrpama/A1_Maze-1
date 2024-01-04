@@ -31,7 +31,8 @@ class Maze {
   std::vector<Border> matrix_;
 
   std::vector<int> FindPath(Vector2D, Vector2D);
-  std::vector<Vector2D> FindSolution(Vector2D, Vector2D, const std::vector<int>&);
+  std::vector<Vector2D> FindSolution(Vector2D, Vector2D,
+                                     const std::vector<int>&);
 };
 
 }  // namespace s21

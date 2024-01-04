@@ -2,12 +2,12 @@
 #define A1_MAZE_1_0_SRC_MODEL_CAVE_H
 
 #include <algorithm>
+#include <fstream>
 #include <iostream>
 #include <queue>
-#include <vector>
 #include <random>
-#include <fstream>
 #include <sstream>
+#include <vector>
 
 #include "../type.h"
 #include "../utils.h"
@@ -16,15 +16,16 @@ namespace s21 {
 
 class Cave {
  public:
-  Cave() : matrix_{}, rows_{}, cols_{} {}
-  Cave(int rows, int cols) : matrix_{}, rows_(rows), cols_(cols) {}
+  Cave() : matrix_{}, rows_{}, cols_{}, die_limit_{}, born_limit_{} {}
+  Cave(int rows, int cols)
+      : matrix_{}, rows_(rows), cols_(cols), die_limit_{}, born_limit_{} {}
 
   int GetRows() { return rows_; }
   int GetCols() { return cols_; }
   void SetRows(int rows) { rows_ = rows; }
   void SetCols(int cols) { cols_ = cols; }
-  std::vector<unsigned>& GetMatrix() { return matrix_; }
-  
+  std::vector<unsigned> &GetMatrix() { return matrix_; }
+
   void Generate(int, int, float);
   bool StepRender(unsigned, unsigned);
   void ParseFromFile(std::string);

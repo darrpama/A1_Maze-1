@@ -124,14 +124,15 @@ std::vector<int> Maze::FindPath(Vector2D init_point, Vector2D end_point) {
   return visited;
 }
 
-std::vector<Vector2D> Maze::FindSolution(Vector2D init_point, Vector2D end_point, const std::vector<int>& visited) {
+std::vector<Vector2D> Maze::FindSolution(Vector2D init_point,
+                                         Vector2D end_point,
+                                         const std::vector<int>& visited) {
   int matrix_size = GetMatrix().size();
   int init_cell = init_point.x_ * cols_ + init_point.y_;
   int end_cell = end_point.x_ * cols_ + end_point.y_;
   std::vector<Vector2D> solution{};
   solution.reserve(matrix_size);
-  if (init_point.x_ == end_point.x_ &&
-      init_point.y_ == end_point.y_) {
+  if (init_point.x_ == end_point.x_ && init_point.y_ == end_point.y_) {
     solution.push_back(init_point);
     solution.push_back(end_point);
     return solution;

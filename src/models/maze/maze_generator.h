@@ -6,8 +6,8 @@
 #include <unordered_map>
 #include <vector>
 
-#include "maze.h"
 #include "../utils.h"
+#include "maze.h"
 
 namespace s21 {
 

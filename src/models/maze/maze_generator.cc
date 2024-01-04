@@ -38,7 +38,8 @@ void MazeGenerator::AddRightWalls(Maze& maze, int row,
                                   float right_wall_chance) {
   for (size_t cell = 0; cell < static_cast<size_t>(maze.GetCols() - 1);
        cell++) {
-    if (Utils::RandomChoice(right_wall_chance) || cells_[cell] == cells_[cell + 1]) {
+    if (Utils::RandomChoice(right_wall_chance) ||
+        cells_[cell] == cells_[cell + 1]) {
       maze.GetMatrix()[row * maze.GetCols() + cell] = RIGHT_BORDER;
     } else {
       MergeSets(cells_[cell], cells_[cell + 1]);
@@ -57,7 +58,8 @@ void MazeGenerator::AddBottomWalls(Maze& maze, int row,
                  maze.GetMatrix()[row * maze.GetCols() + c] == BOTH_BORDER;
         });
 
-    if (Utils::RandomChoice(bottom_wall_chance) && sets_[cur_cell].size() != 1 &&
+    if (Utils::RandomChoice(bottom_wall_chance) &&
+        sets_[cur_cell].size() != 1 &&
         bottom_borders != sets_[cur_cell].size() - 1) {
       maze.GetMatrix()[row * maze.GetCols() + cell] =
           (maze.GetMatrix()[row * maze.GetCols() + cell] == RIGHT_BORDER

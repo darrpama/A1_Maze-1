@@ -24,9 +24,7 @@ TEST(MazeResolverTest, Resolve_Positive) {
   size_t end_col = 3;
 
   std::vector<s21::Vector2D> solution = maze.Resolve(
-    s21::Vector2D(init_row, init_col), 
-    s21::Vector2D(end_row, end_col)
-  );
+      s21::Vector2D(init_row, init_col), s21::Vector2D(end_row, end_col));
 
   std::vector<s21::Vector2D> correct_solution{
       {0, 3}, {1, 3}, {2, 3}, {2, 4}, {2, 5}, {3, 5}, {3, 4}, {4, 4}, {4, 3},

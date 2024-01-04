@@ -24,14 +24,13 @@ bool Cave::StepRender(unsigned die_limit, unsigned born_limit) {
   Cave old_cave = *this;
   die_limit_ = die_limit;
   born_limit_ = born_limit;
-  int current_col = 0;
-  int current_row = 0;
   for (int row = 0; row < rows_; row++) {
-    current_row = row;
+    int current_row = row;
     for (int col = 0; col < cols_; col++) {
-      current_col = col;
+      int current_col = col;
       unsigned index = row * cols_ + col;
-      ApplyRules(index, GetAliveNeigborsCount(&old_cave, current_row, current_col));
+      ApplyRules(index,
+                 GetAliveNeigborsCount(&old_cave, current_row, current_col));
     }
   }
 
@@ -44,7 +43,7 @@ void Cave::ApplyRules(unsigned index, unsigned alive_neighbors_count) {
     if (alive_neighbors_count < die_limit_) {
       matrix_[index] = 0;
     }
-  // death cell (alive rule)
+    // death cell (alive rule)
   } else {
     if (alive_neighbors_count > born_limit_) {
       matrix_[index] = 1;
@@ -53,8 +52,9 @@ void Cave::ApplyRules(unsigned index, unsigned alive_neighbors_count) {
 }
 
 bool Cave::CompareCaves(Cave *old_cave, Cave *new_cave) {
-  if (old_cave->GetRows() != new_cave->GetRows() || old_cave->GetCols() != new_cave->GetCols()) {
-    return false; // LCOV_EXCL_LINE
+  if (old_cave->GetRows() != new_cave->GetRows() ||
+      old_cave->GetCols() != new_cave->GetCols()) {
+    return false;  // LCOV_EXCL_LINE
   }
   for (int i = 0; i < old_cave->GetRows(); i++) {
     for (int j = 0; j < old_cave->GetCols(); j++) {
@@ -69,31 +69,33 @@ bool Cave::CompareCaves(Cave *old_cave, Cave *new_cave) {
 }
 
 int Cave::GetAliveNeigborsCount(Cave *cave, int r, int c) {
-  int top_left = ((((r-1) < 0) || ((c-1) < 0))
-    ? 1 : cave->GetMatrix()[(r-1) * cols_ + (c-1)]);
-  
-  int top = (((r-1) < 0) 
-    ? 1 : cave->GetMatrix()[(r-1) * cols_ + c]);
-  
-  int top_right = ((((r-1) < 0) || ((c+1) >= cols_)) 
-    ? 1 : cave->GetMatrix()[(r-1) * cols_ + (c+1)]);
-  
-  int right = (((c+1) >= cols_) 
-    ? 1 : cave->GetMatrix()[r * cols_ + (c+1)]);
-  
-  int bottom_right = ((((r+1) >= rows_) || ((c+1) >= cols_)) 
-    ? 1 : cave->GetMatrix()[(r+1) * cols_ + (c+1)]);
-  
-  int bottom = (((r+1) >= rows_) 
-    ? 1 : cave->GetMatrix()[(r+1) * cols_ + c]);
-  
-  int bottom_left = (((r+1) >= rows_) || ((c-1) < 0)) 
-    ? 1 : cave->GetMatrix()[(r+1) * cols_ + (c-1)];
-  
-  int left = (((c-1) < 0) 
-    ? 1 : cave->GetMatrix()[r * cols_ + (c-1)]);
-  
-  return top_left + top + top_right + right + bottom_right + bottom + bottom_left + left;
+  int top_left = ((((r - 1) < 0) || ((c - 1) < 0))
+                      ? 1
+                      : cave->GetMatrix()[(r - 1) * cols_ + (c - 1)]);
+
+  int top = (((r - 1) < 0) ? 1 : cave->GetMatrix()[(r - 1) * cols_ + c]);
+
+  int top_right = ((((r - 1) < 0) || ((c + 1) >= cols_))
+                       ? 1
+                       : cave->GetMatrix()[(r - 1) * cols_ + (c + 1)]);
+
+  int right = (((c + 1) >= cols_) ? 1 : cave->GetMatrix()[r * cols_ + (c + 1)]);
+
+  int bottom_right = ((((r + 1) >= rows_) || ((c + 1) >= cols_))
+                          ? 1
+                          : cave->GetMatrix()[(r + 1) * cols_ + (c + 1)]);
+
+  int bottom =
+      (((r + 1) >= rows_) ? 1 : cave->GetMatrix()[(r + 1) * cols_ + c]);
+
+  int bottom_left = (((r + 1) >= rows_) || ((c - 1) < 0))
+                        ? 1
+                        : cave->GetMatrix()[(r + 1) * cols_ + (c - 1)];
+
+  int left = (((c - 1) < 0) ? 1 : cave->GetMatrix()[r * cols_ + (c - 1)]);
+
+  return top_left + top + top_right + right + bottom_right + bottom +
+         bottom_left + left;
 }
 
 // PARSER
@@ -104,7 +106,8 @@ void Cave::ParseFromFile(std::string filepath) {
 
   std::ifstream file(filepath);
   if (!file.is_open()) {
-    throw std::invalid_argument("Failed to open file: " + filepath); // LCOV_EXCL_LINE
+    throw std::invalid_argument("Failed to open file: " +
+                                filepath);  // LCOV_EXCL_LINE
   }
 
   std::stringstream buffer;
@@ -136,7 +139,8 @@ void Cave::ParseSize(const std::string &line) {
     SetRows(rows);
     SetCols(cols);
   } else {
-    throw std::invalid_argument("Failed to parse size of matrix"); // LCOV_EXCL_LINE
+    throw std::invalid_argument(
+        "Failed to parse size of matrix");  // LCOV_EXCL_LINE
   }
 }
 

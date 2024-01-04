@@ -3,11 +3,11 @@
 
 #include <string>
 
-#include "models/type.h"
 #include "models/cave/cave.h"
 #include "models/maze/maze.h"
 #include "models/maze/maze_generator.h"
 #include "models/maze/maze_parser.h"
+#include "models/type.h"
 
 namespace s21 {
 
@@ -43,7 +43,11 @@ class ControllerSingleton {
   MazeGenerator *maze_generator_;
   Cave *cave_;
 
-  ControllerSingleton() {};
+  ControllerSingleton()
+      : maze_(nullptr),
+        maze_parser_(nullptr),
+        maze_generator_(nullptr),
+        cave_(nullptr){};
   ControllerSingleton(const ControllerSingleton &);
   ControllerSingleton &operator=(const ControllerSingleton &) = delete;
 };
