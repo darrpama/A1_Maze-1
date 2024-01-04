@@ -24,6 +24,8 @@ set(PROJECT_SOURCES
     views/cave_canvas.cc
     controllers/controller_singleton.cc
     controllers/controller_singleton.h
+    models/type.h
+    models/utils.h
     models/maze/maze_generator.h
     models/maze/maze_generator.cc
     models/maze/maze_parser.h

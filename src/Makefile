@@ -12,7 +12,8 @@ HEADERS = \
 	$(PROJECTDIR)/models/maze/maze_generator.h \
 	$(PROJECTDIR)/models/maze/maze_parser.h \
 	$(PROJECTDIR)/models/maze/maze_saver.h \
-	$(PROJECTDIR)/models/maze/maze.h
+	$(PROJECTDIR)/models/maze/maze.h \
+	$(PROJECTDIR)/models/utils.h
 
 SOURCES = \
 	$(PROJECTDIR)/models/cave/cave.cc \
@@ -81,8 +82,8 @@ $(STATICLIB): $(OBJECTS)
 
 gcov_report: $(EXECUTABLE)
 	./$(EXECUTABLE)
-	lcov -t "./test.out" -o test.info --no-external -c -d . --ignore-errors mismatch
-	genhtml -o report test.info
+	lcov -t "./test.out" -o test.info --no-external -c -d . --ignore-errors mismatch,mismatch
+	genhtml -o report test.info 
 	open report/index.html
 
 .PHONY: clean test dvi dist check leaks gcov_report

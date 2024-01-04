@@ -25,16 +25,9 @@ void Cave::Generate(int rows, int cols, float chance) {
   matrix_ = std::vector<unsigned>(rows * cols, 0);
   for (int row = 0; row < rows; row++) {
     for (int col = 0; col < cols; col++) {
-      matrix_[row * cols + col] = (RandomChoice(chance)) ? 1 : 0;
+      matrix_[row * cols + col] = (Utils::RandomChoice(chance)) ? 1 : 0;
     }
   }
-}
-
-bool Cave::RandomChoice(float chance) {
-  std::mt19937 gen(std::random_device{}());
-  std::bernoulli_distribution bd(chance);
-
-  return bd(gen);
 }
 
 bool Cave::StepRender(unsigned die_limit, unsigned born_limit) {
@@ -113,23 +106,9 @@ int Cave::GetAliveNeigborsCount(Cave *cave, int r, int c) {
 
 // PARSER
 // ==================================================================
-void Cave::CheckAndFixEndLine(std::string filepath) {
-  FILE *fp = fopen(filepath.c_str(), "r+");
-  if (fp == NULL) {
-    throw std::invalid_argument("Failed to open file: " + filepath); // LCOV_EXCL_LINE
-  }
-  fseek(fp, -1, SEEK_END);
-  char c = fgetc(fp);
-  if (c != '\n') {
-    fseek(fp, -1, SEEK_END); // LCOV_EXCL_LINE
-    fputc('\n', fp); // LCOV_EXCL_LINE
-  }
-  fclose(fp);
-}
-
 void Cave::ParseFromFile(std::string filepath) {
   Clear();
-  CheckAndFixEndLine(filepath);
+  Utils::CheckAndFixEndLine(filepath);
 
   std::ifstream file(filepath);
   if (!file.is_open()) {

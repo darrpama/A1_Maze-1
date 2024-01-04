@@ -10,6 +10,7 @@
 #include <sstream>
 
 #include "../type.h"
+#include "../utils.h"
 
 namespace s21 {
 
@@ -17,21 +18,14 @@ class Cave {
  public:
   Cave() : rows_{}, cols_{}, matrix_{} {}
   Cave(int rows, int cols) : rows_(rows), cols_(cols), matrix_{} {}
-  ~Cave() = default;
 
   std::vector<unsigned>& GetMatrix();
   int GetRows();
   int GetCols();
   void SetRows(int);
   void SetCols(int);
-
-  void Clear();
-
-  // generator
   void Generate(int, int, float);
   bool StepRender(unsigned, unsigned);
-
-  // parser
   void ParseFromFile(std::string);
 
  private:
@@ -39,11 +33,9 @@ class Cave {
   int cols_;
   std::vector<unsigned> matrix_;
 
-  bool RandomChoice(float);
+  void Clear();
   bool CompareCaves(Cave *, Cave *);
   int GetAliveNeigborsCount(Cave *, int, int);
-
-  void CheckAndFixEndLine(std::string);
   void ParseSize(const std::string &);
   void ParseMatrix(const std::string &);
 };

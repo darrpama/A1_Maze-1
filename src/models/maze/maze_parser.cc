@@ -2,28 +2,13 @@
 
 namespace s21 {
 
-void MazeParser::CheckAndFixEndLine() {
-  const char *filepath = filepath_.c_str();
-  FILE *fp = fopen(filepath, "r+");
-  if (fp == NULL) {
-    throw std::invalid_argument("Failed to open file: " + filepath_);
-  }
-  fseek(fp, -1, SEEK_END);
-  char c = fgetc(fp);
-  if (c != '\n') {
-    fseek(fp, -1, SEEK_END);
-    fputc('\n', fp);
-  }
-  fclose(fp);
-}
-
 void MazeParser::Parse() {
   std::ifstream file(filepath_);
   if (!file.is_open()) {
     throw std::invalid_argument("Failed to open file: " + filepath_);
   }
 
-  CheckAndFixEndLine();
+  Utils::CheckAndFixEndLine(filepath_);
 
   std::stringstream buffer;
   buffer << file.rdbuf();

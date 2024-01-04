@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "maze.h"
+#include "../utils.h"
 
 namespace s21 {
 
@@ -24,7 +25,6 @@ class MazeParser {
   std::vector<Border> bottom_matrix_;
   int current_line_ = 0;
 
-  void CheckAndFixEndLine();
   void ParseSize(const std::string &);
   void ParseMatrixRight(const std::string &);
   void ParseMatrixBottom(const std::string &);

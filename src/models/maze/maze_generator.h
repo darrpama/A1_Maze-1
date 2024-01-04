@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "maze.h"
+#include "../utils.h"
 
 namespace s21 {
 
@@ -28,7 +29,6 @@ class MazeGenerator {
   void AddBottomWalls(Maze& maze, int row, float bottom_wall_chance);
   void AddEndLine(Maze& maze, float right_wall_chance);
 
-  bool RandomChoice(float chance);
   void MergeSets(size_t set1, size_t set2);
   void Clear();
 };
