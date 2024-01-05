@@ -4,7 +4,7 @@ project(MazeModels VERSION 0.1 LANGUAGES CXX)
 option(COVERAGE OFF)
 
 set(LIBGCOV "")
-if (COVERAGE)
+if (COVERAGE AND (NOT APPLE))
     set(LIBGCOV "gcov")
 endif()
 
