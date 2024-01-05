@@ -16,7 +16,7 @@ CaveCanvas::~CaveCanvas() {
   }
 }
 
-void CaveCanvas::paintEvent(QPaintEvent *event) {
+void CaveCanvas::paintEvent(QPaintEvent *) {
   matrix_ = s21::ControllerSingleton::GetInstance().GetCaveMatrix();
   cols_ = s21::ControllerSingleton::GetInstance().GetCaveCols();
   rows_ = s21::ControllerSingleton::GetInstance().GetCaveRows();
@@ -42,8 +42,8 @@ void CaveCanvas::paintEvent(QPaintEvent *event) {
 void CaveCanvas::DrawCave() {
   setFixedSize(width_, height_);
   size_t index = 0;
-  for (size_t i = 0; i < rows_; i++) {
-    for (size_t j = 0; j < cols_; j++) {
+  for (int i = 0; i < rows_; i++) {
+    for (int j = 0; j < cols_; j++) {
       DrawCell(i, j, matrix_[index]);
       index++;
     }

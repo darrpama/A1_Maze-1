@@ -36,7 +36,7 @@ void MazeCanvas::mousePressEvent(QMouseEvent *event) {
   update();
 }
 
-void MazeCanvas::paintEvent(QPaintEvent *event) {
+void MazeCanvas::paintEvent(QPaintEvent *) {
   matrix_ = s21::ControllerSingleton::GetInstance().GetMazeMatrix();
   cols_ = s21::ControllerSingleton::GetInstance().GetMazeCols();
   rows_ = s21::ControllerSingleton::GetInstance().GetMazeRows();
@@ -66,8 +66,8 @@ void MazeCanvas::DrawMaze() {
   setFixedSize(this->width(), this->height());
   size_t index = 0;
 
-  for (size_t i = 0; i < rows_; i++) {
-    for (size_t j = 0; j < cols_; j++) {
+  for (int i = 0; i < rows_; i++) {
+    for (int j = 0; j < cols_; j++) {
       s21::Border border = matrix_[index];
       DrawCell(i, j, border);
       index++;
@@ -146,7 +146,7 @@ void MazeCanvas::DrawPathLine() {
   std::vector<s21::Vector2D> path =
       s21::ControllerSingleton::GetInstance().ResolveMaze(path_cells_[0],
                                                           path_cells_[1]);
-  for (int i = 0; i < path.size() - 1; i++) {
+  for (size_t i = 0; i < path.size() - 1; i++) {
     DrawLineBetweenCellsCenters(path[i], path[i + 1]);
   }
 }
