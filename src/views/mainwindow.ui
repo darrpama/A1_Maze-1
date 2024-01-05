@@ -92,7 +92,7 @@
               <number>20</number>
              </property>
              <item>
-              <widget class="QPushButton" name="upload_maze_btn">
+              <widget class="QPushButton" name="maze_upload_btn">
                <property name="minimumSize">
                 <size>
                  <width>0</width>
@@ -172,7 +172,7 @@
               </layout>
              </item>
              <item>
-              <widget class="QPushButton" name="generate_maze_btn">
+              <widget class="QPushButton" name="maze_init_random_btn">
                <property name="text">
                 <string>generate</string>
                </property>
