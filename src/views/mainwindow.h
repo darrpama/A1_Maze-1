@@ -28,7 +28,8 @@ class MainWindow : public QMainWindow
   ~MainWindow();
 
 private slots:
-  void on_generate_btn_clicked();
+  void on_maze_upload_btn_clicked();
+  void on_maze_init_random_btn_clicked();
   void on_cave_upload_btn_clicked();
   void on_cave_init_random_btn_clicked();
   void on_step_render_btn_clicked();

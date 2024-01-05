@@ -15,7 +15,7 @@ MainWindow::~MainWindow() {
   delete ui_;
 }
 
-void MainWindow::on_generate_btn_clicked() {
+void MainWindow::on_maze_init_random_btn_clicked() {
   try {
     s21::ControllerSingleton::GetInstance().GenerateMaze(ui_->rows_input->value(), ui_->cols_input->value());
   } catch(const std::exception& e) {
@@ -23,6 +23,23 @@ void MainWindow::on_generate_btn_clicked() {
   }
   
   ui_->maze_canvas->update();
+}
+
+void MainWindow::on_maze_upload_btn_clicked() {
+  QString file_path = QFileDialog::getOpenFileName(
+    this, tr("Select File"), "", tr("All Files (*.*)")
+  );
+  if (!file_path.isEmpty()) {
+    try
+    {
+      std::string filepath = file_path.toStdString();
+      s21::ControllerSingleton::GetInstance().UploadMaze(filepath);
+    }
+    catch(const std::exception& e)
+    {
+      ShowErrorMessage(e);
+    }
+  }
 }
 
 void MainWindow::on_cave_upload_btn_clicked() {
@@ -93,4 +110,3 @@ void MainWindow::on_emergency_stop_btn_clicked() {
   std::cout << "emergency stop btn clicked;" << std::endl;
   emergency_stop_ = true;
 }
-
