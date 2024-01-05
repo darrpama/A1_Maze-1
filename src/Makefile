@@ -36,7 +36,7 @@ endif
 all: install tests gcov_report clean dist check dvi
 
 
-install: | $(BUILDDIR)-release
+install: $(BUILDDIR)-release
 	read -p "Enter path to install: " path; \
 	if [ -z "$$path" ]; then \
         path="./"; \
@@ -54,13 +54,13 @@ uninstall: clean
 	rm -rf ./bin ./Maze.exe ./$(TEST_EXE)
 
 
-tests: | $(BUILDDIR)-testing
+tests: $(BUILDDIR)-testing
 	cd $(BUILDDIR)-testing && \
 	cmake .. -DTESTING=ON -G "Unix Makefiles" && \
 	cmake --build . --config=RelWithDebInfo
 
 
-gcov_report: | $(BUILDDIR)-coverage
+gcov_report: $(BUILDDIR)-coverage
 	cd $(BUILDDIR)-coverage && \
 	cmake .. -DTESTING=ON -DCOVERAGE=ON -G "Unix Makefiles" && \
 	cmake --build . --config=RelWithDebInfo
