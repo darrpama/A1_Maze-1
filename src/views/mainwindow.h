@@ -10,7 +10,6 @@
 #include <QTimer>
 #include <QtOpenGL>
 #include <QtOpenGLWidgets>
-#include <iostream>
 
 #include "../controllers/controller_singleton.h"
 
@@ -28,16 +27,18 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
 
 private slots:
-  void on_maze_upload_btn_clicked();
-  void on_maze_init_random_btn_clicked();
-  void on_cave_upload_btn_clicked();
-  void on_cave_init_random_btn_clicked();
-  void on_step_render_btn_clicked();
-  void on_auto_render_btn_clicked();
-  void on_emergency_stop_btn_clicked();
+  void MazeUploadButtonClicked();
+  void MazeDownloadButtonClicked();
+  void MazeInitRandomButtonClicked();
+  void CaveUploadButtonClicked();
+  void CaveInitRandomButtonClicked();
+  void CaveStepRenderButtonClicked();
+  void CaveAutoRenderButtonClicked();
+  void CaveStopRenderButtonClicked();
 
  private:
   Ui::MainWindow *ui_;
+  QTimer* timer_;
   bool emergency_stop_;
 
   void ShowErrorMessage(const std::exception &);

@@ -11,7 +11,17 @@ void ControllerSingleton::SetMazeGenerator(MazeGenerator *mg) {
   maze_generator_ = mg;
 }
 
+void ControllerSingleton::SetMazeSaver(MazeSaver *ms) {
+  maze_saver_ = ms;
+}
+
 void ControllerSingleton::SetCave(Cave *c) { cave_ = c; }
+
+void ControllerSingleton::DownloadMaze(const std::string &filename) {
+  maze_saver_->SetFilePath(filename);
+  maze_saver_->SetMaze(maze_);
+  maze_saver_->Save();
+}
 
 // MAZE
 void ControllerSingleton::UploadMaze(const std::string &filepath) {

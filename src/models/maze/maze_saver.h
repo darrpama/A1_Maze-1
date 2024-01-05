@@ -13,9 +13,10 @@ namespace s21 {
 
 class MazeSaver {
  public:
-  explicit MazeSaver(Maze &maze) : maze_(&maze){};
+  explicit MazeSaver(Maze *maze);
   void Save();
   void SetFilePath(const std::string &);
+  void SetMaze(Maze *maze);
 
  private:
   Maze *maze_;

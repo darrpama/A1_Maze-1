@@ -54,7 +54,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="maze_tab">
        <attribute name="title">
@@ -62,7 +62,7 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <layout class="QHBoxLayout" name="maze_layout">
           <item alignment="Qt::AlignLeft|Qt::AlignTop">
            <widget class="MazeCanvas" name="maze_canvas" native="true">
             <property name="minimumSize">
@@ -106,7 +106,14 @@
                 </size>
                </property>
                <property name="text">
-                <string>upload maze</string>
+                <string>Upload Maze</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="maze_download_btn">
+               <property name="text">
+                <string>Download Maze</string>
                </property>
               </widget>
              </item>
@@ -124,11 +131,11 @@
               </spacer>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_6">
+              <layout class="QHBoxLayout" name="maze_cols_layout">
                <item alignment="Qt::AlignRight|Qt::AlignTop">
                 <widget class="QLabel" name="maze_cols_label">
                  <property name="text">
-                  <string>cols</string>
+                  <string>Cols</string>
                  </property>
                  <property name="margin">
                   <number>5</number>
@@ -137,6 +144,9 @@
                </item>
                <item alignment="Qt::AlignLeft|Qt::AlignTop">
                 <widget class="QSpinBox" name="maze_cols_input">
+                 <property name="minimum">
+                  <number>2</number>
+                 </property>
                  <property name="maximum">
                   <number>50</number>
                  </property>
@@ -148,11 +158,11 @@
               </layout>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_7">
+              <layout class="QHBoxLayout" name="maze_rows_layout">
                <item alignment="Qt::AlignRight|Qt::AlignTop">
                 <widget class="QLabel" name="maze_rows_label">
                  <property name="text">
-                  <string>rows</string>
+                  <string>Rows</string>
                  </property>
                  <property name="margin">
                   <number>5</number>
@@ -161,6 +171,9 @@
                </item>
                <item alignment="Qt::AlignLeft|Qt::AlignTop">
                 <widget class="QSpinBox" name="maze_rows_input">
+                 <property name="minimum">
+                  <number>2</number>
+                 </property>
                  <property name="maximum">
                   <number>50</number>
                  </property>
@@ -174,7 +187,7 @@
              <item>
               <widget class="QPushButton" name="maze_init_random_btn">
                <property name="text">
-                <string>generate</string>
+                <string>Generate</string>
                </property>
               </widget>
              </item>
@@ -197,7 +210,7 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <layout class="QHBoxLayout" name="cave_layout">
           <item>
            <widget class="CaveCanvas" name="cave_canvas" native="true">
             <property name="minimumSize">
@@ -232,7 +245,7 @@
              <item>
               <widget class="QPushButton" name="cave_upload_btn">
                <property name="text">
-                <string>upload</string>
+                <string>Upload</string>
                </property>
               </widget>
              </item>
@@ -250,11 +263,11 @@
               </spacer>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_10">
+              <layout class="QHBoxLayout" name="cave_cols_layout">
                <item>
-                <widget class="QLabel" name="label_4">
+                <widget class="QLabel" name="cave_cold_label">
                  <property name="text">
-                  <string>cols</string>
+                  <string>Columns</string>
                  </property>
                 </widget>
                </item>
@@ -271,11 +284,11 @@
               </layout>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_9">
+              <layout class="QHBoxLayout" name="cave_rows_layout">
                <item>
-                <widget class="QLabel" name="label_3">
+                <widget class="QLabel" name="cave_rows_label">
                  <property name="text">
-                  <string>rows</string>
+                  <string>Rows</string>
                  </property>
                 </widget>
                </item>
@@ -292,14 +305,14 @@
               </layout>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout">
+              <layout class="QHBoxLayout" name="cave_chance_layout">
                <property name="topMargin">
                 <number>0</number>
                </property>
                <item>
-                <widget class="QLabel" name="label_6">
+                <widget class="QLabel" name="cave_cell_chance_label">
                  <property name="text">
-                  <string>chance</string>
+                  <string>Chance</string>
                  </property>
                 </widget>
                </item>
@@ -321,7 +334,7 @@
              <item>
               <widget class="QPushButton" name="cave_init_random_btn">
                <property name="text">
-                <string>init random</string>
+                <string>Generate</string>
                </property>
               </widget>
              </item>
@@ -339,7 +352,7 @@
               </spacer>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <layout class="QHBoxLayout" name="cave_die_limit_layout">
                <property name="spacing">
                 <number>0</number>
                </property>
@@ -347,9 +360,9 @@
                 <number>0</number>
                </property>
                <item alignment="Qt::AlignRight">
-                <widget class="QLabel" name="label_2">
+                <widget class="QLabel" name="cave_die_limit_label">
                  <property name="text">
-                  <string>die limit</string>
+                  <string>Die Limit</string>
                  </property>
                  <property name="margin">
                   <number>1</number>
@@ -357,7 +370,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QSpinBox" name="die_limit_input">
+                <widget class="QSpinBox" name="cave_die_limit_input">
                  <property name="minimumSize">
                   <size>
                    <width>50</width>
@@ -378,14 +391,14 @@
               </layout>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_3">
+              <layout class="QHBoxLayout" name="cave_born_limit_layout">
                <property name="spacing">
                 <number>0</number>
                </property>
                <item alignment="Qt::AlignRight">
-                <widget class="QLabel" name="label">
+                <widget class="QLabel" name="cave_born_limit_label">
                  <property name="text">
-                  <string>born limit</string>
+                  <string>Born Limit</string>
                  </property>
                  <property name="margin">
                   <number>1</number>
@@ -393,7 +406,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QSpinBox" name="born_limit_input">
+                <widget class="QSpinBox" name="cave_born_limit_input">
                  <property name="minimumSize">
                   <size>
                    <width>50</width>
@@ -417,9 +430,9 @@
               </layout>
              </item>
              <item>
-              <widget class="QPushButton" name="step_render_btn">
+              <widget class="QPushButton" name="cave_step_render_btn">
                <property name="text">
-                <string>step</string>
+                <string>Render Step</string>
                </property>
               </widget>
              </item>
@@ -437,12 +450,12 @@
               </spacer>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_11">
+              <layout class="QHBoxLayout" name="cave_render_timeout_layout">
                <property name="spacing">
                 <number>0</number>
                </property>
                <item>
-                <widget class="QSpinBox" name="render_timeout_input">
+                <widget class="QSpinBox" name="cave_render_timeout_input">
                  <property name="minimumSize">
                   <size>
                    <width>50</width>
@@ -461,7 +474,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="label_5">
+                <widget class="QLabel" name="cave_render_timeout_label">
                  <property name="text">
                   <string>ms</string>
                  </property>
@@ -473,16 +486,16 @@
               </layout>
              </item>
              <item>
-              <widget class="QPushButton" name="auto_render_btn">
+              <widget class="QPushButton" name="cave_auto_render_btn">
                <property name="text">
-                <string>auto</string>
+                <string>Autorender</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="emergency_stop_btn">
+              <widget class="QPushButton" name="cave_stop_render_btn">
                <property name="text">
-                <string>emergency stop</string>
+                <string>Stop render</string>
                </property>
               </widget>
              </item>
