@@ -1,6 +1,6 @@
 #include "maze_canvas.h"
 
-MazeCanvas::MazeCanvas(QWidget *parent) : QWidget(parent) { 
+MazeCanvas::MazeCanvas(QWidget *parent) : QWidget(parent) {
   painter_ = nullptr;
 }
 
@@ -40,7 +40,6 @@ void MazeCanvas::paintEvent(QPaintEvent *event) {
 
   cell_width_ = (static_cast<float>(width_) / cols_) - border_size_;
   cell_height_ = (static_cast<float>(height_) / rows_) - border_size_;
-  
 
   if (cols_ > 0 && rows_ > 0) {
     if (painter_) {
@@ -91,13 +90,9 @@ void MazeCanvas::DrawFrames() {
 
 void MazeCanvas::DrawClickedCellBody() {
   for (auto cell : path_cells_) {
-    painter_->fillRect(
-      (cell_width_ * cell.y_) + (cell.y_*2),
-      (cell_height_ * cell.x_) + (cell.x_*2),
-      cell_width_,
-      cell_height_, 
-      Qt::GlobalColor::yellow
-    );
+    painter_->fillRect((cell_width_ * cell.y_) + (cell.y_ * 2),
+                       (cell_height_ * cell.x_) + (cell.x_ * 2), cell_width_,
+                       cell_height_, Qt::GlobalColor::yellow);
   }
 }
 
@@ -116,49 +111,36 @@ void MazeCanvas::DrawCell(size_t i, size_t j, s21::Border border) {
 }
 
 void MazeCanvas::DrawCellBody(size_t i, size_t j) {
-  painter_->fillRect(
-    (cell_width_ * j) + (j*2),
-    (cell_height_ * i) + (i*2),
-    cell_width_,
-    cell_height_, 
-    Qt::GlobalColor::white
-  );
+  painter_->fillRect((cell_width_ * j) + (j * 2), (cell_height_ * i) + (i * 2),
+                     cell_width_, cell_height_, Qt::GlobalColor::white);
 }
 
 void MazeCanvas::DrawRightBorder(size_t i, size_t j) {
-  painter_->fillRect(
-    ((cell_width_ * j) + (j*2) + cell_width_),
-    ((cell_height_ * i) + (i*2)) - 2,
-    2,
-    cell_height_ + 4,
-    border_color_
-  );
+  painter_->fillRect(((cell_width_ * j) + (j * 2) + cell_width_),
+                     ((cell_height_ * i) + (i * 2)) - 2, 2, cell_height_ + 4,
+                     border_color_);
 }
 
 void MazeCanvas::DrawBottomBorder(size_t i, size_t j) {
-  painter_->fillRect(
-    (cell_width_ * j) + (j*2) - 2,
-    (cell_height_ * i) + (i*2) + cell_height_,
-    cell_width_ + 4,
-    2,
-    border_color_
-  );
+  painter_->fillRect((cell_width_ * j) + (j * 2) - 2,
+                     (cell_height_ * i) + (i * 2) + cell_height_,
+                     cell_width_ + 4, 2, border_color_);
 }
 
 void MazeCanvas::DrawLineBetweenCellsCenters(s21::Vector2D a, s21::Vector2D b) {
   QPen pen(line_color_, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
   painter_->setPen(pen);
-  painter_->drawLine(
-    (cell_height_ * a.y_) + (cell_height_ / 2) + (a.y_ * 2),
-    (cell_width_ * a.x_) + (cell_width_ / 2) + (a.x_ * 2),
-    (cell_height_ * b.y_) + (cell_height_ / 2) + (b.y_ * 2),
-    (cell_width_ * b.x_) + (cell_width_ / 2) + (b.x_ * 2)
-  );
+  painter_->drawLine((cell_height_ * a.y_) + (cell_height_ / 2) + (a.y_ * 2),
+                     (cell_width_ * a.x_) + (cell_width_ / 2) + (a.x_ * 2),
+                     (cell_height_ * b.y_) + (cell_height_ / 2) + (b.y_ * 2),
+                     (cell_width_ * b.x_) + (cell_width_ / 2) + (b.x_ * 2));
 }
 
 void MazeCanvas::DrawPathLine() {
-  std::vector<s21::Vector2D> path = s21::ControllerSingleton::GetInstance().ResolveMaze(path_cells_[0], path_cells_[1]);
+  std::vector<s21::Vector2D> path =
+      s21::ControllerSingleton::GetInstance().ResolveMaze(path_cells_[0],
+                                                          path_cells_[1]);
   for (int i = 0; i < path.size() - 1; i++) {
-    DrawLineBetweenCellsCenters(path[i], path[i+1]);
+    DrawLineBetweenCellsCenters(path[i], path[i + 1]);
   }
 }

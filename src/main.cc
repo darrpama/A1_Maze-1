@@ -1,10 +1,9 @@
 #include <QApplication>
 
 #include "controllers/controller_singleton.h"
-
+#include "models/cave/cave.h"
 #include "models/maze/maze.h"
 #include "models/maze/maze_parser.h"
-#include "models/cave/cave.h"
 #include "views/mainwindow.h"
 
 int main(int argc, char *argv[]) {
@@ -18,7 +17,8 @@ int main(int argc, char *argv[]) {
 
   s21::Cave cave = s21::Cave(0, 0);
 
-  s21::ControllerSingleton &controller = s21::ControllerSingleton::GetInstance();
+  s21::ControllerSingleton &controller =
+      s21::ControllerSingleton::GetInstance();
   controller.SetMaze(&maze);
   controller.SetMazeParser(&maze_parser);
   controller.SetMazeGenerator(&maze_generator);

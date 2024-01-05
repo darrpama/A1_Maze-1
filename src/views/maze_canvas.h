@@ -1,11 +1,10 @@
 #ifndef CPP4_3DVIEWER_V2_0_2_SRC_VIEWS_MAZE_CANVAS_H
 #define CPP4_3DVIEWER_V2_0_2_SRC_VIEWS_MAZE_CANVAS_H
 
-#include <vector>
-
-#include <QWidget>
-#include <QPainter>
 #include <QMouseEvent>
+#include <QPainter>
+#include <QWidget>
+#include <vector>
 
 #include "../controllers/controller_singleton.h"
 
@@ -28,7 +27,7 @@ class MazeCanvas : public QWidget {
   QColor frame_color_;
   QColor line_color_;
   QColor background_color_;
-  
+
   float cell_width_ = 0.0f;
   float cell_height_ = 0.0f;
   int cols_ = 0;
@@ -49,4 +48,4 @@ class MazeCanvas : public QWidget {
   void DrawLineBetweenCellsCenters(s21::Vector2D, s21::Vector2D);
 };
 
-#endif // CPP4_3DVIEWER_V2_0_2_SRC_VIEWS_MAZE_CANVAS_H
+#endif  // CPP4_3DVIEWER_V2_0_2_SRC_VIEWS_MAZE_CANVAS_H

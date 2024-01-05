@@ -1,6 +1,6 @@
 #include "cave_canvas.h"
 
-CaveCanvas::CaveCanvas(QWidget * parent) : QWidget(parent) {
+CaveCanvas::CaveCanvas(QWidget *parent) : QWidget(parent) {
   painter_ = nullptr;
 }
 
@@ -47,14 +47,15 @@ void CaveCanvas::DrawCave() {
 void CaveCanvas::DrawFrames() {
   painter_->fillRect(0, 0, width_, border_size_, Qt::black);
   painter_->fillRect(0, 0, border_size_, height_, Qt::black);
-  painter_->fillRect((width_ - border_size_), 0, border_size_, height_, Qt::black);
-  painter_->fillRect(0, (height_ - border_size_), width_, border_size_, Qt::black);
+  painter_->fillRect((width_ - border_size_), 0, border_size_, height_,
+                     Qt::black);
+  painter_->fillRect(0, (height_ - border_size_), width_, border_size_,
+                     Qt::black);
 }
 
 void CaveCanvas::DrawCell(size_t i, size_t j, unsigned cell) {
   painter_->fillRect(
-    (cell_width_ * static_cast<float>(j)), (cell_height_ * static_cast<float>(i)),
-    cell_width_, cell_height_,
-    (cell == 0) ? Qt::GlobalColor::white : Qt::GlobalColor::black
-  );
+      (cell_width_ * static_cast<float>(j)),
+      (cell_height_ * static_cast<float>(i)), cell_width_, cell_height_,
+      (cell == 0) ? Qt::GlobalColor::white : Qt::GlobalColor::black);
 }

@@ -3,11 +3,11 @@
 
 #include <string>
 
-#include "models/cave/cave.h"
-#include "models/maze/maze.h"
-#include "models/maze/maze_generator.h"
-#include "models/maze/maze_parser.h"
-#include "models/type.h"
+#include "../models/cave/cave.h"
+#include "../models/maze/maze.h"
+#include "../models/maze/maze_generator.h"
+#include "../models/maze/maze_parser.h"
+#include "../models/type.h"
 
 namespace s21 {
 

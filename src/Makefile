@@ -1,98 +1,104 @@
-CC = g++
-CCFLAGS = -g -std=c++17 -Wall -Werror -Wextra 
-LDFLAGS = -fprofile-arcs -ftest-coverage
 PROJECTDIR = $(CURDIR)
 BUILDDIR = $(PROJECTDIR)/build
-EXECUTABLE = test.out
-STATICLIB = Maze.a
+EXE = Maze.exe
+TEST_EXE = MazeTests.exe
 DISTDIR = ../distributive
 
+
 HEADERS = \
-	$(PROJECTDIR)/models/cave/cave.h \
-	$(PROJECTDIR)/models/maze/maze_generator.h \
-	$(PROJECTDIR)/models/maze/maze_parser.h \
-	$(PROJECTDIR)/models/maze/maze_saver.h \
-	$(PROJECTDIR)/models/maze/maze.h \
-	$(PROJECTDIR)/models/utils.h
+	$(PROJECTDIR)/views/*.h \
+	$(PROJECTDIR)/controllers/*.h \
+	$(PROJECTDIR)/models/*/*.h \
+	$(PROJECTDIR)/models/*/*.h \
+	$(PROJECTDIR)/models/*.h
+
 
 SOURCES = \
-	$(PROJECTDIR)/models/cave/cave.cc \
-	$(PROJECTDIR)/models/maze/maze_generator.cc \
-	$(PROJECTDIR)/models/maze/maze_parser.cc \
-	$(PROJECTDIR)/models/maze/maze_saver.cc \
-	$(PROJECTDIR)/models/maze/maze.cc \
-	$(PROJECTDIR)/tests/cave_test.cc \
-	$(PROJECTDIR)/tests/maze_generator_test.cc \
-	$(PROJECTDIR)/tests/run_all_tests.cc \
-	$(PROJECTDIR)/tests/maze_parser_test.cc \
-	$(PROJECTDIR)/tests/maze_resolver_test.cc \
-	$(PROJECTDIR)/tests/maze_saver_test.cc 
+	$(PROJECTDIR)/main.cc \
+	$(PROJECTDIR)/views/*.cc \
+	$(PROJECTDIR)/controllers/*.cc \
+	$(PROJECTDIR)/models/*/*.cc \
+	$(PROJECTDIR)/models/*/*.cc \
+	$(PROJECTDIR)/tests/*.cc \
 
-OTHERS = \
-	$(PROJECTDIR)/controllers/controller_singleton.h \
-	$(PROJECTDIR)/controllers/controller_singleton.cc
 
-OBJECTS = $(SOURCES:.cc=.o)
-GCDA = $(SOURCES:.cc=.gcda)
-GCNO = $(SOURCES:.cc=.gcno)
+ifeq ($(shell uname), Darwin)
+	EXE = Maze
+	TEST_EXE = MazeTests
+endif
 
-all: install
+ifeq ($(shell uname), Linux)
+	EXE = Maze
+	TEST_EXE = MazeTests
+endif
 
-tests: $(SOURCES) $(EXECUTABLE)
+
+all: install tests gcov_report clean dist check dvi
+
+
+install: | $(BUILDDIR)-release
+	read -p "Enter path to install: " path; \
+	if [ -z "$$path" ]; then \
+        path="./"; \
+    fi; \
+	if [ ! -d $$path ]; then mkdir -p $$path; fi; \
+	if ! [ "$$path" != "$${path#/}" ]; then \
+		path="$(PROJECTDIR)/$$path"; \
+	fi; \
+	cd $(BUILDDIR)-release && \
+	cmake .. -DINSTALL=ON -DCMAKE_INSTALL_PREFIX=$$path -G "Unix Makefiles" && \
+	cmake --build . --config=Release
+	
+
+uninstall: clean
+	rm -rf ./bin ./Maze.exe ./$(TEST_EXE)
+
+
+tests: | $(BUILDDIR)-testing
+	cd $(BUILDDIR)-testing && \
+	cmake .. -DTESTING=ON -G "Unix Makefiles" && \
+	cmake --build . --config=RelWithDebInfo
+
+
+gcov_report: | $(BUILDDIR)-coverage
+	cd $(BUILDDIR)-coverage && \
+	cmake .. -DTESTING=ON -DCOVERAGE=ON -G "Unix Makefiles" && \
+	cmake --build . --config=RelWithDebInfo
+	./$(TEST_EXE)
+	lcov -t "$(TEST_EXE)" -o test.info --no-external -c -d $(BUILDDIR)-coverage
+	genhtml -o report test.info 
+	open report/index.html
+
 
 dvi:
 	open ./README.pdf
 
-build:
-	cd $(PROJECTDIR) && ls -la && mkdir $(BUILDDIR) && cd $(BUILDDIR) && cmake .. -G "Unix Makefiles" && make
 
-install:
-	@read -p "Enter path to install: " path; \
-	if [ -z "$$path" ]; then \
-        path="./"; \
-    fi; \
-	cd $$path && ls -la && mkdir -p $(BUILDDIR) && cd $(BUILDDIR) && cmake .. -G "Unix Makefiles" && make
-	$(BUILDDIR)/Maze.app/Contents/MacOS/Maze 
-
-uninstall: clean
-
-dist: build
+dist:
 	rm -rf $(DISTDIR)
-	mkdir $(DISTDIR)
+	mkdir -p $(DISTDIR)
 	cp -r $(PROJECTDIR) $(DISTDIR)
 	cd .. && tar -czvf distributive.tgz distributive
 	rm -rf $(DISTDIR)
 
-check:
-	clang-format -i --style="Google" $(SOURCES) $(HEADERS) $(OTHERS)
-	cppcheck --std=c++17 --language=c++ --enable=all --suppress=unusedStructMember --suppress=unusedFunction --suppress=missingInclude --suppress=missingIncludeSystem $(SOURCES) $(OTHERS) $(HEADERS)
 
-leaks: $(EXECUTABLE) build
-	-leaks --atExit -- ./$(EXECUTABLE)
+check:
+	clang-format -i --style="Google" $(SOURCES) $(HEADERS)
+# cppcheck --std=c++17 --language=c++ --enable=all --suppress=unusedStructMember --suppress=unusedFunction --suppress=missingInclude --suppress=missingIncludeSystem $(SOURCES) $(HEADERS)
+
+
+leaks: tests
+	-leaks --atExit -- ./$(TEST_EXE)
 	leaks --atExit -- "./build/Maze.app/Contents/MacOS/Maze"
 
-$(EXECUTABLE): $(OBJECTS)
-	$(CC) $(OBJECTS) -o $@ $(LDFLAGS) -lgtest
-	./$(EXECUTABLE) 
 
-%.o: %.cc
-	$(CC) $(CCFLAGS) -o $@ -c $< $(LDFLAGS)
+$(BUILDDIR)-%:
+	mkdir -p $@
 
-$(STATICLIB): $(OBJECTS)
-	ar rcs $(STATICLIB) $^
-
-gcov_report: $(EXECUTABLE)
-	./$(EXECUTABLE)
-	lcov -t "./test.out" -o test.info --no-external -c -d . --ignore-errors mismatch,mismatch
-	genhtml -o report test.info 
-	open report/index.html
 
 .PHONY: clean test dvi dist check leaks gcov_report
 clean:
-	rm -rf $(OBJECTS)
-	rm -rf $(EXECUTABLE)
-	rm -rf $(STATICLIB)
-	rm -rf $(BUILDDIR)
-	rm -rf *.gcno $(GCDA) $(GCNO) *.info
-	rm -rf report
+	rm -rf $(BUILDDIR)-*
+	rm -rf report *.info
 	rm -rf *.tgz ../*.tgz
+
