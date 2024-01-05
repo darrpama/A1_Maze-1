@@ -9,7 +9,7 @@ endif()
 
 if (APPLE)
     add_link_options("-Wl,-no_compact_unwind")
-    set(CMAKE_CXX_COMPILER "/usr/local/bin/g++")
+    # set(CMAKE_CXX_COMPILER "/usr/local/bin/g++")
 endif()
     
 set(CMAKE_CXX_STANDARD 17)
@@ -19,6 +19,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(GTest REQUIRED)
 enable_testing()
+include_directories(${GTEST_INCLUDE_DIRS})
 
 set(${PROJECT_NAME}_SOURCES
     run_all_tests.cc
@@ -35,7 +36,9 @@ add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_SOURCES})
 
 target_link_libraries(${PROJECT_NAME}
     MazeModels
-    gtest
+    ${GTEST_LIBRARIES}
+    ${GTEST_MAIN_LIBRARIES}
+    pthread
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
