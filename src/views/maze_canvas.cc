@@ -1,7 +1,18 @@
 #include "maze_canvas.h"
 
-MazeCanvas::MazeCanvas(QWidget *parent) : QWidget(parent) {
+MazeCanvas::MazeCanvas(QWidget *parent) : QWidget(parent), kBorderSize(2.0f) {
   painter_ = nullptr;
+
+  cell_width_ = 0.0f;
+  cell_height_ = 0.0f;
+  cols_ = 0;
+  rows_ = 0;
+  click_counter_ = 0;
+
+  border_color_ = QColor(170, 170, 170);
+  frame_color_ = QColor(170, 170, 170);
+  line_color_ = QColor(204, 0, 0);
+  background_color_ = QColor(255, 255, 255);
 }
 
 MazeCanvas::~MazeCanvas() {
@@ -30,16 +41,11 @@ void MazeCanvas::paintEvent(QPaintEvent *event) {
   cols_ = s21::ControllerSingleton::GetInstance().GetMazeCols();
   rows_ = s21::ControllerSingleton::GetInstance().GetMazeRows();
 
-  width_ = 500.0f;
-  height_ = 500.0f;
-  border_size_ = 2.0f;
-  border_color_ = QColor("#aaaaaa");
-  frame_color_ = QColor("#aaaaaa");
-  line_color_ = QColor("#cc0000");
-  background_color_ = QColor("#ffffff");
+  float width = this->width();
+  float height = this->height();
 
-  cell_width_ = (static_cast<float>(width_) / cols_) - border_size_;
-  cell_height_ = (static_cast<float>(height_) / rows_) - border_size_;
+  cell_width_ = (static_cast<float>(width) / cols_) - kBorderSize;
+  cell_height_ = (static_cast<float>(height) / rows_) - kBorderSize;
 
   if (cols_ > 0 && rows_ > 0) {
     if (painter_) {
@@ -57,7 +63,7 @@ void MazeCanvas::paintEvent(QPaintEvent *event) {
 }
 
 void MazeCanvas::DrawMaze() {
-  setFixedSize(width_, height_);
+  setFixedSize(this->width(), this->height());
   size_t index = 0;
 
   for (size_t i = 0; i < rows_; i++) {

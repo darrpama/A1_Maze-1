@@ -35,6 +35,7 @@ private slots:
   void CaveStepRenderButtonClicked();
   void CaveAutoRenderButtonClicked();
   void CaveStopRenderButtonClicked();
+  void TimerCallback();
 
  private:
   Ui::MainWindow *ui_;

@@ -11,19 +11,23 @@ class CaveCanvas : public QWidget {
   CaveCanvas(QWidget *parent = nullptr);
   ~CaveCanvas();
 
+  const float kBorderSize;
+
  protected:
   void paintEvent(QPaintEvent *event) override;
 
  private:
   QPainter *painter_;
   std::vector<unsigned> matrix_;
+
   float width_;
   float height_;
-  float border_size_;
-  float cell_width_ = 0;
-  float cell_height_ = 0;
-  int cols_ = 0;
-  int rows_ = 0;
+
+  float cell_width_;
+  float cell_height_;
+
+  int cols_;
+  int rows_;
 
   void DrawFrames();
   void DrawCave();

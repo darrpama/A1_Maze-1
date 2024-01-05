@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget* parent)
 
   emergency_stop_ = false;
   timer_ = new QTimer(this);;
+  connect(timer_, &QTimer::timeout, this, &MainWindow::TimerCallback);
 
   connect(ui_->maze_upload_btn, &QAbstractButton::clicked, this, &MainWindow::MazeUploadButtonClicked);
   connect(ui_->maze_download_btn, &QAbstractButton::clicked, this, &MainWindow::MazeDownloadButtonClicked);
@@ -118,27 +119,27 @@ void MainWindow::CaveAutoRenderButtonClicked() {
 
   int interval = ui_->cave_render_timeout_input->value();
 
-  unsigned die_limit = static_cast<unsigned>(ui_->cave_die_limit_input->value());
-  unsigned born_limit = static_cast<unsigned>(ui_->cave_born_limit_input->value());
-
-  connect(timer_, &QTimer::timeout, this,
-          [die_limit, born_limit, this]() {
-            bool stop = s21::ControllerSingleton::GetInstance().StepRender(
-                die_limit, born_limit);
-
-            if (stop || this->emergency_stop_) {
-              this->timer_->stop();
-              this->ui_->cave_auto_render_btn->setEnabled(true);
-            } else {
-              this->ui_->cave_canvas->update();
-            }
-          });
-
+  timer_->setInterval(interval);
   timer_->start(interval);
 }
 
 void MainWindow::CaveStopRenderButtonClicked() {
-  emergency_stop_ = true;
+    emergency_stop_ = true;
+}
+
+void MainWindow::TimerCallback() {
+    unsigned die_limit = static_cast<unsigned>(ui_->cave_die_limit_input->value());
+    unsigned born_limit = static_cast<unsigned>(ui_->cave_born_limit_input->value());
+
+    bool stop = s21::ControllerSingleton::GetInstance().StepRender(
+        die_limit, born_limit);
+
+    if (stop || emergency_stop_) {
+      timer_->stop();
+      ui_->cave_auto_render_btn->setEnabled(true);
+    } else {
+      ui_->cave_canvas->update();
+    }
 }
 
 void MainWindow::ShowErrorMessage(const std::exception& e) {

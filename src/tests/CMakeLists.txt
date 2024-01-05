@@ -7,6 +7,11 @@ if (COVERAGE)
     add_compile_options(--coverage -fno-elide-constructors)
 endif()
 
+if (APPLE)
+    add_link_options("-Wl,-no_compact_unwind")
+    set(CMAKE_CXX_COMPILER "/usr/local/bin/g++")
+endif()
+    
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_compile_options(-Wall -Werror -Wextra)

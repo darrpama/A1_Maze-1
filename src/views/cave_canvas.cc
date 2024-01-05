@@ -1,7 +1,13 @@
 #include "cave_canvas.h"
 
-CaveCanvas::CaveCanvas(QWidget *parent) : QWidget(parent) {
+CaveCanvas::CaveCanvas(QWidget *parent) : QWidget(parent), kBorderSize(2.0f) {
   painter_ = nullptr;
+
+  cell_width_ = 0;
+  cell_height_ = 0;
+
+  cols_ = 0;
+  rows_ = 0;
 }
 
 CaveCanvas::~CaveCanvas() {
@@ -14,9 +20,8 @@ void CaveCanvas::paintEvent(QPaintEvent *event) {
   matrix_ = s21::ControllerSingleton::GetInstance().GetCaveMatrix();
   cols_ = s21::ControllerSingleton::GetInstance().GetCaveCols();
   rows_ = s21::ControllerSingleton::GetInstance().GetCaveRows();
-  width_ = 500.0f;
-  height_ = 500.0f;
-  border_size_ = 2.0f;
+  width_ = this->width();
+  height_ = this->height();
 
   cell_width_ = width_ / static_cast<float>(cols_);
   cell_height_ = height_ / static_cast<float>(rows_);
@@ -26,6 +31,7 @@ void CaveCanvas::paintEvent(QPaintEvent *event) {
       delete painter_;
       painter_ = nullptr;
     }
+
     painter_ = new QPainter(this);
     DrawCave();
     DrawFrames();
@@ -45,11 +51,11 @@ void CaveCanvas::DrawCave() {
 }
 
 void CaveCanvas::DrawFrames() {
-  painter_->fillRect(0, 0, width_, border_size_, Qt::black);
-  painter_->fillRect(0, 0, border_size_, height_, Qt::black);
-  painter_->fillRect((width_ - border_size_), 0, border_size_, height_,
+  painter_->fillRect(0, 0, width_, kBorderSize, Qt::black);
+  painter_->fillRect(0, 0, kBorderSize, height_, Qt::black);
+  painter_->fillRect((width_ - kBorderSize), 0, kBorderSize, height_,
                      Qt::black);
-  painter_->fillRect(0, (height_ - border_size_), width_, border_size_,
+  painter_->fillRect(0, (height_ - kBorderSize), width_, kBorderSize,
                      Qt::black);
 }
 
