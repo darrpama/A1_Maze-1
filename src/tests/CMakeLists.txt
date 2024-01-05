@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
 set(CMAKE_EXE_LINKER_FLAGS
     "${CMAKE_EXE_LINKER_FLAGS} -fprofile-arcs -ftest-coverage")
 
@@ -8,11 +8,11 @@ project(MazeTests VERSION 0.1 LANGUAGES CXX)
 option(COVERAGE OFF)
 
 if (COVERAGE)
-    add_compile_options(--coverage -fno-elide-constructors)
+    add_compile_options(--coverage)
 endif()
 
 if (APPLE)
-    add_link_options("-Wl,-no_compact_unwind")
+    # add_link_options("-Wl,-no_compact_unwind")
     # set(CMAKE_CXX_COMPILER "/usr/local/bin/g++")
 endif()
     
