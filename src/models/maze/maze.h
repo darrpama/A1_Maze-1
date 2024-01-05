@@ -12,7 +12,8 @@ namespace s21 {
 
 class Maze {
  public:
-  Maze(int rows, int cols) : rows_(rows), cols_(cols), matrix_{} {}
+  Maze();
+  Maze(int rows, int cols);
 
   int GetRows();
   int GetCols();
@@ -26,8 +27,8 @@ class Maze {
   std::vector<Vector2D> Resolve(Vector2D, Vector2D);
 
  private:
-  int rows_ = 0;
-  int cols_ = 0;
+  int rows_;
+  int cols_;
   std::vector<Border> matrix_;
 
   std::vector<int> FindPath(Vector2D, Vector2D);

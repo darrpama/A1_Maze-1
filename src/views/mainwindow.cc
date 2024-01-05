@@ -7,6 +7,8 @@
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui_(new Ui::MainWindow) {
   ui_->setupUi(this);
+
+  emergency_stop_ = false;
 }
 
 MainWindow::~MainWindow() { delete ui_; }
@@ -50,11 +52,11 @@ void MainWindow::on_step_render_btn_clicked() {
   s21::ControllerSingleton::GetInstance().StepRender(
       static_cast<unsigned>(ui_->die_limit_input->value()),
       static_cast<unsigned>(ui_->born_limit_input->value()));
+
   ui_->cave_canvas->update();
 }
 
 void MainWindow::ShowErrorMessage(const std::exception& e) {
-  std::cerr << e.what() << '\n';
   QMessageBox messageBox;
   messageBox.critical(0, "Error", e.what());
   messageBox.setFixedSize(500, 200);
@@ -85,6 +87,5 @@ void MainWindow::on_auto_render_btn_clicked() {
 }
 
 void MainWindow::on_emergency_stop_btn_clicked() {
-  std::cout << "emergency stop btn clicked;" << std::endl;
   emergency_stop_ = true;
 }

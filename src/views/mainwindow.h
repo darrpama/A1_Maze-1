@@ -37,8 +37,9 @@ class MainWindow : public QMainWindow {
 
  private:
   Ui::MainWindow *ui_;
+  bool emergency_stop_;
+
   void ShowErrorMessage(const std::exception &);
-  bool emergency_stop_ = false;
 };
 
 #endif  // CPP4_3DVIEWER_V2_0_2_SRC_VIEWS_MAINWINDOW_H

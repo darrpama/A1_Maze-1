@@ -84,7 +84,7 @@ dist:
 
 check:
 	clang-format -i --style="Google" $(SOURCES) $(HEADERS)
-# cppcheck --std=c++17 --language=c++ --enable=all --suppress=unusedStructMember --suppress=unusedFunction --suppress=missingInclude --suppress=missingIncludeSystem $(SOURCES) $(HEADERS)
+	cppcheck --std=c++17 --language=c++ --enable=all --suppress=unusedStructMember --suppress=unusedFunction --suppress=missingInclude --suppress=missingIncludeSystem $(SOURCES) $(HEADERS)
 
 
 leaks: tests

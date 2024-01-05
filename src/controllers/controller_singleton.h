@@ -18,24 +18,24 @@ class ControllerSingleton {
     return instance;
   }
 
-  void SetMaze(Maze *m) { maze_ = m; }
-  void SetMazeParser(MazeParser *mp) { maze_parser_ = mp; }
-  void SetMazeGenerator(MazeGenerator *mg) { maze_generator_ = mg; }
-  void SetCave(Cave *c) { cave_ = c; }
+  void SetMaze(Maze *m);
+  void SetMazeParser(MazeParser *mp);
+  void SetMazeGenerator(MazeGenerator *mg);
+  void SetCave(Cave *c);
 
-  std::vector<Border> &GetMazeMatrix();
-  int GetMazeRows();
-  int GetMazeCols();
   void UploadMaze(const std::string &filename);
   void GenerateMaze(int rows, int cols);
   std::vector<Vector2D> ResolveMaze(Vector2D, Vector2D);
+  std::vector<Border> &GetMazeMatrix();
+  int GetMazeRows();
+  int GetMazeCols();
 
-  std::vector<unsigned> &GetCaveMatrix();
-  int GetCaveRows();
-  int GetCaveCols();
   void UploadCave(const std::string &filename);
   void GenerateCave(int rows, int cols, float chance);
   bool StepRender(unsigned die_limit, unsigned born_limit);
+  std::vector<unsigned> &GetCaveMatrix();
+  int GetCaveRows();
+  int GetCaveCols();
 
  private:
   Maze *maze_;
