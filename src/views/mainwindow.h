@@ -26,7 +26,7 @@ class MainWindow : public QMainWindow {
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
 
-private slots:
+ private slots:
   void MazeUploadButtonClicked();
   void MazeDownloadButtonClicked();
   void MazeInitRandomButtonClicked();
@@ -39,7 +39,7 @@ private slots:
 
  private:
   Ui::MainWindow *ui_;
-  QTimer* timer_;
+  QTimer *timer_;
   bool emergency_stop_;
 
   void ShowErrorMessage(const std::exception &);

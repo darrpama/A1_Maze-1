@@ -8,6 +8,9 @@ CaveCanvas::CaveCanvas(QWidget *parent) : QWidget(parent), kBorderSize(2.0f) {
 
   cols_ = 0;
   rows_ = 0;
+
+  width_ = 0;
+  height_ = 0;
 }
 
 CaveCanvas::~CaveCanvas() {
