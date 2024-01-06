@@ -86,12 +86,12 @@ dist:
 
 
 check:
-	clang-format -i --style="Google" $(SOURCES) $(HEADERS)
+	clang-format -n --style="Google" $(SOURCES) $(HEADERS)
 	cppcheck --std=c++17 --language=c++ --enable=all --suppress=unusedStructMember --suppress=unusedFunction --suppress=missingInclude --suppress=missingIncludeSystem $(SOURCES) $(HEADERS)
 
 
 leaks: tests
-	-leaks --atExit -- ./$(TEST_EXE)
+	leaks --atExit -- ./$(TEST_EXE)
 	leaks --atExit -- "./build/Maze.app/Contents/MacOS/Maze"
 
 

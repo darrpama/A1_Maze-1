@@ -91,8 +91,10 @@ void MazeCanvas::DrawBackground() {
 void MazeCanvas::DrawFrames() {
   painter_->fillRect(0, 0, width(), kBorderSize, frame_color_);
   painter_->fillRect(0, 0, kBorderSize, height(), frame_color_);
-  painter_->fillRect(width() - kBorderSize, 0, kBorderSize, height(), frame_color_);
-  painter_->fillRect(0, height() - kBorderSize, width(), kBorderSize, frame_color_);
+  painter_->fillRect(width() - kBorderSize, 0, kBorderSize, height(),
+                     frame_color_);
+  painter_->fillRect(0, height() - kBorderSize, width(), kBorderSize,
+                     frame_color_);
 }
 
 void MazeCanvas::DrawClickedCellBody() {
@@ -134,14 +136,16 @@ void MazeCanvas::DrawBottomBorder(size_t i, size_t j) {
                      cell_width_ + 4, 2, border_color_);
 }
 
-void MazeCanvas::DrawLineBetweenCellsCenters(s21::Vector2D src, s21::Vector2D dst) {
+void MazeCanvas::DrawLineBetweenCellsCenters(s21::Vector2D src,
+                                             s21::Vector2D dst) {
   QPen pen(line_color_, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
   painter_->setPen(pen);
 
-  painter_->drawLine((cell_width_ * src.y_) + (cell_width_ / 2) + (src.y_ * 2),
-                     (cell_height_ * src.x_) + (cell_height_ / 2) + (src.x_ * 2),
-                     (cell_width_ * dst.y_) + (cell_width_ / 2) + (dst.y_ * 2),
-                     (cell_height_ * dst.x_) + (cell_height_ / 2) + (dst.x_ * 2));
+  painter_->drawLine(
+      (cell_width_ * src.y_) + (cell_width_ / 2) + (src.y_ * 2),
+      (cell_height_ * src.x_) + (cell_height_ / 2) + (src.x_ * 2),
+      (cell_width_ * dst.y_) + (cell_width_ / 2) + (dst.y_ * 2),
+      (cell_height_ * dst.x_) + (cell_height_ / 2) + (dst.x_ * 2));
 }
 
 void MazeCanvas::DrawPathLine() {

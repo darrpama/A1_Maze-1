@@ -54,7 +54,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="maze_tab">
        <attribute name="title">
@@ -263,16 +263,16 @@
               </spacer>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="cave_cols_layout">
+              <layout class="QHBoxLayout" name="cave_rows_layout">
                <item>
-                <widget class="QLabel" name="cave_cold_label">
+                <widget class="QLabel" name="cave_rows_label">
                  <property name="text">
-                  <string>Columns</string>
+                  <string>Rows</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QSpinBox" name="cave_cols">
+                <widget class="QSpinBox" name="cave_rows">
                  <property name="maximum">
                   <number>50</number>
                  </property>
@@ -284,16 +284,16 @@
               </layout>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="cave_rows_layout">
+              <layout class="QHBoxLayout" name="cave_cols_layout">
                <item>
-                <widget class="QLabel" name="cave_rows_label">
+                <widget class="QLabel" name="cave_cold_label">
                  <property name="text">
-                  <string>Rows</string>
+                  <string>Columns</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QSpinBox" name="cave_rows">
+                <widget class="QSpinBox" name="cave_cols">
                  <property name="maximum">
                   <number>50</number>
                  </property>
@@ -378,7 +378,7 @@
                   </size>
                  </property>
                  <property name="minimum">
-                  <number>1</number>
+                  <number>0</number>
                  </property>
                  <property name="maximum">
                   <number>7</number>
@@ -417,7 +417,7 @@
                   <string notr="true"/>
                  </property>
                  <property name="minimum">
-                  <number>1</number>
+                  <number>0</number>
                  </property>
                  <property name="maximum">
                   <number>7</number>
