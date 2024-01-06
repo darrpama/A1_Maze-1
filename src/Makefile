@@ -3,6 +3,7 @@ BUILDDIR = $(PROJECTDIR)/build
 EXE = Maze.exe
 TEST_EXE = MazeTests.exe
 DISTDIR = ../distributive
+GCOVAPPLE = ""
 
 
 HEADERS = \
@@ -25,6 +26,7 @@ SOURCES = \
 ifeq ($(shell uname), Darwin)
 	EXE = Maze
 	TEST_EXE = MazeTests
+	GCOVAPPLE = "--ignore-errors inconsistent"
 endif
 
 ifeq ($(shell uname), Linux)
@@ -65,8 +67,8 @@ gcov_report: $(BUILDDIR)-coverage
 	cmake .. -DTESTING=ON -DCOVERAGE=ON -G "Unix Makefiles" && \
 	cmake --build . --config=RelWithDebInfo
 	./$(TEST_EXE)
-	lcov -t "$(TEST_EXE)" -o test.info --no-external -c -b . -d $(BUILDDIR)-coverage --ignore-errors inconsistent,mismatch
-	genhtml -o report test.info --ignore-errors inconsistent
+	lcov -t "$(TEST_EXE)" -o test.info --no-external -c -b . -d $(BUILDDIR)-coverage $(GCOVAPPLE)
+	genhtml -o report test.info $(GCOVAPPLE)
 	open report/index.html
 
 

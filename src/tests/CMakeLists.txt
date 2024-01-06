@@ -5,17 +5,10 @@ project(MazeTests VERSION 0.1 LANGUAGES CXX)
 option(COVERAGE OFF)
 
 if (COVERAGE)
-    add_compile_options(-fno-elide-constructors)
-endif()
-
-if (COVERAGE AND APPLE)
-    # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
-    # set(CMAKE_EXE_LINKER_FLAGS
-    # "${CMAKE_EXE_LINKER_FLAGS} -fprofile-arcs -ftest-coverage")
-
-    add_compile_options(-fprofile-arcs -ftest-coverage)
+    add_compile_options(-fprofile-arcs -ftest-coverage -fno-elide-constructors)
     add_link_options(-fprofile-arcs -ftest-coverage)
 endif()
+
     
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
