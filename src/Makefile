@@ -3,7 +3,7 @@ BUILDDIR = $(PROJECTDIR)/build
 EXE = Maze.exe
 TEST_EXE = MazeTests.exe
 DISTDIR = ../distributive
-GCOVAPPLE = ""
+GCOVAPPLE =
 
 
 HEADERS = \
