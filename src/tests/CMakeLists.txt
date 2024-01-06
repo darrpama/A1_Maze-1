@@ -9,11 +9,12 @@ if (COVERAGE)
 endif()
 
 if (APPLE)
-    # add_link_options("-Wl,-no_compact_unwind")
-    # set(CMAKE_CXX_COMPILER "/usr/local/bin/g++")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
-    set(CMAKE_EXE_LINKER_FLAGS
-        "${CMAKE_EXE_LINKER_FLAGS} -fprofile-arcs -ftest-coverage")
+    # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
+    # set(CMAKE_EXE_LINKER_FLAGS
+    # "${CMAKE_EXE_LINKER_FLAGS} -fprofile-arcs -ftest-coverage")
+
+    add_compile_options(-fprofile-arcs -ftest-coverage)
+    add_link_options(-fprofile-arcs -ftest-coverage)
 endif()
     
 set(CMAKE_CXX_STANDARD 17)
