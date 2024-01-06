@@ -54,7 +54,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="maze_tab">
        <attribute name="title">
@@ -131,11 +131,11 @@
               </spacer>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="maze_cols_layout">
+              <layout class="QHBoxLayout" name="maze_rows_layout">
                <item alignment="Qt::AlignRight|Qt::AlignTop">
-                <widget class="QLabel" name="maze_cols_label">
+                <widget class="QLabel" name="maze_rows_label">
                  <property name="text">
-                  <string>Cols</string>
+                  <string>Rows</string>
                  </property>
                  <property name="margin">
                   <number>5</number>
@@ -143,7 +143,7 @@
                 </widget>
                </item>
                <item alignment="Qt::AlignLeft|Qt::AlignTop">
-                <widget class="QSpinBox" name="maze_cols_input">
+                <widget class="QSpinBox" name="maze_rows_input">
                  <property name="minimum">
                   <number>2</number>
                  </property>
@@ -158,11 +158,11 @@
               </layout>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="maze_rows_layout">
+              <layout class="QHBoxLayout" name="maze_cols_layout">
                <item alignment="Qt::AlignRight|Qt::AlignTop">
-                <widget class="QLabel" name="maze_rows_label">
+                <widget class="QLabel" name="maze_cols_label">
                  <property name="text">
-                  <string>Rows</string>
+                  <string>Columns</string>
                  </property>
                  <property name="margin">
                   <number>5</number>
@@ -170,7 +170,7 @@
                 </widget>
                </item>
                <item alignment="Qt::AlignLeft|Qt::AlignTop">
-                <widget class="QSpinBox" name="maze_rows_input">
+                <widget class="QSpinBox" name="maze_cols_input">
                  <property name="minimum">
                   <number>2</number>
                  </property>

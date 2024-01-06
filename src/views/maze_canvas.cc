@@ -45,8 +45,8 @@ void MazeCanvas::paintEvent(QPaintEvent *) {
   float width = this->width();
   float height = this->height();
 
-  cell_width_ = (static_cast<float>(width) / cols_) - kBorderSize;
-  cell_height_ = (static_cast<float>(height) / rows_) - kBorderSize;
+  cell_width_ = (static_cast<float>(width) / rows_) - kBorderSize;
+  cell_height_ = (static_cast<float>(height) / cols_) - kBorderSize;
 
   if (cols_ > 0 && rows_ > 0) {
     if (painter_) {
@@ -64,8 +64,8 @@ void MazeCanvas::paintEvent(QPaintEvent *) {
 }
 
 void MazeCanvas::DrawMaze() {
-  setFixedSize(this->width(), this->height());
-  size_t index = 0;
+  setFixedSize(width(), height());
+ size_t index = 0;
 
   for (int i = 0; i < rows_; i++) {
     for (int j = 0; j < cols_; j++) {
@@ -86,13 +86,13 @@ void MazeCanvas::DrawPath() {
 }
 
 void MazeCanvas::DrawBackground() {
-  painter_->fillRect(0, 0, 500, 500, background_color_);
+  painter_->fillRect(0, 0, width(), height(), background_color_);
 }
 void MazeCanvas::DrawFrames() {
-  painter_->fillRect(0, 0, 500, 2, frame_color_);
-  painter_->fillRect(0, 0, 2, 500, frame_color_);
-  painter_->fillRect(498, 0, 2, 500, frame_color_);
-  painter_->fillRect(0, 498, 500, 2, frame_color_);
+  painter_->fillRect(0, 0, width(), kBorderSize, frame_color_);
+  painter_->fillRect(0, 0, kBorderSize, height(), frame_color_);
+  painter_->fillRect(width() - kBorderSize, 0, kBorderSize, height(), frame_color_);
+  painter_->fillRect(0, height() - kBorderSize, width(), kBorderSize, frame_color_);
 }
 
 void MazeCanvas::DrawClickedCellBody() {
