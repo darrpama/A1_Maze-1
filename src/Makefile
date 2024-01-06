@@ -65,7 +65,7 @@ gcov_report: $(BUILDDIR)-coverage
 	cmake .. -DTESTING=ON -DCOVERAGE=ON -G "Unix Makefiles" && \
 	cmake --build . --config=RelWithDebInfo
 	./$(TEST_EXE)
-	lcov -t "$(TEST_EXE)" -o test.info --no-external -c -d $(BUILDDIR)-coverage
+	lcov -t "$(TEST_EXE)" -o test.info --no-external -c -b . -d $(BUILDDIR)-coverage
 	genhtml -o report test.info 
 	open report/index.html
 
