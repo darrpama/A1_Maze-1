@@ -8,7 +8,7 @@ if (COVERAGE)
     add_compile_options(--coverage -fno-elide-constructors)
 endif()
 
-if (APPLE)
+if (COVERAGE AND APPLE)
     # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
     # set(CMAKE_EXE_LINKER_FLAGS
     # "${CMAKE_EXE_LINKER_FLAGS} -fprofile-arcs -ftest-coverage")
