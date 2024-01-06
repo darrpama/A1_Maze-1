@@ -26,7 +26,7 @@ SOURCES = \
 ifeq ($(shell uname), Darwin)
 	EXE = Maze
 	TEST_EXE = MazeTests
-	GCOVAPPLE = "--ignore-errors inconsistent"
+	GCOVAPPLE = --ignore-errors inconsistent
 endif
 
 ifeq ($(shell uname), Linux)
