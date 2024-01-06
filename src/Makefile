@@ -27,7 +27,7 @@ ifeq ($(shell uname), Darwin)
 	EXE = Maze
 	TEST_EXE = MazeTests
 	GCOVAPPLE = --ignore-errors inconsistent,mismatch
-	COMPILER21 = -DCMAKE_CXX_COMPILER="/usr/local/bin/g++"
+	COMPILER21 = -DCMAKE_CXX_COMPILER="/usr/bin/g++"
 endif
 
 ifeq ($(shell uname), Linux)
@@ -87,7 +87,7 @@ dist:
 
 check:
 	clang-format -n --style="Google" $(SOURCES) $(HEADERS)
-	cppcheck --std=c++17 --language=c++ --enable=all --suppress=unusedStructMember --suppress=unusedFunction --suppress=missingInclude --suppress=missingIncludeSystem $(SOURCES) $(HEADERS)
+	cppcheck --std=c++17 --language=c++ --enable=all --library=qt --suppress=unusedStructMember --suppress=unusedFunction --suppress=missingInclude --suppress=missingIncludeSystem $(SOURCES) $(HEADERS)
 
 
 leaks: install tests

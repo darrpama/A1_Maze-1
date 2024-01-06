@@ -8,7 +8,7 @@
 
 class CaveCanvas : public QWidget {
  public:
-  CaveCanvas(QWidget *parent = nullptr);
+  explicit CaveCanvas(QWidget *parent = nullptr);
   ~CaveCanvas();
 
   const float kBorderSize;
