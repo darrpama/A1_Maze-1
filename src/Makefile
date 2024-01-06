@@ -90,7 +90,7 @@ check:
 	cppcheck --std=c++17 --language=c++ --enable=all --suppress=unusedStructMember --suppress=unusedFunction --suppress=missingInclude --suppress=missingIncludeSystem $(SOURCES) $(HEADERS)
 
 
-leaks: tests
+leaks: install tests
 	leaks --atExit -- ./$(TEST_EXE)
 	leaks --atExit -- "./build/Maze.app/Contents/MacOS/Maze"
 
