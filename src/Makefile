@@ -65,8 +65,8 @@ gcov_report: $(BUILDDIR)-coverage
 	cmake .. -DTESTING=ON -DCOVERAGE=ON -G "Unix Makefiles" && \
 	cmake --build . --config=RelWithDebInfo
 	./$(TEST_EXE)
-	lcov -t "$(TEST_EXE)" -o test.info --no-external -c -b . -d $(BUILDDIR)-coverage
-	genhtml -o report test.info 
+	lcov -t "$(TEST_EXE)" -o test.info --no-external -c -b . -d $(BUILDDIR)-coverage --ignore-errors inconsistent,mismatch
+	genhtml -o report test.info --ignore-errors inconsistent
 	open report/index.html
 
 

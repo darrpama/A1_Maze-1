@@ -5,7 +5,7 @@ project(MazeTests VERSION 0.1 LANGUAGES CXX)
 option(COVERAGE OFF)
 
 if (COVERAGE)
-    add_compile_options(--coverage -fno-elide-constructors)
+    add_compile_options(-fno-elide-constructors)
 endif()
 
 if (COVERAGE AND APPLE)
