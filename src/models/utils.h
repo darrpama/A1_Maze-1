@@ -25,8 +25,8 @@ class Utils {
   static void CheckAndFixEndLine(const std::string &filepath) {
     FILE *fp = fopen(filepath.c_str(), "r+");
     if (fp == NULL) {
-      throw std::invalid_argument("Failed to open file: " +
-                                  filepath);  // LCOV_EXCL_LINE
+      throw std::invalid_argument("Failed to open file: " +  // LCOV_EXCL_LINE
+                                  filepath);                 // LCOV_EXCL_LINE
     }
     fseek(fp, -1, SEEK_END);
     char c = fgetc(fp);

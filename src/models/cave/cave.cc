@@ -126,8 +126,8 @@ void Cave::ParseFromFile(std::string filepath) {
 
   std::ifstream file(filepath);
   if (!file.is_open()) {
-    throw std::invalid_argument("Failed to open file: " +
-                                filepath);  // LCOV_EXCL_LINE
+    throw std::invalid_argument("Failed to open file: " +  // LCOV_EXCL_LINE
+                                filepath);                 // LCOV_EXCL_LINE
   }
 
   std::stringstream buffer;
@@ -160,7 +160,7 @@ void Cave::ParseSize(const std::string &line) {
     SetRows(rows);
     SetCols(cols);
   } else {
-    throw std::invalid_argument(
+    throw std::invalid_argument(            // LCOV_EXCL_LINE
         "Failed to parse size of matrix");  // LCOV_EXCL_LINE
   }
 }
