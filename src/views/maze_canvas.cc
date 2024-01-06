@@ -27,8 +27,8 @@ void MazeCanvas::mousePressEvent(QMouseEvent *event) {
     click_counter_ += 1;
     int x = event->position().x();
     int y = event->position().y();
-    int row = y / (cell_width_ + 2);
-    int col = x / (cell_height_ + 2);
+    int row = y / (cell_height_ + 2);
+    int col = x / (cell_width_ + 2);
     path_cells_.push_back(s21::Vector2D(row, col));
   } else {
     click_counter_ = 0;
@@ -45,8 +45,8 @@ void MazeCanvas::paintEvent(QPaintEvent *) {
   float width = this->width();
   float height = this->height();
 
-  cell_width_ = (static_cast<float>(width) / rows_) - kBorderSize;
-  cell_height_ = (static_cast<float>(height) / cols_) - kBorderSize;
+  cell_width_ = (static_cast<float>(width) / cols_) - kBorderSize;
+  cell_height_ = (static_cast<float>(height) / rows_) - kBorderSize;
 
   if (cols_ > 0 && rows_ > 0) {
     if (painter_) {
@@ -65,7 +65,7 @@ void MazeCanvas::paintEvent(QPaintEvent *) {
 
 void MazeCanvas::DrawMaze() {
   setFixedSize(width(), height());
- size_t index = 0;
+  size_t index = 0;
 
   for (int i = 0; i < rows_; i++) {
     for (int j = 0; j < cols_; j++) {
@@ -134,13 +134,14 @@ void MazeCanvas::DrawBottomBorder(size_t i, size_t j) {
                      cell_width_ + 4, 2, border_color_);
 }
 
-void MazeCanvas::DrawLineBetweenCellsCenters(s21::Vector2D a, s21::Vector2D b) {
+void MazeCanvas::DrawLineBetweenCellsCenters(s21::Vector2D src, s21::Vector2D dst) {
   QPen pen(line_color_, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
   painter_->setPen(pen);
-  painter_->drawLine((cell_height_ * a.y_) + (cell_height_ / 2) + (a.y_ * 2),
-                     (cell_width_ * a.x_) + (cell_width_ / 2) + (a.x_ * 2),
-                     (cell_height_ * b.y_) + (cell_height_ / 2) + (b.y_ * 2),
-                     (cell_width_ * b.x_) + (cell_width_ / 2) + (b.x_ * 2));
+
+  painter_->drawLine((cell_width_ * src.y_) + (cell_width_ / 2) + (src.y_ * 2),
+                     (cell_height_ * src.x_) + (cell_height_ / 2) + (src.x_ * 2),
+                     (cell_width_ * dst.y_) + (cell_width_ / 2) + (dst.y_ * 2),
+                     (cell_height_ * dst.x_) + (cell_height_ / 2) + (dst.x_ * 2));
 }
 
 void MazeCanvas::DrawPathLine() {

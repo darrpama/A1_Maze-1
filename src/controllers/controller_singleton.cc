@@ -43,9 +43,9 @@ std::vector<Border> &ControllerSingleton::GetMazeMatrix() {
   return maze_->GetMatrix();
 }
 
-int ControllerSingleton::GetMazeRows() { return maze_->GetCols(); }
+int ControllerSingleton::GetMazeRows() { return maze_->GetRows(); }
 
-int ControllerSingleton::GetMazeCols() { return maze_->GetRows(); }
+int ControllerSingleton::GetMazeCols() { return maze_->GetCols(); }
 
 // CAVE
 void ControllerSingleton::UploadCave(const std::string &filepath) {

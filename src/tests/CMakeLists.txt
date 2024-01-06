@@ -2,11 +2,8 @@ cmake_minimum_required(VERSION 3.5)
 
 project(MazeTests VERSION 0.1 LANGUAGES CXX)
 
-enable_testing()
-
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-add_definitions(-DGTEST_LANGUAGE_CXX17)
 option(COVERAGE OFF)
 
 if (COVERAGE)
@@ -19,6 +16,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
+add_definitions(-DGTEST_LANGUAGE_CXX17)
+enable_testing()
 
 set(${PROJECT_NAME}_SOURCES
     run_all_tests.cc
