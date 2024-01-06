@@ -66,7 +66,7 @@ gcov_report: $(BUILDDIR)-coverage
 	cmake --build . --config=RelWithDebInfo
 	./$(TEST_EXE)
 	lcov -t "$(TEST_EXE)" -o test.info --no-external -c -b . -d $(BUILDDIR)-coverage --ignore-errors inconsistent,mismatch
-	genhtml -o report test.info --ignore-errors inconsistent
+	genhtml -o report test.info --ignore-errors inconsistent,mismatch
 	open report/index.html
 
 
