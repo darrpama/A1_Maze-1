@@ -1,22 +1,27 @@
 cmake_minimum_required(VERSION 3.5)
 
-
 project(MazeTests VERSION 0.1 LANGUAGES CXX)
-option(COVERAGE OFF)
 
+enable_testing()
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+add_definitions(-DGTEST_LANGUAGE_CXX17)
+
+option(COVERAGE OFF)
 if (COVERAGE)
     add_compile_options(-fprofile-arcs -ftest-coverage -fno-elide-constructors)
     add_link_options(-fprofile-arcs -ftest-coverage)
 endif()
 
-    
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+if (APPLE)
+    set(CMAKE_CXX_COMPILER "/usr/local/bin/g++")
+endif()   
+
 add_compile_options(-Wall -Werror -Wextra)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(GTest REQUIRED)
-enable_testing()
 include_directories(${GTEST_INCLUDE_DIRS})
 
 set(${PROJECT_NAME}_SOURCES

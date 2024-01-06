@@ -5,7 +5,6 @@ TEST_EXE = MazeTests.exe
 DISTDIR = ../distributive
 GCOVAPPLE =
 
-
 HEADERS = \
 	$(PROJECTDIR)/views/*.h \
 	$(PROJECTDIR)/controllers/*.h \
@@ -26,7 +25,7 @@ SOURCES = \
 ifeq ($(shell uname), Darwin)
 	EXE = Maze
 	TEST_EXE = MazeTests
-	GCOVAPPLE = --ignore-errors inconsistent
+	GCOVAPPLE = --ignore-errors inconsistent,mismatch
 endif
 
 ifeq ($(shell uname), Linux)
@@ -58,13 +57,13 @@ uninstall: clean
 
 tests: $(BUILDDIR)-testing
 	cd $(BUILDDIR)-testing && \
-	cmake .. -DTESTING=ON -G "Unix Makefiles" && \
+	cmake .. -DTESTING=ON -D CMAKE_CXX_COMPILER="/usr/local/bin/g++" -G "Unix Makefiles" && \
 	cmake --build . --config=RelWithDebInfo
 
 
 gcov_report: $(BUILDDIR)-coverage
 	cd $(BUILDDIR)-coverage && \
-	cmake .. -DTESTING=ON -DCOVERAGE=ON -G "Unix Makefiles" && \
+	cmake .. -DTESTING=ON -DCOVERAGE=ON -D CMAKE_CXX_COMPILER="/usr/local/bin/g++" -G "Unix Makefiles" && \
 	cmake --build . --config=RelWithDebInfo
 	./$(TEST_EXE)
 	lcov -t "$(TEST_EXE)" -o test.info --no-external -c -b . -d $(BUILDDIR)-coverage $(GCOVAPPLE)
