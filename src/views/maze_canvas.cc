@@ -1,6 +1,12 @@
 #include "maze_canvas.h"
 
-MazeCanvas::MazeCanvas(QWidget *parent) : QWidget(parent), kBorderSize(2.0f) {
+MazeCanvas::MazeCanvas(QWidget *parent)
+    : QWidget(parent),
+      kBorderSize(2.0f),
+      border_color_(QColor(170, 170, 170)),
+      frame_color_(QColor(170, 170, 170)),
+      line_color_(QColor(204, 0, 0)),
+      background_color_(QColor(255, 255, 255)) {
   painter_ = nullptr;
 
   cell_width_ = 0.0f;
@@ -8,11 +14,6 @@ MazeCanvas::MazeCanvas(QWidget *parent) : QWidget(parent), kBorderSize(2.0f) {
   cols_ = 0;
   rows_ = 0;
   click_counter_ = 0;
-
-  border_color_ = QColor(170, 170, 170);
-  frame_color_ = QColor(170, 170, 170);
-  line_color_ = QColor(204, 0, 0);
-  background_color_ = QColor(255, 255, 255);
 }
 
 MazeCanvas::~MazeCanvas() {

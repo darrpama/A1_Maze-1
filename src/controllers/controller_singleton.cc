@@ -11,9 +11,7 @@ void ControllerSingleton::SetMazeGenerator(MazeGenerator *mg) {
   maze_generator_ = mg;
 }
 
-void ControllerSingleton::SetMazeSaver(MazeSaver *ms) {
-  maze_saver_ = ms;
-}
+void ControllerSingleton::SetMazeSaver(MazeSaver *ms) { maze_saver_ = ms; }
 
 void ControllerSingleton::SetCave(Cave *c) { cave_ = c; }
 

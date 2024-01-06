@@ -14,6 +14,7 @@ class MazeCanvas : public QWidget {
   ~MazeCanvas();
 
   const float kBorderSize;
+
  protected:
   void paintEvent(QPaintEvent *event) override;
   void mousePressEvent(QMouseEvent *event) override;

@@ -5,7 +5,7 @@ namespace s21 {
 Cave::Cave() : matrix_{}, rows_{}, cols_{}, die_limit_{}, born_limit_{} {}
 
 Cave::Cave(int rows, int cols)
-      : matrix_{}, rows_(rows), cols_(cols), die_limit_{}, born_limit_{} {}
+    : matrix_{}, rows_(rows), cols_(cols), die_limit_{}, born_limit_{} {}
 
 int Cave::GetRows() { return rows_; }
 
@@ -15,7 +15,7 @@ void Cave::SetRows(int rows) { rows_ = rows; }
 
 void Cave::SetCols(int cols) { cols_ = cols; }
 
-std::vector<unsigned>& Cave::GetMatrix() { return matrix_; }
+std::vector<unsigned> &Cave::GetMatrix() { return matrix_; }
 
 void Cave::Clear() {
   matrix_.clear();
