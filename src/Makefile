@@ -54,7 +54,7 @@ install: $(BUILDDIR)-release
 	
 
 uninstall: clean
-	rm -rf ./bin ./Maze.exe ./$(TEST_EXE)
+	rm -rf ./bin ./Maze.exe ./$(TEST_EXE) ./Maze.app
 
 
 tests: $(BUILDDIR)-testing
