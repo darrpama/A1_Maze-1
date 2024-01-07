@@ -22,6 +22,11 @@ MazeCanvas::~MazeCanvas() {
   }
 }
 
+void MazeCanvas::ClearPath() {
+  click_counter_ = 0;
+  path_cells_.clear();
+}
+
 void MazeCanvas::mousePressEvent(QMouseEvent *event) {
   if (click_counter_ < 2) {
     click_counter_ += 1;
@@ -31,8 +36,7 @@ void MazeCanvas::mousePressEvent(QMouseEvent *event) {
     int col = x / (cell_width_ + 2);
     path_cells_.push_back(s21::Vector2D(row, col));
   } else {
-    click_counter_ = 0;
-    path_cells_.clear();
+    ClearPath();
   }
   update();
 }

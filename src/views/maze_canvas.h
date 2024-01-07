@@ -12,6 +12,7 @@ class MazeCanvas : public QWidget {
  public:
   explicit MazeCanvas(QWidget *parent = nullptr);
   ~MazeCanvas();
+  void ClearPath();
 
   const float kBorderSize;
 

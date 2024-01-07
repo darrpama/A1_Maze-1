@@ -40,6 +40,7 @@ MainWindow::~MainWindow() {
 
 void MainWindow::MazeInitRandomButtonClicked() {
   try {
+    ui_->maze_canvas->ClearPath();
     s21::ControllerSingleton::GetInstance().GenerateMaze(
         ui_->maze_rows_input->value(), ui_->maze_cols_input->value());
 
