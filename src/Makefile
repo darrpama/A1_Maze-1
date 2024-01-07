@@ -27,7 +27,7 @@ ifeq ($(shell uname), Darwin)
 	EXE = Maze
 	TEST_EXE = MazeTests
 	GCOVAPPLE = --ignore-errors inconsistent,mismatch
-	COMPILER21 = -DCMAKE_CXX_COMPILER="/usr/bin/g++"
+	COMPILER21 = -DCMAKE_CXX_COMPILER="/usr/local/bin/g++"
 endif
 
 ifeq ($(shell uname), Linux)
