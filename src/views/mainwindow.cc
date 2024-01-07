@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget* parent)
 
   emergency_stop_ = false;
   timer_ = new QTimer(this);
-  ;
+
   connect(timer_, &QTimer::timeout, this, &MainWindow::TimerCallback);
 
   connect(ui_->maze_upload_btn, &QAbstractButton::clicked, this,
