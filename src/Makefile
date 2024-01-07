@@ -101,7 +101,8 @@ $(BUILDDIR)-%:
 
 .PHONY: clean test dvi dist check leaks gcov_report
 clean:
-	rm -rf $(BUILDDIR)-*
-	rm -rf report *.info
-	rm -rf *.tgz ../*.tgz
+	@rm -rf $(BUILDDIR)-*
+	@rm -rf report *.info
+	@rm -rf *.tgz ../*.tgz
+	@rm -rf MazeTests
 
