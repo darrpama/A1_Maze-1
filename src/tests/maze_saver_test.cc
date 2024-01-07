@@ -52,7 +52,7 @@ TEST(MazeParserTest, MazeSaver_Positive) {
     EXPECT_EQ(mat[i], expected_mat[i]);
   }
 
-  MazeSaver saver(maze);
+  MazeSaver saver(&maze);
   saver.SetFilePath(parent_path_to_save);
   EXPECT_NO_THROW(saver.Save());
 

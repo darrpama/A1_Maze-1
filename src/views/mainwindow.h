@@ -3,43 +3,46 @@
 
 #define GL_SILENCE_DEPRECATION
 
-#include <iostream>
-
-#include <QtOpenGL>
-#include <QtOpenGLWidgets>
 #include <QApplication>
+#include <QFileDialog>
 #include <QMainWindow>
 #include <QPainter>
-#include <QFileDialog>
 #include <QTimer>
+#include <QtOpenGL>
+#include <QtOpenGLWidgets>
 
 #include "../controllers/controller_singleton.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui {
+class MainWindow;
+}
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
   Q_OBJECT
 
  public:
-  MainWindow(QWidget *parent = nullptr);
+  explicit MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
 
-private slots:
-  void on_maze_upload_btn_clicked();
-  void on_maze_init_random_btn_clicked();
-  void on_cave_upload_btn_clicked();
-  void on_cave_init_random_btn_clicked();
-  void on_step_render_btn_clicked();
-  void on_auto_render_btn_clicked();
-  void on_emergency_stop_btn_clicked();
+ private slots:
+  void MazeUploadButtonClicked();
+  void MazeDownloadButtonClicked();
+  void MazeInitRandomButtonClicked();
+  void CaveUploadButtonClicked();
+  void CaveInitRandomButtonClicked();
+  void CaveStepRenderButtonClicked();
+  void CaveAutoRenderButtonClicked();
+  void CaveStopRenderButtonClicked();
+  void TimerCallback();
 
-private:
+ private:
   Ui::MainWindow *ui_;
-  void ShowErrorMessage(const std::exception&);
-  bool emergency_stop_ = false;
+  QTimer *timer_;
+  bool emergency_stop_;
+
+  void ShowErrorMessage(const std::exception &);
 };
 
-#endif // CPP4_3DVIEWER_V2_0_2_SRC_VIEWS_MAINWINDOW_H
+#endif  // CPP4_3DVIEWER_V2_0_2_SRC_VIEWS_MAINWINDOW_H

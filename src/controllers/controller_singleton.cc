@@ -2,19 +2,30 @@
 
 namespace s21 {
 
+// INIT
+void ControllerSingleton::SetMaze(Maze *m) { maze_ = m; }
+
+void ControllerSingleton::SetMazeParser(MazeParser *mp) { maze_parser_ = mp; }
+
+void ControllerSingleton::SetMazeGenerator(MazeGenerator *mg) {
+  maze_generator_ = mg;
+}
+
+void ControllerSingleton::SetMazeSaver(MazeSaver *ms) { maze_saver_ = ms; }
+
+void ControllerSingleton::SetCave(Cave *c) { cave_ = c; }
+
+void ControllerSingleton::DownloadMaze(const std::string &filename) {
+  maze_saver_->SetFilePath(filename);
+  maze_saver_->SetMaze(maze_);
+  maze_saver_->Save();
+}
+
 // MAZE
 void ControllerSingleton::UploadMaze(const std::string &filepath) {
   maze_parser_->SetFilePath(filepath);
   maze_parser_->Parse();
 }
-
-std::vector<Border> &ControllerSingleton::GetMazeMatrix() {
-  return maze_->GetMatrix();
-}
-
-int ControllerSingleton::GetMazeRows() { return maze_->GetCols(); }
-
-int ControllerSingleton::GetMazeCols() { return maze_->GetRows(); }
 
 void ControllerSingleton::GenerateMaze(int rows, int cols) {
   maze_->Clear();
@@ -28,17 +39,18 @@ std::vector<Vector2D> ControllerSingleton::ResolveMaze(Vector2D a, Vector2D b) {
   return maze_->Resolve(a, b);
 }
 
+std::vector<Border> &ControllerSingleton::GetMazeMatrix() {
+  return maze_->GetMatrix();
+}
+
+int ControllerSingleton::GetMazeRows() { return maze_->GetRows(); }
+
+int ControllerSingleton::GetMazeCols() { return maze_->GetCols(); }
+
 // CAVE
 void ControllerSingleton::UploadCave(const std::string &filepath) {
   cave_->ParseFromFile(filepath);
 }
-std::vector<unsigned> &ControllerSingleton::GetCaveMatrix() {
-  return cave_->GetMatrix();
-}
-
-int ControllerSingleton::GetCaveRows() { return cave_->GetCols(); }
-
-int ControllerSingleton::GetCaveCols() { return cave_->GetRows(); }
 
 void ControllerSingleton::GenerateCave(int rows, int cols, float chance) {
   cave_->Generate(rows, cols, chance);
@@ -47,5 +59,13 @@ void ControllerSingleton::GenerateCave(int rows, int cols, float chance) {
 bool ControllerSingleton::StepRender(unsigned die_limit, unsigned born_limit) {
   return cave_->StepRender(die_limit, born_limit);
 }
+
+std::vector<unsigned> &ControllerSingleton::GetCaveMatrix() {
+  return cave_->GetMatrix();
+}
+
+int ControllerSingleton::GetCaveRows() { return cave_->GetCols(); }
+
+int ControllerSingleton::GetCaveCols() { return cave_->GetRows(); }
 
 }  // namespace s21

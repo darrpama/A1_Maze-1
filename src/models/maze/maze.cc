@@ -2,6 +2,10 @@
 
 namespace s21 {
 
+Maze::Maze() : rows_(0), cols_(0), matrix_{} {}
+
+Maze::Maze(int rows, int cols) : rows_(rows), cols_(cols), matrix_{} {}
+
 int Maze::GetRows() { return rows_; }
 
 int Maze::GetCols() { return cols_; }
@@ -61,12 +65,14 @@ bool Maze::IsIdeal() {
 
 std::vector<Vector2D> Maze::Resolve(Vector2D start_point, Vector2D end_point) {
   std::vector<int> visited = FindPath(start_point, end_point);
+
   return (FindSolution(start_point, end_point, visited));
 }
 
 bool Maze::CheckBorder(int dir, int c_b, int n_b, int c_r, int c_c, int n_r,
                        int n_c) {
   bool answer = false;
+
   if (c_b == BOTH_BORDER && (dir == 1 || dir == cols_)) answer = true;
   if (c_b == RIGHT_BORDER && dir == 1) answer = true;
   if (c_b == BOTTOM_BORDER && dir == cols_) answer = true;
@@ -75,6 +81,7 @@ bool Maze::CheckBorder(int dir, int c_b, int n_b, int c_r, int c_c, int n_r,
   if (dir == -cols_ &&
       (n_c != c_c || (n_b == BOTTOM_BORDER || n_b == BOTH_BORDER)))
     answer = true;
+
   return answer;
 }
 
@@ -121,6 +128,7 @@ std::vector<int> Maze::FindPath(Vector2D init_point, Vector2D end_point) {
       }
     }
   }
+
   return visited;
 }
 
@@ -130,13 +138,16 @@ std::vector<Vector2D> Maze::FindSolution(Vector2D init_point,
   int matrix_size = GetMatrix().size();
   int init_cell = init_point.x_ * cols_ + init_point.y_;
   int end_cell = end_point.x_ * cols_ + end_point.y_;
+
   std::vector<Vector2D> solution{};
   solution.reserve(matrix_size);
+
   if (init_point.x_ == end_point.x_ && init_point.y_ == end_point.y_) {
     solution.push_back(init_point);
     solution.push_back(end_point);
     return solution;
   }
+
   std::vector<int> directions = {1, -cols_, -1, cols_};
   std::queue<int> q;
   q.push(end_cell);
@@ -164,6 +175,7 @@ std::vector<Vector2D> Maze::FindSolution(Vector2D init_point,
         q.push(neighbor_cell);
         solution.push_back(Vector2D(neighbor_row, neighbor_col));
       }
+
       if (cur_cell == init_cell) {
         while (!q.empty()) {
           q.pop();
@@ -172,6 +184,7 @@ std::vector<Vector2D> Maze::FindSolution(Vector2D init_point,
       }
     }
   }
+
   return solution;
 }
 

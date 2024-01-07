@@ -2,6 +2,21 @@
 
 namespace s21 {
 
+Cave::Cave() : matrix_{}, rows_{}, cols_{}, die_limit_{}, born_limit_{} {}
+
+Cave::Cave(int rows, int cols)
+    : matrix_{}, rows_(rows), cols_(cols), die_limit_{}, born_limit_{} {}
+
+int Cave::GetRows() { return rows_; }
+
+int Cave::GetCols() { return cols_; }
+
+void Cave::SetRows(int rows) { rows_ = rows; }
+
+void Cave::SetCols(int cols) { cols_ = cols; }
+
+std::vector<unsigned> &Cave::GetMatrix() { return matrix_; }
+
 void Cave::Clear() {
   matrix_.clear();
   rows_ = 0;
@@ -13,6 +28,7 @@ void Cave::Generate(int rows, int cols, float chance) {
   rows_ = rows;
   cols_ = cols;
   matrix_ = std::vector<unsigned>(rows * cols, 0);
+
   for (int row = 0; row < rows; row++) {
     for (int col = 0; col < cols; col++) {
       matrix_[row * cols + col] = (Utils::RandomChoice(chance)) ? 1 : 0;
@@ -24,6 +40,7 @@ bool Cave::StepRender(unsigned die_limit, unsigned born_limit) {
   Cave old_cave = *this;
   die_limit_ = die_limit;
   born_limit_ = born_limit;
+
   for (int row = 0; row < rows_; row++) {
     int current_row = row;
     for (int col = 0; col < cols_; col++) {
@@ -56,15 +73,18 @@ bool Cave::CompareCaves(Cave *old_cave, Cave *new_cave) {
       old_cave->GetCols() != new_cave->GetCols()) {
     return false;  // LCOV_EXCL_LINE
   }
+
   for (int i = 0; i < old_cave->GetRows(); i++) {
     for (int j = 0; j < old_cave->GetCols(); j++) {
       bool old_cave_value = old_cave->GetMatrix()[i * old_cave->GetCols() + j];
       bool new_cave_value = new_cave->GetMatrix()[i * new_cave->GetCols() + j];
+
       if (old_cave_value != new_cave_value) {
         return false;
       }
     }
   }
+
   return true;
 }
 
@@ -106,8 +126,8 @@ void Cave::ParseFromFile(std::string filepath) {
 
   std::ifstream file(filepath);
   if (!file.is_open()) {
-    throw std::invalid_argument("Failed to open file: " +
-                                filepath);  // LCOV_EXCL_LINE
+    throw std::invalid_argument("Failed to open file: " +  // LCOV_EXCL_LINE
+                                filepath);                 // LCOV_EXCL_LINE
   }
 
   std::stringstream buffer;
@@ -135,11 +155,12 @@ void Cave::ParseFromFile(std::string filepath) {
 void Cave::ParseSize(const std::string &line) {
   std::stringstream ss(line);
   int rows, cols;
+
   if (ss >> rows >> cols) {
     SetRows(rows);
     SetCols(cols);
   } else {
-    throw std::invalid_argument(
+    throw std::invalid_argument(            // LCOV_EXCL_LINE
         "Failed to parse size of matrix");  // LCOV_EXCL_LINE
   }
 }

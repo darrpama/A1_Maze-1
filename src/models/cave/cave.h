@@ -16,15 +16,14 @@ namespace s21 {
 
 class Cave {
  public:
-  Cave() : matrix_{}, rows_{}, cols_{}, die_limit_{}, born_limit_{} {}
-  Cave(int rows, int cols)
-      : matrix_{}, rows_(rows), cols_(cols), die_limit_{}, born_limit_{} {}
+  Cave();
+  Cave(int rows, int cols);
 
-  int GetRows() { return rows_; }
-  int GetCols() { return cols_; }
-  void SetRows(int rows) { rows_ = rows; }
-  void SetCols(int cols) { cols_ = cols; }
-  std::vector<unsigned> &GetMatrix() { return matrix_; }
+  int GetRows();
+  int GetCols();
+  void SetRows(int rows);
+  void SetCols(int cols);
+  std::vector<unsigned> &GetMatrix();
 
   void Generate(int, int, float);
   bool StepRender(unsigned, unsigned);

@@ -7,12 +7,12 @@
 bool CompareMatrices(const std::vector<unsigned> &m1,
                      const std::vector<unsigned> &m2) {
   if (m1.size() != m2.size()) {
-    return false;
+    return false;  // LCOV_EXCL_LINE
   }
 
   for (size_t i = 0; i < m1.size(); i++) {
     if (m1[i] != m2[i]) {
-      return false;
+      return false;  // LCOV_EXCL_LINE
     }
   }
 

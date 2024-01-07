@@ -1,6 +1,7 @@
 #include "maze_saver.h"
 
 namespace s21 {
+MazeSaver::MazeSaver(Maze* maze) : maze_(maze){};
 
 void MazeSaver::Save() {
   std::ofstream file(filepath_);
@@ -19,6 +20,8 @@ void MazeSaver::SetFilePath(const std::string& filepath) {
   Reset();
   filepath_ = filepath;
 }
+
+void MazeSaver::SetMaze(Maze* maze) { maze_ = maze; }
 
 void MazeSaver::UnmergeMatricies() {
   const auto& matrix = maze_->GetMatrix();
